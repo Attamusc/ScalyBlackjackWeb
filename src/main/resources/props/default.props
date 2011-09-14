@@ -1,5 +1,11 @@
 # Sean's Database config. Change to reflect local state...
-db.driver=com.mysql.jdbc.Driver
-db.url=jdbc:mysql://localhost/scalyblackjackdb
-db.user=root
-db.password=mysqladmin
+# db.driver=com.mysql.jdbc.Driver
+# db.url=jdbc:mysql://localhost/scalyblackjackdb
+# db.user=root
+# db.password=mysqladmin
+
+# Cloudbee's database
+# db.driver=com.mysql.jdbc.Driver
+# db.url=jdbc:cloudbees://scalyblackjackdb
+# db.user=sbjadmin
+# db.password=mysqladmin
