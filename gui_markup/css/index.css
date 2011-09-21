@@ -1,0 +1,205 @@
+.skip {
+	clear: both;
+}
+#navigation {
+	padding: 7px 0;
+	margin-right: 15px;
+}
+#navigation a {
+	margin: 0 8px;
+}
+#house_banner {
+	clear: both;
+	border-top: 2px solid #333;
+	border-bottom: 1px solid #333;
+}
+#house_stats {
+	border-bottom: 4px solid #333;
+}
+#house_banner, #house_stats {
+	padding: 10px 6px;
+	width: 100%;
+	background: whiteSmoke;
+	border-left: 2px solid #000;
+	border-right: 2px solid #000;
+	text-align: center;
+}
+#casino_floor {
+	background:
+-webkit-radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 9%, hsla(0, 100%, 20%, 0) 9%) 0 0,
+-webkit-radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 8%, hsla(0, 100%, 20%, 0) 10%) 50px 50px,
+-webkit-radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 50px 0,
+-webkit-radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 0 50px,
+-webkit-radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 50px 0,
+-webkit-radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 100px 50px,
+-webkit-radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 0 0,
+-webkit-radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 50px 50px,
+-webkit-linear-gradient(45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0,
+-webkit-linear-gradient(-45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0;
+background:
+-moz-radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 9%, hsla(0, 100%, 20%, 0) 9%) 0 0,
+-moz-radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 8%, hsla(0, 100%, 20%, 0) 10%) 50px 50px,
+-moz-radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 50px 0,
+-moz-radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 0 50px,
+-moz-radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 50px 0,
+-moz-radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 100px 50px,
+-moz-radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 0 0,
+-moz-radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 50px 50px,
+-moz-linear-gradient(45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0,
+-moz-linear-gradient(-45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0;
+background:
+-webkit-radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 9%, hsla(0, 100%, 20%, 0) 9%) 0 0,
+-webkit-radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 8%, hsla(0, 100%, 20%, 0) 10%) 50px 50px,
+-webkit-radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 50px 0,
+-webkit-radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 0 50px,
+-webkit-radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 50px 0,
+-webkit-radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 100px 50px,
+-webkit-radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 0 0,
+-webkit-radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 50px 50px,
+-webkit-linear-gradient(45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0,
+-webkit-linear-gradient(-45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0;
+background-color: #300; 
+background-size: 100px 100px;
+	
+	
+	margin-left: 25px;
+	border: 2px solid #000;
+}
+.sidebar {
+	padding: 15px 10px 20px;
+	background: whiteSmoke;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-radius: 0 0 10px 10px;
+}
+.content {
+	margin-left: 10px;
+}
+.sidebar .page-head {
+	text-align: center;
+}
+.sidebar ul, .sidebar ol {
+	margin: 0 auto;
+	width: 75%;
+}
+.house_table_wrapper {
+	list-style: none;
+	float: left;
+	margin-right: 25px;
+	margin-top: 40px;
+	width: 415px;
+	height: 250px;
+	position: relative;
+	padding: 10px;
+}
+.house_table {
+	z-index: 4;
+	margin: 30px auto 0;
+	text-align: center;
+	width: 330px;
+	height: 175px;
+	border-radius: 40px;
+	border: 5px solid #9b6a1a;
+	position: relative;
+	color: #fff;
+	
+	background:
+	  -webkit-radial-gradient(#088135 15%, transparent 16%) 25px 25px,
+	  -webkit-radial-gradient(#088135 15%, transparent 16%) 25px 25px,
+	  -webkit-radial-gradient(rgba(7, 112, 46,.1) 15%, transparent 20%) 0 1px,
+	  -webkit-radial-gradient(rgba(7, 112, 46,.1) 15%, transparent 20%) 8px 9px;
+	background:
+	  -moz-radial-gradient(#088135 15%, transparent 16%) 0 0,
+	  -moz-radial-gradient(#088135 15%, transparent 16%) 8px 8px,
+	  -moz-radial-gradient(rgba(7, 112, 46,.1) 15%, transparent 20%) 0 1px,
+	  -moz-radial-gradient(rgba(7, 112, 46,.1) 15%, transparent 20%) 8px 9px;
+	background:
+	  radial-gradient(#088135 15%, transparent 16%) 0 0,
+	  radial-gradient(#088135 15%, transparent 16%) 8px 8px,
+	  radial-gradient(rgba(7, 112, 46,.1) 15%, transparent 20%) 0 1px,
+	  radial-gradient(rgba(7, 112, 46,.1) 15%, transparent 20%) 8px 9px;
+	background-color:#07702E;
+	background-size:16px 16px;
+}
+.house_table p {
+	font-size: 20px;
+}
+.table_overview {
+	margin-top: 70px;
+}
+.table_seats_wrapper {
+	position: absolute;
+	width: 100%;
+	display: block;
+	z-index: 4;
+}
+.seat {
+	z-index: 1;
+	position: relative;
+	margin: 0 auto;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border: 2px solid #000;
+	border-radius: 25px;
+	background: purple;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	-webkit-box-shadow: 4px 1px 10px #333;
+	-moz-box-shadow: 4px 1px 10px #333;
+	-ms-box-shadow: 4px 1px 10px #333;
+	-o-box-shadow: 4px 1px 10px #333;
+	box-shadow: 4px 1px 10px #333;
+}
+.empty_seat {
+	color: #222;
+	background: #888;
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	-ms-transition: all .2s ease-in-out;
+}
+.empty_seat:hover {
+	color: gold;
+	background: green;
+}
+.dealer_seat {
+	color: #000;
+	background: purple;
+	-webkit-transform: translate(0, -.5em);
+	-moz-transform: translate(0, -.5em);
+	-os-transform: translate(0, -.5em);
+	-ms-transform: translate(0, -.5em);
+}
+.seat_1 {
+	-webkit-transform: translate(-9.9em, 4.5em);
+	-moz-transform: translate(-9.9em, 4.5em);
+	-os-transform: translate(-9.9em, 4.5em);
+	-ms-transform: translate(-9.9em, 4.5em);
+}
+.seat_2 {
+	-webkit-transform: translate(-6em, 6.2em);
+	-moz-transform: translate(-6em, 6.2em);
+	-os-transform: translate(-6em, 6.2em);
+	-ms-transform: translate(-6em, 6.2em);
+}
+.seat_3 {
+	-webkit-transform: translate(0, 4.1em);
+	-moz-transform: translate(0, 4.1em);
+	-os-transform: translate(0, 4.1em);
+	-ms-transform: translate(0, 4.1em);
+}
+.seat_4 {
+	-webkit-transform: translate(5.7em, 1.8em);
+	-moz-transform: translate(5.7em, 1.8em);
+	-os-transform: translate(5.7em, 1.8em);
+	-ms-transform: translate(5.7em, 1.8em);
+}
+.seat_5 {
+	-webkit-transform: translate(8.9em, -4.6em);
+	-moz-transform: translate(8.9em, -4.6em);
+	-os-transform: translate(8.9em, -4.6em);
+	-ms-transform: translate(8.9em, -4.6em);
+}
