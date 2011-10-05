@@ -1,17 +1,18 @@
-<!DOCTYPE html "SBW Casino">
+<!DOCTYPE html public "SBW">
 <html>
 	<head>
 		<title>SBW Casino - Where the cool go to play</title>
 		<meta name="description" content="All the fun of blackjack, with all the style of Lift" />
 		<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Short+Stack' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/index.css">
 	</head>
 	<body>
 		<div class="">
 			<div id="navigation" class="pull-right">
-				<span><a id="login_link" href="#">Login</a></span>
-				<span><a id="register_link" href="#">Register</a></span>
-				<span><a id="about_link" href="about.html">About</a></span>
+				<span><a id="login_link" data-controls-modal="login_popup" data-backdrop="true" data-keyboard="true" href="#">Login</a></span>
+				<span><a id="register_link" data-controls-modal="register_popup" data-backdrop="true" data-keyboard="true" href="#">Register</a></span>
+				<span><a id="about_link" data-controls-modal="about_popup" data-backdrop="true" data-keyboard="true" href="#">About</a></span>
 			</div>
 			<div id="house_banner">
 				<h1>SWB Casino</h1>
@@ -65,6 +66,7 @@
 										Sit
 									</div>
 								</div>
+								<a class="join_table_link" href="table.html">
 								<div class="house_table">
 									<div class="table_overview">
 										<p>
@@ -74,7 +76,7 @@
 											Min bet: <em id="table_a_min_bet">$50</em>
 										</p>
 									</div>
-								</div>
+								</div> </a>
 							</li>
 							<li class="house_table_wrapper">
 								<div class="table_seats_wrapper">
@@ -97,6 +99,7 @@
 										Sit
 									</div>
 								</div>
+								<a class="join_table_link" href="table.html">
 								<div class="house_table">
 									<div class="table_overview">
 										<p>
@@ -106,7 +109,7 @@
 											Min bet: <em id="table_b_min_bet">$50</em>
 										</p>
 									</div>
-								</div>
+								</div> </a>
 							</li>
 							<li class="house_table_wrapper">
 								<div class="table_seats_wrapper">
@@ -129,6 +132,7 @@
 										Sit
 									</div>
 								</div>
+								<a class="join_table_link" href="table.html">
 								<div class="house_table">
 									<div class="table_overview">
 										<p>
@@ -138,7 +142,7 @@
 											Min bet: <em id="table_c_min_bet">$50</em>
 										</p>
 									</div>
-								</div>
+								</div> </a>
 							</li>
 							<li class="house_table_wrapper">
 								<div class="table_seats_wrapper">
@@ -161,6 +165,7 @@
 										Sit
 									</div>
 								</div>
+								<a class="join_table_link" href="table.html">
 								<div class="house_table">
 									<div class="table_overview">
 										<p>
@@ -170,7 +175,7 @@
 											Min bet: <em id="table_d_min_bet">$50</em>
 										</p>
 									</div>
-								</div>
+								</div> </a>
 							</li>
 						</ul>
 					</div>
@@ -178,5 +183,84 @@
 				</div>
 			</div>
 		</div>
+		<div id="login_popup" class="modal fade">
+			<div class="modal-header">
+				<a href="#" class="close">x</a>
+				<h3>Login to SBW</h3>
+			</div>
+			<div class="modal-body">
+				<form action="" method="post">
+					<fieldset>
+						<div class="clearfix">
+							<label for="login_email">Email</label>
+							<div class="input">
+								<input id="login_email" class="xlarge" type="text" name="email" />
+							</div>
+						</div>
+						<div class="clearfix">
+							<label for="login_password">Password</label>
+							<div class="input">
+								<input id="login_password" class="xlarge" type="password" name="password" />
+							</div>
+						</div>
+					</fieldset>
+					<div class="actions">
+						<input type="submit" value="Login" class="btn primary" />
+						<input type="button" value="Cancel" class="btn cancel" />
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="register_popup" class="modal fade">
+			<div class="modal-header">
+				<a href="#" class="close">x</a>
+				<h3>Register an Account</h3>
+			</div>
+			<div class="modal-body">
+				<form action="" method="post">
+					<fieldset>
+						<div class="clearfix">
+							<label for="register_email">Email</label>
+							<div class="input">
+								<input id="register_email" class="xlarge" type="text" name="email" />
+							</div>
+						</div>
+						<div class="clearfix">
+							<label for="register_password">Password</label>
+							<div class="input">
+								<input id="register_password" class="xlarge" type="password" name="password" />
+							</div>
+						</div>
+						<div class="clearfix">
+							<label for="register_confirm">Confirm Password</label>
+							<div class="input">
+								<input id="register_confirm" class="xlarge" type="password" name="confirm" />
+							</div>
+						</div>
+					</fieldset>
+					<div class="actions">
+						<input type="submit" value="Register" class="btn primary" />
+						<input type="button" value="Cancel" class="btn cancel" />
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="about_popup" class="modal fade">
+			<div class="modal-header">
+				<a href="#" class="close">x</a>
+				<h3>Modal Heading</h3>
+			</div>
+			<div class="modal-body">
+				<p>
+					About the site...
+				</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn secondary cancel">Close</a>
+			</div>
+		</div>
+		<script src="javascripts/jquery-1.6.4.js"></script>
+		<script src="javascripts/twitter_modal_plugin.js"></script>
+		<script src="javascripts/common.js"></script>
 	</body>
 </html>
