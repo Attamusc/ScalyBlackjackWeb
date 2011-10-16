@@ -6,481 +6,482 @@
 </head>
 <body class="lift:content_id=casino_floor">
 	<div id="casino_floor" class="lift:surround?with=default;at=content">
-	      <div id="leave_table"><a href="/">Leave table</a></div>
-	      <div id="table_section">
-	        <div id="main_table_wrapper">
-	          <div class="table_seats_wrapper">
-	            <div id="table_a_dealer_seat" class="seat dealer_seat">
-	              D
-	            </div>
-	            <div class="seat seat_1 empty_seat">
-	              Sit
-	            </div>
-	            <div class="seat seat_2 empty_seat">
-	              Sit
-	            </div>
-	            <div class="seat seat_3 empty_seat">
-	              Sit
-	            </div>
-	            <div class="seat seat_4 empty_seat">
-	              Sit
-	            </div>
-	            <div class="seat seat_5 empty_seat">
-	              Sit
-	            </div>
-	          </div>
-	          <div class="player_cards_wrapper">
-	            <div class="card_wrapper dealer_cards clearfix">
-	              <div class="card red_card">
-	                10
-	              </div>
-	              <div class="card red_card">
-	                A
-	              </div>
-	            </div>
-	            <div class="card_wrapper seat_1_cards clearfix">
-	              <div class="card red_card">
-	                8
-	              </div>
-	              <div class="card black_card">
-	                4
-	              </div>
-	            </div>
-	            <div class="card_wrapper seat_2_cards clearfix">
-	              <div class="card black_card">
-	                3
-	              </div>
-	              <div class="card black_card">
-	                A
-	              </div>
-	            </div>
-	            <div class="card_wrapper seat_3_cards clearfix">
-	              <div class="card red_card">
-	                K
-	              </div>
-	              <div class="card black_card">
-	                Q
-	              </div>
-	            </div>
-	            <div class="card_wrapper seat_4_cards clearfix">
-	              <div class="card black_card">
-	                8
-	              </div>
-	              <div class="card red_card">
-	                8
-	              </div>
-	            </div>
-	            <div class="card_wrapper seat_5_cards clearfix">
-	              <div class="card red_card">
-	                J
-	              </div>
-	              <div class="card red_card">
-	                J
-	              </div>
-	            </div>
-	          </div>
-	          <div class="house_table"></div>
-	        </div>
-	      </div>
-	      <div id="table_dash_board" class="row">
-	        <div id="table_info" class="span3">
-	          <h4 class="lift:TableUtils.getTableName">Table A</h4>
-	          <p>
-	            Min bet: <em id="table_a_min_bet">$50</em>
-	          </p>                                          
-	        </div>
-	        <div id="table_actions" class="span6">
-	          <input type="button" value="Hit" class="btn" />
-	          <input type="button" value="Stand" class="btn" />
-	          <input type="button" value="Split" class="btn" />
-	          <input type="button" value="Insurance" class="btn" />
-	        </div>
-	      </div>                                    
-	      <div class="skip"></div>
-	    </div>
-	    <div id="basic_strategy_pane">
-	      <div id="basic_strategy_handle"></div>
-	      <div id="basic_strategy_table_wrapper">
-	        <table class="zebra-striped">
-	          <thead>
-	            <tr>
-	              <th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>A</th>
-	            </tr>
-	          </thead>
-	          <tbody>
-	            <tr>
-	              <td><b>8</b></td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>9</b></td>
-	              <td>H</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>10</b></td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>11</b></td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>12</b></td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>13</b></td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	              <td><b>14</b></td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>15</b></td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H/R</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>16</b></td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H/R</td>
-	              <td>H/R</td>
-	              <td>H/R</td>
-	            </tr>
-	            <tr>
-	              <td><b>17</b></td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,2</b></td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,3</b></td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,4</b></td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,5</b></td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,6</b></td>
-	              <td>H</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,7</b></td>
-	              <td>S</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,8</b></td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,9</b></td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	            </tr>
-	            <tr>
-	              <td><b>2,2</b></td>
-	              <td>H/P</td>
-	              <td>H/P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>3,3</b></td>
-	              <td>H/P</td>
-	              <td>H/P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>4,4</b></td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H/P</td>
-	              <td>H/P</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>5,5</b></td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>DD</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>6,6</b></td>
-	              <td>H/P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>7,7</b></td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	              <td>H</td>
-	            </tr>
-	            <tr>
-	              <td><b>8,8</b></td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	            </tr>
-	            <tr>
-	              <td><b>9,9</b></td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>S</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>S</td>
-	              <td>S</td>
-	            </tr>
-	            <tr>
-	              <td><b>10,10</b></td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	              <td>S</td>
-	            </tr>
-	            <tr>
-	              <td><b>A,A</b></td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	              <td>P</td>
-	            </tr>
-	          </tbody>
-	        </table>
-	    </div>
-		<script>
-		      $(document).ready(function() {
-		        var basic_strategy = $('#basic_strategy_pane');
-		        $('#basic_strategy_handle').click(function(e) {
-		          basic_strategy.toggleClass('show');
-		        });
-		      });
-		    </script>
+       <div id="leave_table"><a href="/">Leave table</a></div>
+       <div id="table_section">
+         <div id="main_table_wrapper">
+           <div class="table_seats_wrapper">
+             <div id="table_a_dealer_seat" class="seat dealer_seat">
+               D
+             </div>
+             <div class="seat seat_1 empty_seat">
+               Sit
+             </div>
+             <div class="seat seat_2 empty_seat">
+               Sit
+             </div>
+             <div class="seat seat_3 empty_seat">
+               Sit
+             </div>
+             <div class="seat seat_4 empty_seat">
+               Sit
+             </div>
+             <div class="seat seat_5 empty_seat">
+               Sit
+             </div>
+           </div>
+           <div class="player_cards_wrapper">
+             <div class="card_wrapper dealer_cards clearfix">
+               <div class="card red_card">
+                 10
+               </div>
+               <div class="card red_card">
+                 A
+               </div>
+             </div>
+             <div class="card_wrapper seat_1_cards clearfix">
+               <div class="card red_card">
+                 8
+               </div>
+               <div class="card black_card">
+                 4
+               </div>
+             </div>
+             <div class="card_wrapper seat_2_cards clearfix">
+               <div class="card black_card">
+                 3
+               </div>
+               <div class="card black_card">
+                 A
+               </div>
+             </div>
+             <div class="card_wrapper seat_3_cards clearfix">
+               <div class="card red_card">
+                 K
+               </div>
+               <div class="card black_card">
+                 Q
+               </div>
+             </div>
+             <div class="card_wrapper seat_4_cards clearfix">
+               <div class="card black_card">
+                 8
+               </div>
+               <div class="card red_card">
+                 8
+               </div>
+             </div>
+             <div class="card_wrapper seat_5_cards clearfix">
+               <div class="card red_card">
+                 J
+               </div>
+               <div class="card red_card">
+                 J
+               </div>
+             </div>
+           </div>
+           <div class="house_table"></div>
+         </div>
+       </div>
+       <div id="table_dash_board" class="row">
+         <div id="table_info" class="span3">
+           <h4 class="lift:TableUtils.getTableName">Table A</h4>
+           <p>
+             Min bet: <em id="table_a_min_bet">$50</em>
+           </p>                                          
+         </div>
+         <div id="table_actions" class="span6">
+           <input type="button" value="Hit" class="btn" />
+           <input type="button" value="Stand" class="btn" />
+           <input type="button" value="Split" class="btn" />
+           <input type="button" value="Insurance" class="btn" />
+         </div>
+       </div>                                    
+       <div class="skip"></div>
+     </div>
+     <div id="basic_strategy_pane">
+       <div id="basic_strategy_handle"></div>
+       <div id="basic_strategy_table_wrapper">
+         <table class="zebra-striped">
+           <thead>
+             <tr>
+               <th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>A</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <td><b>8</b></td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>9</b></td>
+               <td>H</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>10</b></td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>11</b></td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>12</b></td>
+               <td>H</td>
+               <td>H</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>13</b></td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+               <td><b>14</b></td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>15</b></td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H/R</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>16</b></td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H/R</td>
+               <td>H/R</td>
+               <td>H/R</td>
+             </tr>
+             <tr>
+               <td><b>17</b></td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+             </tr>
+             <tr>
+               <td><b>A,2</b></td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>A,3</b></td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>A,4</b></td>
+               <td>H</td>
+               <td>H</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>A,5</b></td>
+               <td>H</td>
+               <td>H</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>A,6</b></td>
+               <td>H</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>A,7</b></td>
+               <td>S</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>S</td>
+               <td>S</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>A,8</b></td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+             </tr>
+             <tr>
+               <td><b>A,9</b></td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+             </tr>
+             <tr>
+               <td><b>2,2</b></td>
+               <td>H/P</td>
+               <td>H/P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>3,3</b></td>
+               <td>H/P</td>
+               <td>H/P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>4,4</b></td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H/P</td>
+               <td>H/P</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>5,5</b></td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>DD</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>6,6</b></td>
+               <td>H/P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>7,7</b></td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+               <td>H</td>
+             </tr>
+             <tr>
+               <td><b>8,8</b></td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+             </tr>
+             <tr>
+               <td><b>9,9</b></td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>S</td>
+               <td>P</td>
+               <td>P</td>
+               <td>S</td>
+               <td>S</td>
+             </tr>
+             <tr>
+               <td><b>10,10</b></td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+               <td>S</td>
+             </tr>
+             <tr>
+               <td><b>A,A</b></td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+               <td>P</td>
+             </tr>
+           </tbody>
+         </table>
+     </div>
+
+  <script>
+  $(document).ready(function() {
+    var basic_strategy = $('#basic_strategy_pane');
+    $('#basic_strategy_handle').click(function(e) {
+       basic_strategy.toggleClass('show');
+    });
+  });
+  </script>
 </body>
 </html>
