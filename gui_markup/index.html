@@ -1,266 +1,271 @@
 <!DOCTYPE html public "SBW">
 <html>
-	<head>
-		<title>SBW Casino - Where the cool go to play</title>
-		<meta name="description" content="All the fun of blackjack, with all the style of Lift" />
-		<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
-		<link href='http://fonts.googleapis.com/css?family=Short+Stack' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="css/index.css">
-	</head>
-	<body>
-		<div class="">
-			<div id="navigation" class="pull-right">
-				<span><a id="login_link" data-controls-modal="login_popup" data-backdrop="true" data-keyboard="true" href="#">Login</a></span>
-				<span><a id="register_link" data-controls-modal="register_popup" data-backdrop="true" data-keyboard="true" href="#">Register</a></span>
-				<span><a id="about_link" data-controls-modal="about_popup" data-backdrop="true" data-keyboard="true" href="#">About</a></span>
-			</div>
-			<div id="house_banner">
-				<h1>SWB Casino</h1>
-				<h2>All the fun of blackjack, with all the style of Lift</h2>
-			</div>
-			<div id="house_stats">
-				<p>
-					The house has paid out <em id="amount_house_paid_out">$1,000,000</em> today!
-				</p>
-				<p>
-					The house has made <em id="amount_house_made">$23,000,000</em> today!
-				</p>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="sidebar">
-				<div class="page-head">
-					<h4>House Statistics</h4>
-				</div>
-				<ul id="stats_list" class="unstyled">
-					<li>
-						Number of players: <em>12</em>
-					</li>
-					<li>
-						Number of tables: <em>4</em>
-					</li>
-				</ul>
-			</div>
-			<div class="content">
-				<div id="casino_floor">
-					<div id="table_section">
-						<ul>
-							<li class="house_table_wrapper">
-								<div class="table_seats_wrapper">
-									<div id="table_a_dealer_seat" class="seat dealer_seat">
-										D
-									</div>
-									<div class="seat seat_1 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_2 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_3 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_4 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_5 empty_seat">
-										Sit
-									</div>
-								</div>
-								<a class="join_table_link" href="table.html">
-								<div class="house_table">
-									<div class="table_overview">
-										<p>
-											Table A
-										</p>
-										<p>
-											Min bet: <em id="table_a_min_bet">$50</em>
-										</p>
-									</div>
-								</div> </a>
-							</li>
-							<li class="house_table_wrapper">
-								<div class="table_seats_wrapper">
-									<div id="table_b_dealer_seat" class="seat dealer_seat">
-										D
-									</div>
-									<div class="seat seat_1 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_2 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_3 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_4 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_5 empty_seat">
-										Sit
-									</div>
-								</div>
-								<a class="join_table_link" href="table.html">
-								<div class="house_table">
-									<div class="table_overview">
-										<p>
-											Table B
-										</p>
-										<p>
-											Min bet: <em id="table_b_min_bet">$50</em>
-										</p>
-									</div>
-								</div> </a>
-							</li>
-							<li class="house_table_wrapper">
-								<div class="table_seats_wrapper">
-									<div id="table_c_dealer_seat" class="seat dealer_seat">
-										D
-									</div>
-									<div class="seat seat_1 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_2 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_3 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_4 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_5 empty_seat">
-										Sit
-									</div>
-								</div>
-								<a class="join_table_link" href="table.html">
-								<div class="house_table">
-									<div class="table_overview">
-										<p>
-											Table C
-										</p>
-										<p>
-											Min bet: <em id="table_c_min_bet">$50</em>
-										</p>
-									</div>
-								</div> </a>
-							</li>
-							<li class="house_table_wrapper">
-								<div class="table_seats_wrapper">
-									<div id="table_d_dealer_seat" class="seat dealer_seat">
-										D
-									</div>
-									<div class="seat seat_1 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_2 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_3 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_4 empty_seat">
-										Sit
-									</div>
-									<div class="seat seat_5 empty_seat">
-										Sit
-									</div>
-								</div>
-								<a class="join_table_link" href="table.html">
-								<div class="house_table">
-									<div class="table_overview">
-										<p>
-											Table D
-										</p>
-										<p>
-											Min bet: <em id="table_d_min_bet">$50</em>
-										</p>
-									</div>
-								</div> </a>
-							</li>
-						</ul>
-					</div>
-					<div class="skip"></div>
-				</div>
-			</div>
-		</div>
-		<div id="login_popup" class="modal fade">
-			<div class="modal-header">
-				<a href="#" class="close">x</a>
-				<h3>Login to SBW</h3>
-			</div>
-			<div class="modal-body">
-				<form action="" method="post">
-					<fieldset>
-						<div class="clearfix">
-							<label for="login_email">Email</label>
-							<div class="input">
-								<input id="login_email" class="xlarge" type="text" name="email" />
-							</div>
-						</div>
-						<div class="clearfix">
-							<label for="login_password">Password</label>
-							<div class="input">
-								<input id="login_password" class="xlarge" type="password" name="password" />
-							</div>
-						</div>
-					</fieldset>
-					<div class="actions">
-						<input type="submit" value="Login" class="btn primary" />
-						<input type="button" value="Cancel" class="btn cancel" />
-					</div>
-				</form>
-			</div>
-		</div>
-		<div id="register_popup" class="modal fade">
-			<div class="modal-header">
-				<a href="#" class="close">x</a>
-				<h3>Register an Account</h3>
-			</div>
-			<div class="modal-body">
-				<form action="" method="post">
-					<fieldset>
-						<div class="clearfix">
-							<label for="register_email">Email</label>
-							<div class="input">
-								<input id="register_email" class="xlarge" type="text" name="email" />
-							</div>
-						</div>
-						<div class="clearfix">
-							<label for="register_password">Password</label>
-							<div class="input">
-								<input id="register_password" class="xlarge" type="password" name="password" />
-							</div>
-						</div>
-						<div class="clearfix">
-							<label for="register_confirm">Confirm Password</label>
-							<div class="input">
-								<input id="register_confirm" class="xlarge" type="password" name="confirm" />
-							</div>
-						</div>
-					</fieldset>
-					<div class="actions">
-						<input type="submit" value="Register" class="btn primary" />
-						<input type="button" value="Cancel" class="btn cancel" />
-					</div>
-				</form>
-			</div>
-		</div>
-		<div id="about_popup" class="modal fade">
-			<div class="modal-header">
-				<a href="#" class="close">x</a>
-				<h3>Modal Heading</h3>
-			</div>
-			<div class="modal-body">
-				<p>
-					About the site...
-				</p>
-			</div>
-			<div class="modal-footer">
-				<a href="#" class="btn secondary cancel">Close</a>
-			</div>
-		</div>
-		<script src="javascripts/jquery-1.6.4.js"></script>
-		<script src="javascripts/twitter_modal_plugin.js"></script>
-		<script src="javascripts/common.js"></script>
-	</body>
+  <head>
+    <title>SBW Casino - Where the cool go to play</title>
+    <meta name="description" content="All the fun of blackjack, with all the style of Lift" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Short+Stack' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <div class="">
+      <div id="navigation">
+        <div class="container">
+          <div class="span8">&nbsp;</div>
+          <div class="span7">
+            <span><a id="login_link" data-controls-modal="login_popup" data-backdrop="true" data-keyboard="true" href="#">Login</a></span>
+            <span><a id="register_link" data-controls-modal="register_popup" data-backdrop="true" data-keyboard="true" href="#">Register</a></span>
+            <span><a id="about_link" data-controls-modal="about_popup" data-backdrop="true" data-keyboard="true" href="#">About</a></span>
+          </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+      </div>
+      <div id="house_banner">
+        <h1>SWB Casino <small>All the fun of blackjack, with all the style of Lift</small></h1>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="page-head">
+          <h4>House Statistics</h4>
+        </div>
+        <ul id="house_stats_block" class="unstyled">
+          <li>
+            Today's payout: <em id="amount_house_paid_out">$1,000,000</em>
+          </li>
+          <li>
+            Today's rake: <em id="amount_house_made">$23,000,000</em>
+          </li>
+        </ul>
+        <ul id="stats_list" class="unstyled">
+          <li>
+            Number of players: <em>12</em>
+          </li>
+          <li>
+            Number of tables: <em>4</em>
+          </li>
+        </ul>
+      </div>
+      <div class="content container">
+        <div id="casino_floor">
+          <div id="table_section">
+            <ul>
+              <li class="house_table_wrapper">
+                <div class="table_seats_wrapper">
+                  <div id="table_a_dealer_seat" class="seat dealer_seat">
+                    D
+                  </div>
+                  <div class="seat seat_1 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_2 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_3 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_4 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_5 empty_seat">
+                    Sit
+                  </div>
+                </div>
+                <a class="join_table_link" href="table.html">
+                <div class="house_table">
+                  <div class="table_overview">
+                    <p>
+                      Table A
+                    </p>
+                    <p>
+                      Min bet: <em id="table_a_min_bet">$50</em>
+                    </p>
+                  </div>
+                </div> </a>
+              </li>
+              <li class="house_table_wrapper">
+                <div class="table_seats_wrapper">
+                  <div id="table_b_dealer_seat" class="seat dealer_seat">
+                    D
+                  </div>
+                  <div class="seat seat_1 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_2 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_3 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_4 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_5 empty_seat">
+                    Sit
+                  </div>
+                </div>
+                <a class="join_table_link" href="table.html">
+                <div class="house_table">
+                  <div class="table_overview">
+                    <p>
+                      Table B
+                    </p>
+                    <p>
+                      Min bet: <em id="table_b_min_bet">$50</em>
+                    </p>
+                  </div>
+                </div> </a>
+              </li>
+              <li class="house_table_wrapper">
+                <div class="table_seats_wrapper">
+                  <div id="table_c_dealer_seat" class="seat dealer_seat">
+                    D
+                  </div>
+                  <div class="seat seat_1 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_2 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_3 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_4 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_5 empty_seat">
+                    Sit
+                  </div>
+                </div>
+                <a class="join_table_link" href="table.html">
+                <div class="house_table">
+                  <div class="table_overview">
+                    <p>
+                      Table C
+                    </p>
+                    <p>
+                      Min bet: <em id="table_c_min_bet">$50</em>
+                    </p>
+                  </div>
+                </div> </a>
+              </li>
+              <li class="house_table_wrapper">
+                <div class="table_seats_wrapper">
+                  <div id="table_d_dealer_seat" class="seat dealer_seat">
+                    D
+                  </div>
+                  <div class="seat seat_1 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_2 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_3 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_4 empty_seat">
+                    Sit
+                  </div>
+                  <div class="seat seat_5 empty_seat">
+                    Sit
+                  </div>
+                </div>
+                <a class="join_table_link" href="table.html">
+                <div class="house_table">
+                  <div class="table_overview">
+                    <p>
+                      Table D
+                    </p>
+                    <p>
+                      Min bet: <em id="table_d_min_bet">$50</em>
+                    </p>
+                  </div>
+                </div> </a>
+              </li>
+            </ul>
+          </div>
+          <div class="skip"></div>
+        </div>
+      </div>
+    </div>
+    <div id="login_popup" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>Login to SBW</h3>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <fieldset>
+            <div class="clearfix">
+              <label for="login_email">Email</label>
+              <div class="input">
+                <input id="login_email" class="xlarge" type="text" name="email" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="login_password">Password</label>
+              <div class="input">
+                <input id="login_password" class="xlarge" type="password" name="password" />
+              </div>
+            </div>
+          </fieldset>
+          <div class="actions">
+            <input type="submit" value="Login" class="btn primary" />
+            <input type="button" value="Cancel" class="btn cancel" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="register_popup" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>Register an Account</h3>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <fieldset>
+            <div class="clearfix">
+              <label for="register_email">Email</label>
+              <div class="input">
+                <input id="register_email" class="xlarge" type="text" name="email" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="register_password">Password</label>
+              <div class="input">
+                <input id="register_password" class="xlarge" type="password" name="password" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="register_confirm">Confirm Password</label>
+              <div class="input">
+                <input id="register_confirm" class="xlarge" type="password" name="confirm" />
+              </div>
+            </div>
+          </fieldset>
+          <div class="actions">
+            <input type="submit" value="Register" class="btn primary" />
+            <input type="button" value="Cancel" class="btn cancel" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="about_popup" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>Modal Heading</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          About the site...
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn secondary cancel">Close</a>
+      </div>
+    </div>
+    <script src="javascripts/jquery-1.6.4.js"></script>
+    <script src="javascripts/twitter_modal_plugin.js"></script>
+    <script src="javascripts/common.js"></script>
+  </body>
 </html>
