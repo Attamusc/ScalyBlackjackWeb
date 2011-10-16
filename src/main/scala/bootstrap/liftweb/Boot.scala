@@ -42,14 +42,18 @@ class Boot {
 
 	// URI Rewriting Rules
 	LiftRules.statelessRewrite.prepend(NamedPF("SBWCasinoRewrites") {
+		// Rewrites /tables/:id => tables/show?tableId=:id
 	  	case RewriteRequest(ParsePath("tables" :: tableId :: Nil, "", true, false), GetRequest, _ ) => RewriteResponse("tables/show" :: Nil, Map("tableId" -> tableId))
+		// Rewrites /tables/:id/game => /games/show?tableId=:id
+		case RewriteRequest(ParsePath("tables" :: tableId :: "game" :: Nil, "", true, false), GetRequest, _ ) => RewriteResponse("games/show" :: Nil, Map("tableId" -> tableId))
 	})
 
     // Build SiteMap
     def sitemap = SiteMap(
       	Menu.i("Home") / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
 		Menu.i("About") / "about",
-		Menu.i("List Tables") / "tables/show",
+		Menu.i("Show Table") / "tables/show",
+		Menu.i("Play Game") / "games/show",
 
       // more complex because this menu allows anything in the
       // /static path to be visible

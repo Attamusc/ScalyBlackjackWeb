@@ -1,82 +1,110 @@
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html xmlns:lift="http://liftweb.net/" class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html xmlns:lift="http://liftweb.net/" class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html xmlns:lift="http://liftweb.net/" class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!--> <html xmlns:lift="http://liftweb.net/" class="no-js" lang="en"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-
-  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
-       More info: h5bp.com/b/378 -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-  <title>Scaly Blackjack</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
-
-  <!-- CSS: implied media=all -->
-  <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <!-- end CSS-->
-
-  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
-
-  <!-- All JavaScript at the bottom, except for Modernizr / Respond.
-       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
-       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="/javascripts/libs/modernizr-2.0.6.min.js"></script>
-</head>
-
-<body>
-
-  <div id="container">
-    <header>
-		<lift:Menu.builder />
-    </header>
-
-    <div id="content" role="main">The Main Content will be placed here...</div>
-    
-	<footer>
-
-    </footer>
-  </div> <!--! end of #container -->
-
-
-  <!-- JavaScript at the bottom for fast page loading -->
-
-  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.6.2.min.js"><\/script>')</script>
-
-
-  <!-- scripts concatenated and minified via ant build script-->
-  <script defer src="/javascripts/plugins.js"></script>
-  <script defer src="/javascripts/script.js"></script>
-  <!-- end scripts-->
-
-	
-  <!-- Change UA-XXXXX-X to be your site's ID -->
-  <script>
-    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-    Modernizr.load({
-      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-    });
-  </script>
-
-
-  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
-       chromium.org/developers/how-tos/chrome-frame-getting-started -->
-  <!--[if lt IE 7 ]>
-    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-  <![endif]-->
-  
-</body>
+<!DOCTYPE html public "SBW">
+<html>
+  <head>
+    <title>SBW Casino - Where the cool go to play</title>
+    <meta name="description" content="All the fun of blackjack, with all the style of Lift" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Short+Stack' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+    <div class="">
+      <div id="navigation">
+        <div class="container">
+          <div class="span8">&nbsp;</div>
+          <div class="span7">
+            <span><a id="login_link" data-controls-modal="login_popup" data-backdrop="true" data-keyboard="true" href="#">Login</a></span>
+            <span><a id="register_link" data-controls-modal="register_popup" data-backdrop="true" data-keyboard="true" href="#">Register</a></span>
+            <span><a id="about_link" data-controls-modal="about_popup" data-backdrop="true" data-keyboard="true" href="#">About</a></span>
+          </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+      </div>
+      <div id="house_banner">
+        <h1>SBW Casino <small>All the fun of blackjack, with all the style of Lift</small></h1>
+      </div>
+    </div>
+    <div id="content">
+    	Main content will go here.
+    </div>
+    <div id="login_popup" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>Login to SBW</h3>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <fieldset>
+            <div class="clearfix">
+              <label for="login_email">Email</label>
+              <div class="input">
+                <input id="login_email" class="xlarge" type="text" name="email" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="login_password">Password</label>
+              <div class="input">
+                <input id="login_password" class="xlarge" type="password" name="password" />
+              </div>
+            </div>
+          </fieldset>
+          <div class="actions">
+            <input type="submit" value="Login" class="btn primary" />
+            <input type="button" value="Cancel" class="btn cancel" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="register_popup" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>Register an Account</h3>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <fieldset>
+            <div class="clearfix">
+              <label for="register_email">Email</label>
+              <div class="input">
+                <input id="register_email" class="xlarge" type="text" name="email" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="register_password">Password</label>
+              <div class="input">
+                <input id="register_password" class="xlarge" type="password" name="password" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="register_confirm">Confirm Password</label>
+              <div class="input">
+                <input id="register_confirm" class="xlarge" type="password" name="confirm" />
+              </div>
+            </div>
+          </fieldset>
+          <div class="actions">
+            <input type="submit" value="Register" class="btn primary" />
+            <input type="button" value="Cancel" class="btn cancel" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="about_popup" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>Modal Heading</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          About the site...
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn secondary cancel">Close</a>
+      </div>
+    </div>
+    <script src="/javascripts/jquery-1.6.4.min.js"></script>
+    <script src="/javascripts/twitter_modal_plugin.js"></script>
+    <script src="/javascripts/common.js"></script>
+  </body>
 </html>
