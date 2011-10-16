@@ -336,21 +336,21 @@ a.join_table_link {
 }
 #basic_strategy_pane {
   position: absolute;
-  left: -600px;
+  left: -605px;
   top: 200px;
-  transition: all .5s ease-in-out; 
-  -moz-transition: all .5s ease-in-out; 
-  -webkit-transition: all .5s ease-in-out; 
-  -o-transition: all .5s ease-in-out; 
-  -ms-transition: all .5s ease-in-out; 
+  transition: all .2s ease-in-out; 
+  -moz-transition: all .2s ease-in-out; 
+  -webkit-transition: all .2s ease-in-out; 
+  -o-transition: all .2s ease-in-out; 
+  -ms-transition: all .2s ease-in-out; 
 }
 #basic_strategy_pane.show {
   left: 0;
-  transition: all .5s ease-in-out; 
-  -moz-transition: all .5s ease-in-out; 
-  -webkit-transition: all .5s ease-in-out; 
-  -o-transition: all .5s ease-in-out; 
-  -ms-transition: all .5s ease-in-out; 
+  transition: all .2s ease-in-out; 
+  -moz-transition: all .2s ease-in-out; 
+  -webkit-transition: all .2s ease-in-out; 
+  -o-transition: all .2s ease-in-out; 
+  -ms-transition: all .2s ease-in-out; 
 }
 #basic_strategy_table_wrapper {
   padding: 3px 3px 0 0;
@@ -378,7 +378,7 @@ a.join_table_link {
   z-index: 8;
   position: absolute;
   right: -20px;
-  top: 100px;
+  top: 150px;
   height: 100px;
   width: 20px;
   background: #999;
@@ -388,4 +388,10 @@ a.join_table_link {
   -ms-border-radius: 0 10px 10px 0;
   -moz-border-radius: 0 10px 10px 0;
   -o-border-radius: 0 10px 10px 0;
+}
+#basic_strategy_pane:hover {
+  left: -600px;
+}
+#basic_strategy_pane.show:hover {
+  left: 0;
 }
