@@ -66,6 +66,20 @@ html, body {
   border: 2px solid #000;
   padding-bottom: 30px;
 }
+#leave_table {
+  margin-left: 50px;
+  margin-top: 5px;
+  text-align: center;
+  width: 80px;
+  padding: 5px;
+  background: #eee;
+  border: 3px solid #7E7703;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+}
 .sidebar {
   padding: 15px 10px 20px;
   background: #020202;
