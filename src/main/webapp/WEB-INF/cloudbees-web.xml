@@ -6,8 +6,8 @@
         <param-value>prod</param-value>
     </context-param>
 	<resource name="jdbc/scalyblackjackdb" auth="Container" type="javax.sql.DataSource">
-	 <param name="username" value="sbjadmin" />
-	 <param name="password" value="mysqladmin" />
-	 <param name="url" value="jdbc:cloudbees://scalyblackjackdb" />
+		<param name="username" value="sbjadmin" />
+		<param name="password" value="mysqladmin" />
+		<param name="url" value="jdbc:cloudbees://scalyblackjackdb" />
 	</resource>
 </cloudbees-web-app>

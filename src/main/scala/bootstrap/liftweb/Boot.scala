@@ -3,6 +3,7 @@ package bootstrap.liftweb
 import net.liftweb._
 import util._
 import Helpers._
+import net.liftweb.http.LiftRules
 
 import common._
 import http._
@@ -22,9 +23,9 @@ class Boot {
     if (!DB.jndiJdbcConnAvailable_?) {
       val vendor = 
 	new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
-			     Props.get("db.url") openOr 
-			     "jdbc:h2:lift_proto.db;AUTO_SERVER=TRUE",
-			     Props.get("db.user"), Props.get("db.password"))
+			     Props.get("db.url") openOr "jdbc:h2:lift_proto.db;AUTO_SERVER=TRUE",
+			     Props.get("db.user"), 
+				 Props.get("db.password"))
 
       LiftRules.unloadHooks.append(vendor.closeAllConnections_! _)
 
@@ -39,9 +40,16 @@ class Boot {
     // where to search snippet
     LiftRules.addToPackages("code")
 
+	// URI Rewriting Rules
+	LiftRules.statelessRewrite.prepend(NamedPF("SBWCasinoRewrites") {
+	  	case RewriteRequest(ParsePath("tables" :: tableId :: Nil, "", true, false), GetRequest, _ ) => RewriteResponse("tables/show" :: Nil, Map("tableId" -> tableId))
+	})
+
     // Build SiteMap
     def sitemap = SiteMap(
-      Menu.i("Home") / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
+      	Menu.i("Home") / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
+		Menu.i("About") / "about",
+		Menu.i("List Tables") / "tables/show",
 
       // more complex because this menu allows anything in the
       // /static path to be visible
