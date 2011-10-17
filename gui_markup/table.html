@@ -24,7 +24,6 @@
                    </div>
     </div>
     <div id="casino_floor">
-      <div id="leave_table"><a href="index.html">Leave table</a></div>
       <div id="table_section">
         <div id="main_table_wrapper">
           <div class="table_seats_wrapper">
@@ -72,7 +71,7 @@
                 A
               </div>
             </div>
-            <div class="card_wrapper seat_3_cards clearfix">
+            <div id="player_cards" class="card_wrapper seat_3_cards clearfix">
               <div class="card red_card">
                 K
               </div>
@@ -100,18 +99,22 @@
           <div class="house_table"></div>
         </div>
       </div>
-      <div id="table_dash_board" class="row">
-        <div id="table_info" class="span3">
-          <h4>Table A</h4>
-          <p>
-            Min bet: <em id="table_a_min_bet">$50</em>
-          </p>                                          
-        </div>
-        <div id="table_actions" class="span6">
-          <input type="button" value="Hit" class="btn" />
-          <input type="button" value="Stand" class="btn" />
-          <input type="button" value="Split" class="btn" />
-          <input type="button" value="Insurance" class="btn" />
+      <div id="table_dash_board">
+        <div class="container">
+          <div class="span2 dash_section">
+            <p>
+              Min bet: <b id="table_a_min_bet">$50</b> <!-- TODO: set somewhere -->
+            </p>
+          </div>
+          <div class="span8 dash_section"> <!-- TODO: do something when buttons are clicked! -->
+            <input type="button" value="Hit" class="btn primary" />
+            <input type="button" value="Stand" class="btn primary" />
+            <input type="button" value="Split" class="btn primary" />
+            <input type="button" value="Double Down" class="btn primary" />
+            <input type="button" value="Insurance" class="btn primary" />
+          </div>
+          <div class="span2 dash_section"><p>Your total: <b id="player-hand-total">20</b></p></div> <!-- TODO: set value on card deal -->
+          <div class="span2 dash_section"><a href="index.html" class="cash_out_button btn primary">Cash Out</a></div> <!-- TODO: actually cash out or something --> <!-- TODO: fix href-->
         </div>
       </div>                                    
       <div class="skip"></div>
