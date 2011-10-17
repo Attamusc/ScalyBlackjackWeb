@@ -55,19 +55,19 @@
                   <div id="table_a_dealer_seat" class="seat dealer_seat">
                     D
                   </div>
-                  <div class="seat seat_1 empty_seat">
+                  <div class="seat seat_1" data-controls-modal="player_info" data-backdrop="true" data-keyboard="true">
+                    Paul
+                  </div>
+                  <div class="seat seat_2 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_2 empty_seat">
+                  <div class="seat seat_3 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_3 empty_seat">
+                  <div class="seat seat_4 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_4 empty_seat">
-                    Sit
-                  </div>
-                  <div class="seat seat_5 empty_seat">
+                  <div class="seat seat_5 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
                 </div>
@@ -88,19 +88,19 @@
                   <div id="table_b_dealer_seat" class="seat dealer_seat">
                     D
                   </div>
-                  <div class="seat seat_1 empty_seat">
+                  <div class="seat seat_1 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_2 empty_seat">
+                  <div class="seat seat_2 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_3 empty_seat">
+                  <div class="seat seat_3 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_4 empty_seat">
+                  <div class="seat seat_4 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_5 empty_seat">
+                  <div class="seat seat_5 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
                 </div>
@@ -121,19 +121,19 @@
                   <div id="table_c_dealer_seat" class="seat dealer_seat">
                     D
                   </div>
-                  <div class="seat seat_1 empty_seat">
+                  <div class="seat seat_1 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_2 empty_seat">
+                  <div class="seat seat_2 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_3 empty_seat">
+                  <div class="seat seat_3 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_4 empty_seat">
+                  <div class="seat seat_4 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_5 empty_seat">
+                  <div class="seat seat_5 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
                 </div>
@@ -154,19 +154,19 @@
                   <div id="table_d_dealer_seat" class="seat dealer_seat">
                     D
                   </div>
-                  <div class="seat seat_1 empty_seat">
+                  <div class="seat seat_1 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_2 empty_seat">
+                  <div class="seat seat_2 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_3 empty_seat">
+                  <div class="seat seat_3 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_4 empty_seat">
+                  <div class="seat seat_4 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
-                  <div class="seat seat_5 empty_seat">
+                  <div class="seat seat_5 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
                     Sit
                   </div>
                 </div>
@@ -264,6 +264,53 @@
         <a href="#" class="btn secondary cancel">Close</a>
       </div>
     </div>
+    <div id="player_info" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3 id="player_info_name">Paul!</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="span3">
+            <ul class="unstyled">
+              <li>Chips in play: <b id="player_chips_in_play">200</b></li>
+              <li>Win Ration: <b id="player_win_ratio">75%</b></li>
+              <li>Time in house: <b id="player_time_in_house">5 hours</b></li>
+            </ul>
+          </div>
+          <div class="span4" id="player_avatar">
+            <img src="http://placekitten.com/350/350" alt="player avatar" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn secondary cancel">Close</a>
+      </div>
+    </div>
+    <div id="trade_in_chips" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>How much of your wallet would you like to convert to chips?</h3>
+      </div>
+      <form action="table.html" class="form-stacked">
+        <div class="modal-body">
+          <fieldset>
+            <div class="clearfix">
+              <label for="convert_cash_amount">Amount in Wallet</label>
+              <div class="input">
+                <input type="text" name="convert_cash_amount" />
+                <span class="help-block">Current Rate $<b id="table_chip-rate">100 = 1000</b> chips</span>
+              </div>
+            </div>
+          </fieldset> 
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn secondary cancel" value="Close" />
+          <input type="submit" value="Sit" class="btn primary" />
+        </div>
+      </form>
+    </div>
+
     <script src="javascripts/jquery-1.6.4.js"></script>
     <script src="javascripts/twitter_modal_plugin.js"></script>
     <script src="javascripts/common.js"></script>

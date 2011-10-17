@@ -40,6 +40,9 @@ html, body {
 #house_banner h1 {
   color: #feff03;
 }
+.modal-header h3 {
+  width: 400px;
+}
 .sidebar ul {
   padding: 10px 12px;
   background: #eee;
@@ -172,15 +175,17 @@ a.join_table_link {
   text-align: center;
   font-weight: bold;
   font-size: 20px;
+  background: #e69a50;
+  color: #000;
   -webkit-box-shadow: 4px 1px 10px #333;
   -moz-box-shadow: 4px 1px 10px #333;
   -ms-box-shadow: 4px 1px 10px #333;
   -o-box-shadow: 4px 1px 10px #333;
   box-shadow: 4px 1px 10px #333;
+  cursor: pointer;
 }
 .empty_seat {
   color: #222;
-  background: #e69a50;
   -webkit-transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
   -o-transition: all .2s ease-in-out;
@@ -190,7 +195,6 @@ a.join_table_link {
   color: #000;
   background: #ECB379;
   border: 2px solid #333;
-  cursor: pointer;
 }
 .house_table_wrapper .dealer_seat {
   color: #000;
