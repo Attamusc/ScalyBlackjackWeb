@@ -1,174 +1,167 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-    <title>Home</title>
-  </head>
-  <body class="lift:content_id=container">
-    <div id="container" class="container-fluid lift:surround?with=default;at=content">
-	  	<div class="sidebar">
-	        <div class="page-head">
-	          <h4>House Statistics</h4>
-	        </div>
-	        <ul id="house_stats_block" class="unstyled">
-	          <li>
-	            Today's payout: <em id="amount_house_paid_out">$1,000,000</em>
-	          </li>
-	          <li>
-	            Today's rake: <em id="amount_house_made">$23,000,000</em>
-	          </li>
-	        </ul>
-	        <ul id="stats_list" class="unstyled">
-	          <li>
-	            Number of players: <em>12</em>
-	          </li>
-	          <li>
-	            Number of tables: <em>4</em>
-	          </li>
-	        </ul>
-	      </div>
-	      <div class="content container">
-	        <div id="casino_floor">
-	          <div id="table_section">
-	            <ul>
-	              <li class="house_table_wrapper">
-	                <div class="table_seats_wrapper">
-	                  <div id="table_a_dealer_seat" class="seat dealer_seat">
-	                    D
-	                  </div>
-	                  <div class="seat seat_1 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_2 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_3 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_4 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_5 empty_seat">
-	                    Sit
-	                  </div>
-	                </div>
-	                <a class="join_table_link" href="/tables/1/game">
-	                <div class="house_table">
-	                  <div class="table_overview">
-	                    <p>
-	                      Table A
-	                    </p>
-	                    <p>
-	                      Min bet: <em id="table_a_min_bet">$50</em>
-	                    </p>
-	                  </div>
-	                </div> </a>
-	              </li>
-	              <li class="house_table_wrapper">
-	                <div class="table_seats_wrapper">
-	                  <div id="table_b_dealer_seat" class="seat dealer_seat">
-	                    D
-	                  </div>
-	                  <div class="seat seat_1 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_2 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_3 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_4 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_5 empty_seat">
-	                    Sit
-	                  </div>
-	                </div>
-	                <a class="join_table_link" href="/tables/2/game">
-	                <div class="house_table">
-	                  <div class="table_overview">
-	                    <p>
-	                      Table B
-	                    </p>
-	                    <p>
-	                      Min bet: <em id="table_b_min_bet">$50</em>
-	                    </p>
-	                  </div>
-	                </div> </a>
-	              </li>
-	              <li class="house_table_wrapper">
-	                <div class="table_seats_wrapper">
-	                  <div id="table_c_dealer_seat" class="seat dealer_seat">
-	                    D
-	                  </div>
-	                  <div class="seat seat_1 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_2 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_3 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_4 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_5 empty_seat">
-	                    Sit
-	                  </div>
-	                </div>
-	                <a class="join_table_link" href="/tables/3/game">
-	                <div class="house_table">
-	                  <div class="table_overview">
-	                    <p>
-	                      Table C
-	                    </p>
-	                    <p>
-	                      Min bet: <em id="table_c_min_bet">$50</em>
-	                    </p>
-	                  </div>
-	                </div> </a>
-	              </li>
-	              <li class="house_table_wrapper">
-	                <div class="table_seats_wrapper">
-	                  <div id="table_d_dealer_seat" class="seat dealer_seat">
-	                    D
-	                  </div>
-	                  <div class="seat seat_1 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_2 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_3 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_4 empty_seat">
-	                    Sit
-	                  </div>
-	                  <div class="seat seat_5 empty_seat">
-	                    Sit
-	                  </div>
-	                </div>
-	                <a class="join_table_link" href="/tables/4/game">
-	                <div class="house_table">
-	                  <div class="table_overview">
-	                    <p>
-	                      Table D
-	                    </p>
-	                    <p>
-	                      Min bet: <em id="table_d_min_bet">$50</em>
-	                    </p>
-	                  </div>
-	                </div> </a>
-	              </li>
-	            </ul>
-	          </div>
-	          <div class="skip"></div>
-	        </div>
-	      </div>
-    </div>
-  </body>
-</html>
+<div id="container" class="container-fluid lift:surround?with=default;at=content">
+	<lift:bind-at name="extra-js"></lift:bind-at>
+	<div class="sidebar">
+     <div class="page-head">
+       <h4>House Statistics</h4>
+     </div>
+     <ul id="house_stats_block" class="unstyled">
+       <li>
+         Today's payout: <em id="amount_house_paid_out">$1,000,000</em>
+       </li>
+       <li>
+         Today's rake: <em id="amount_house_made">$23,000,000</em>
+       </li>
+     </ul>
+     <ul id="stats_list" class="unstyled">
+       <li>
+         Number of players: <em>12</em>
+       </li>
+       <li>
+         Number of tables: <em>4</em>
+       </li>
+     </ul>
+   </div>
+   <div class="content container">
+     <div id="casino_floor">
+       <div id="table_section">
+         <ul>
+           <li class="house_table_wrapper">
+             <div class="table_seats_wrapper">
+               <div id="table_a_dealer_seat" class="seat dealer_seat">
+                 D
+               </div>
+               <div class="seat seat_1 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_2 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_3 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_4 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_5 empty_seat">
+                 Sit
+               </div>
+             </div>
+             <a class="join_table_link" href="/tables/1/game">
+             <div class="house_table">
+               <div class="table_overview">
+                 <p>
+                   Table A
+                 </p>
+                 <p>
+                   Min bet: <em id="table_a_min_bet">$50</em>
+                 </p>
+               </div>
+             </div> </a>
+           </li>
+           <li class="house_table_wrapper">
+             <div class="table_seats_wrapper">
+               <div id="table_b_dealer_seat" class="seat dealer_seat">
+                 D
+               </div>
+               <div class="seat seat_1 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_2 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_3 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_4 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_5 empty_seat">
+                 Sit
+               </div>
+             </div>
+             <a class="join_table_link" href="/tables/2/game">
+             <div class="house_table">
+               <div class="table_overview">
+                 <p>
+                   Table B
+                 </p>
+                 <p>
+                   Min bet: <em id="table_b_min_bet">$50</em>
+                 </p>
+               </div>
+             </div> </a>
+           </li>
+           <li class="house_table_wrapper">
+             <div class="table_seats_wrapper">
+               <div id="table_c_dealer_seat" class="seat dealer_seat">
+                 D
+               </div>
+               <div class="seat seat_1 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_2 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_3 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_4 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_5 empty_seat">
+                 Sit
+               </div>
+             </div>
+             <a class="join_table_link" href="/tables/3/game">
+             <div class="house_table">
+               <div class="table_overview">
+                 <p>
+                   Table C
+                 </p>
+                 <p>
+                   Min bet: <em id="table_c_min_bet">$50</em>
+                 </p>
+               </div>
+             </div> </a>
+           </li>
+           <li class="house_table_wrapper">
+             <div class="table_seats_wrapper">
+               <div id="table_d_dealer_seat" class="seat dealer_seat">
+                 D
+               </div>
+               <div class="seat seat_1 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_2 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_3 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_4 empty_seat">
+                 Sit
+               </div>
+               <div class="seat seat_5 empty_seat">
+                 Sit
+               </div>
+             </div>
+             <a class="join_table_link" href="/tables/4/game">
+             <div class="house_table">
+               <div class="table_overview">
+                 <p>
+                   Table D
+                 </p>
+                 <p>
+                   Min bet: <em id="table_d_min_bet">$50</em>
+                 </p>
+               </div>
+             </div> </a>
+           </li>
+         </ul>
+       </div>
+       <div class="skip"></div>
+     </div>
+   </div>
+</div>
+
 
