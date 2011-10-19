@@ -494,14 +494,21 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <div id="table_info_pane">
+      <div id="table_info_handle"></div>
+      <div id="table_info_content_wrapper">
+        <div class="page-header"><h3>Table Info:</h3></div>
+        <ul class="unstyled"><li>Stuff 1</li><li>Stuff 2</li></ul>
+      </div>
     </div>
     <script src="javascripts/jquery-1.6.4.js"></script>
     <script src="javascripts/twitter_modal_plugin.js"></script>
     <script>
       $(document).ready(function() {
-        var basic_strategy = $('#basic_strategy_pane');
-        $('#basic_strategy_handle').click(function(e) {
-          basic_strategy.toggleClass('show');
+        $('#basic_strategy_handle, #table_info_handle').click(function(e) {
+          $(this).parent().toggleClass('show');
         });
       });
     </script>
