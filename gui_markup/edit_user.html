@@ -1,0 +1,187 @@
+<!DOCTYPE html public "SBW">
+<html>
+  <head>
+    <title>SBW Casino - Where the cool go to play</title>
+    <meta name="description" content="All the fun of blackjack, with all the style of Lift" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Short+Stack' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/index.css">
+    <script>
+      /* Don't bother copying, was just playing around with swapping modals
+      window.CASINO = {
+        modal_switch : function(a) {
+          a.click(function() {
+            // $('.cancel').trigger('click');
+            var m = $('#' + a.data('controls-modal'));
+            // not caching modals in case more are added later
+            $('.modal').each(function(indx, el) { $(el).modal('hide'); });
+            $('#' + a.data('controls-modal')).modal('show');
+          });
+        }
+      };
+      */
+    </script>
+  </head>
+  <body>
+    <div class="">
+      <div id="navigation">
+        <div class="container">
+          <div class="span8">&nbsp;</div>
+          <div class="span7">
+            <span><a id="login_link" data-controls-modal="login_popup" data-backdrop="true" data-keyboard="true" href="#">Login</a></span>
+            <span><a id="register_link" data-controls-modal="register_popup" data-backdrop="true" data-keyboard="true" href="#">Register</a></span>
+            <span><a id="account_link" data-controls-modal="player_info" data-backdrop="true" data-keyboard="true" href="#">Account</a></span>
+            <span><a id="about_link" data-controls-modal="about_popup" data-backdrop="true" data-keyboard="true" href="#">About</a></span>
+          </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+      </div>
+      <div id="house_banner">
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="page-head">
+        </div>
+      </div>
+      <div class="content container">
+        <div id="casino_floor">
+          <div id="table_section">
+            <ul>
+              <li class="house_table_wrapper">
+                <div class="table_seats_wrapper">
+                  <div id="table_a_dealer_seat" class="seat dealer_seat">
+                    D
+                  </div>
+                  <div class="seat seat_1" data-controls-modal="player_info" data-backdrop="true" data-keyboard="true">
+                    Paul
+                  </div>
+                  <div class="seat seat_2 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
+                    Sit
+                  </div>
+                  <div class="seat seat_3 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
+                    Sit
+                  </div>
+                  <div class="seat seat_4 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
+                    Sit
+                  </div>
+                  <div class="seat seat_5 empty_seat" data-controls-modal="trade_in_chips" data-backdrop="true" data-keyboard="true">
+                    Sit
+                  </div>
+                </div>
+                <a class="join_table_link" href="table.html">
+                <div class="house_table">
+                  <div class="table_overview">
+                    <p>
+                      Table A
+                    </p>
+                    <p>
+                      Min bet: <em id="table_a_min_bet">$50</em>
+                    </p>
+                  </div>
+                </div> </a>
+              </li>
+            </ul>
+          </div>
+          <div class="skip"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="player_info" class="modal fade">
+       <div class="modal-header">
+         <a href="#" class="close">x</a>
+         <h3 id="player_info_name">Paul! <small><a href="#" class="edit_user_account" data-controls-modal="edit_player_info" data-backdrop="true" data-keyboard="true">Edit</a></small></h3>
+       </div>
+       <div class="modal-body">
+         <div class="row">
+           <div class="span3">
+             <ul class="unstyled">
+               <li>Chips in play: <b id="player_chips_in_play">200</b></li>
+               <li>Win Ratio: <b id="player_win_ratio">75%</b></li>
+               <li>Time in house: <b id="player_time_in_house">5 hours</b></li>
+             </ul>
+           </div>
+           <div class="span4" id="player_avatar">
+             <img src="http://placekitten.com/350/350" alt="player avatar" />
+           </div>
+         </div>
+       </div>
+       <div class="modal-footer">
+         <a href="#" class="btn secondary cancel">Close</a>
+       </div>
+     </div>
+    <div id="edit_player_info" class="modal fade">
+       <div class="modal-header">
+         <a href="#" class="close">x</a>
+         <h3 id="player_info_name">Paul!</h3>
+       </div>
+       <div class="modal-body">
+         <div class="row">
+           <div class="span5">
+             <form action="/somewhere/over/the/rainbow" method="post" class="form-stacked">
+               <fieldset>
+                 <div class="clearfix"><label>Nickname</label><div class="input"><input type="text" name="nickname" id="edit_user_nickname" /><span class="help-block">What we will call you</span></div></div>
+                 <div class="clearfix"><label>Email</label><div class="input"><input type="text" name="email" id="edit_user_email" /><span class="help-block">How we reach you</span></div></div>
+                 <div class="clearfix"><label>Password</label><div class="input"><input type="password" name="password" id="edit_user_password" /><span class="help-block">How you log in</span></div></div>
+                 <div class="clearfix"><label>Confirm Password</label><div class="input"><input type="password" name="name" id="edit_user_confirm" /></div></div>
+                 <select id="player_avatar_select" name="avatar"><option value="1" checked>First</option><option value="2">Second</option></select>
+               </fieldset>
+               <div class="actions">
+                 <input type="submit" value="update" class="btn primary" />
+               </div>
+             </form>
+           </div>
+           <div class="span4" id="player_avatar_options">
+             <img src="http://placekitten.com/200/200" data-value="1" class="chosen" alt="player avatar" />
+             <img src="http://placekitten.com/g/200/200" data-value="2" alt="player avatar" />
+             <button id="cycle_avatar_left" class="image_shift_button btn">&lt;</button>
+             <button id="cycle_avatar_right" class="image_shift_button btn">&gt;</button>
+           </div>
+         </div>
+       </div>
+       <div class="modal-footer">
+         <a href="#" class="btn secondary cancel">Close</a>
+       </div>
+    </div>
+
+    <script src="javascripts/jquery-1.6.4.js"></script>
+    <script src="javascripts/twitter_modal_plugin.js"></script>
+    <script src="javascripts/common.js"></script>
+
+    <script>
+      /* Don't bother copying, was just playing around with swapping modals
+      $(document).ready(function() {
+        // edit links trigger modals from modals
+        CASINO.modal_switch($('.edit_user_account'));
+      });
+      */
+
+      // set buttons to rotate avatars on edit page
+      var avatar_list = $('#player_avatar_options'), 
+          num_avatars = avatar_list.children('img').size(),
+          avatar_select = $('#player_avatar_select');
+
+      $('#cycle_avatar_left').click(function(e) {
+         e.preventDefault();
+         var item = avatar_list.find('.chosen').removeClass('chosen'), prev = item.prev('img');
+         if (prev.size()) {
+           prev.addClass('chosen');
+         } else {
+           prev = avatar_list.find('img').last().addClass('chosen');
+         }
+         avatar_select.val(prev.data('value'));
+      });
+      $('#cycle_avatar_right').click(function(e) {
+         e.preventDefault();
+         var item = avatar_list.find('.chosen').removeClass('chosen'), next = item.next('img');
+         if (next.size()) {
+           next.addClass('chosen');
+         } else {
+           next = avatar_list.find('img').first().addClass('chosen');
+         }
+         avatar_select.val(next.data('value'));
+      });
+    </script>
+  </body>
+</html>

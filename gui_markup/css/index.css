@@ -468,3 +468,12 @@ a.join_table_link {
 #table_info_pane.show:hover {
   right: 0;
 }
+
+#player_avatar_options img {
+  display: none;
+}
+#player_avatar_options img.chosen {
+  display: inline;
+}
+.image_shift_button {
+}
