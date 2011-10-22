@@ -118,18 +118,31 @@ html, body {
   background-color: #07702E;
   background-size: 16px 16px;
 }
-#main_table_wrapper {
+#main_table_wrapper, #table_info_wrapper {
   padding-top: 40px;
   margin-bottom: 70px;
 }
+#table_info_wrapper {
+  position: relative;
+}
 #main_table_wrapper .house_table {
   width: 825px;
-  height: 438px;
+  height: 395px;
+  border: 10px solid #9D6220;
+  border-radius: 80px;
+}
+#table_info_wrapper .house_table {
+  text-align: center;
+  width: 578px;
+  height: 275px;
   border: 10px solid #9D6220;
   border-radius: 80px;
 }
 a.join_table_link {
   text-decoration: none;
+}
+#join_table_link {
+  color: #222;
 }
 .house_table p {
   font-size: 20px;
@@ -156,6 +169,13 @@ a.join_table_link {
   line-height: 40px;
   border: 2px solid #000;
   border-radius: 25px;
+}
+#table_info_wrapper .seat {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border: 3px solid #000;
+  border-radius: 38px;
 }
 .seat {
   z-index: 1;
@@ -260,6 +280,44 @@ a.join_table_link {
   -moz-transform: translate(21.9em, -6.3em);
   -os-transform: translate(21.9em, -6.3em);
   -ms-transform: translate(21.9em, -6.3em);
+}
+#table_info_wrapper .dealer_seat {
+  color: #000;
+  background: #953e56;
+  -webkit-transform: translate(0, -1.5em);
+  -moz-transform: translate(0, -1.5em);
+  -os-transform: translate(0, -1.5em);
+  -ms-transform: translate(0, -1.5em);
+}
+#table_info_wrapper .seat_1 {
+  -webkit-transform: translate(-16.5em, 6.5em); 
+  -moz-transform: translate(-16.5em, 6.5em); 
+  -os-transform: translate(-16.5em, 6.5em);
+  -ms-transform: translate(-16.5em, 6.5em);
+}
+#table_info_wrapper .seat_2 {
+  -webkit-transform: translate(-10em, 9.2em);
+  -moz-transform: translate(-10em, 9.2em);
+  -os-transform: translate(-10em, 9.2em);
+  -ms-transform: translate(-10em, 9.2em);
+}
+#table_info_wrapper .seat_3 {
+  -webkit-transform: translate(0, 6em);
+  -moz-transform: translate(0, 6em);
+  -os-transform: translate(0, 6em);
+  -ms-transform: translate(0, 6em);
+}
+#table_info_wrapper .seat_4 {
+  -webkit-transform: translate(11em, 2.7em);
+  -moz-transform: translate(11em, 2.7em);
+  -os-transform: translate(11em, 2.7em);
+  -ms-transform: translate(11em, 2.7em);
+}
+#table_info_wrapper .seat_5 {
+  -webkit-transform: translate(16.2em, -6.3em);
+  -moz-transform: translate(16.2em, -6.3em);
+  -os-transform: translate(16.2em, -6.3em);
+  -ms-transform: translate(16.2em, -6.3em);
 }
 .player_cards_wrapper {
   position: absolute;
