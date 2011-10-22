@@ -293,16 +293,19 @@
         <h3>How much of your wallet would you like to convert to chips?</h3>
       </div>
       <form action="table.html" class="form-stacked">
-        <div class="modal-body">
-          <fieldset>
+        <div class="modal-body row">
+          <fieldset class="span5">
             <div class="clearfix">
               <label for="convert_cash_amount">Amount in Wallet</label>
               <div class="input">
-                <input type="text" name="convert_cash_amount" />
+                <input type="text" name="convert_cash_amount" data-show-convert="target_chip_amount" data-rate="10" data-describe="{data} chips" />
                 <span class="help-block">Current Rate $<b id="table_chip-rate">100 = 1000</b> chips</span>
               </div>
             </div>
-          </fieldset> 
+          </fieldset>
+          <div class="span3">
+            You get: <strong><span id="target_chip_amount">0 chips</span></strong>
+          </div>
         </div>
         <div class="modal-footer">
           <input type="button" class="btn secondary cancel" value="Close" />

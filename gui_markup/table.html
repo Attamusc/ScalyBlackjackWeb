@@ -114,7 +114,7 @@
             <input type="button" value="Insurance" class="btn primary" />
           </div>
           <div class="span2 dash_section"><p>Your total: <b id="player-hand-total">20</b></p></div> <!-- TODO: set value on card deal -->
-          <div class="span2 dash_section"><a href="index.html" class="cash_out_button btn primary">Cash Out</a></div> <!-- TODO: actually cash out or something --> <!-- TODO: fix href-->
+          <div class="span2 dash_section"><a href="#" class="cash_out_button btn primary" data-controls-modal="trade_in_cash_modal" data-backdrop="true" data-keyboard="true">Cash Out</a></div> <!-- TODO: actually cash out or something --> <!-- TODO: fix href-->
         </div>
       </div>                                    
       <div class="skip"></div>
@@ -503,8 +503,39 @@
         <ul class="unstyled"><li>Stuff 1</li><li>Stuff 2</li></ul>
       </div>
     </div>
+
+    <div id="trade_in_cash_modal" class="modal fade">
+      <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>How many of your chips would you like to cash out?</h3>
+      </div>
+      <form action="index.html" class="form-stacked">
+        <div class="modal-body row">
+          <fieldset class="span5">
+            <div class="clearfix">
+              <label for="convert_cash_amount">Number of Chips</label>
+              <div class="input">
+                <input type="text" name="convert_cash_amount" data-show-convert="target_cash_amount" data-rate="0.1" data-describe="${data} cash" />
+                <span class="help-block">Current Rate $<b id="table_chip-rate">100 = 1000</b> chips</span>
+              </div>
+            </div>
+          </fieldset>
+          <div class="span3">
+            <div class="clearfix">
+              You get: <strong><span id="target_cash_amount">$0 cash</span></strong>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer row">
+          <input type="button" class="btn secondary cancel" value="Close" />
+          <input type="submit" value="Sit" class="btn primary" />
+        </div>
+      </form>
+    </div>
+
     <script src="javascripts/jquery-1.6.4.js"></script>
     <script src="javascripts/twitter_modal_plugin.js"></script>
+    <script src="javascripts/common.js"></script>
     <script>
       $(document).ready(function() {
         $('#basic_strategy_handle, #table_info_handle').click(function(e) {
