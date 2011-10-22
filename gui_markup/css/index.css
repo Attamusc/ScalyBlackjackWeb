@@ -396,7 +396,7 @@ a.join_table_link {
   height: 66px;
 }
 #table_dash_board {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   z-index: 15;
   width: 100%;
