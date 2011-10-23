@@ -1,0 +1,58 @@
+<lift:children>
+	<div id="player_info" class="modal fade">
+		<div class="modal-header">
+			<a href="#" class="close">x</a>
+			<h3 id="player_info_name">Paul! <small><a href="#" class="edit_user_account" data-controls-modal="edit_player_info" data-backdrop="true" data-keyboard="true">Edit</a></small></h3>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="span3">
+					<ul class="unstyled">
+						<li>Chips in play: <b id="player_chips_in_play">200</b></li>
+						<li>Win Ration: <b id="player_win_ratio">75%</b></li>
+						<li>Time in house: <b id="player_time_in_house">5 hours</b></li>
+					</ul>
+				</div>
+				<div class="span4" id="player_avatar">
+					<img src="http://placekitten.com/350/350" alt="player avatar" />
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn secondary cancel">Close</a>
+		</div>
+	</div>
+	<div id="edit_player_info" class="modal fade">
+	       <div class="modal-header">
+	         <a href="#" class="close">x</a>
+	         <h3 id="player_info_name">Paul!</h3>
+	       </div>
+	       <div class="modal-body">
+	         <div class="row">
+	           <div class="span5">
+	             <form action="/somewhere/over/the/rainbow" method="post" class="form-stacked">
+	               <fieldset>
+	                 <div class="clearfix"><label>Nickname</label><div class="input"><input type="text" name="nickname" id="edit_user_nickname" /><span class="help-block">What we will call you</span></div></div>
+	                 <div class="clearfix"><label>Email</label><div class="input"><input type="text" name="email" id="edit_user_email" /><span class="help-block">How we reach you</span></div></div>
+	                 <div class="clearfix"><label>Password</label><div class="input"><input type="password" name="password" id="edit_user_password" /><span class="help-block">How you log in</span></div></div>
+	                 <div class="clearfix"><label>Confirm Password</label><div class="input"><input type="password" name="name" id="edit_user_confirm" /></div></div>
+	                 <select id="player_avatar_select" name="avatar"><option value="1" checked>First</option><option value="2">Second</option></select>
+	               </fieldset>
+	               <div class="actions">
+	                 <input type="submit" value="update" class="btn primary" />
+	               </div>
+	             </form>
+	           </div>
+	           <div class="span4" id="player_avatar_options">
+	             <img src="http://placekitten.com/200/200" data-value="1" class="chosen" alt="player avatar" />
+	             <img src="http://placekitten.com/g/200/200" data-value="2" alt="player avatar" />
+	             <button id="cycle_avatar_left" class="image_shift_button btn">&lt;</button>
+	             <button id="cycle_avatar_right" class="image_shift_button btn">&gt;</button>
+	           </div>
+	         </div>
+	       </div>
+	       <div class="modal-footer">
+	         <a href="#" class="btn secondary cancel">Close</a>
+	       </div>
+	</div>
+</lift:children>

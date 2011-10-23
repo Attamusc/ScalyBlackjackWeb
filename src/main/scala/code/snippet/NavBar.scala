@@ -15,8 +15,8 @@ class NavBar {
 		Logger.debug("the attribute is: " + isLoggedIn)
 		isLoggedIn match {
 			case "false" => "*" #> <lift:embed what="base_nav" />
-			case "true" => "*" #> "<lift:embed what=\"logged_in_nav\">"
-			case _ => "*" #> "<div>Whoops!!!</div>"
+			case "true" => "*" #> <lift:embed what="logged_in_nav" />
+			case _ => "*" #> <div>Whoops!!!</div>
 		}
 	}
 }

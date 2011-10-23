@@ -42,10 +42,10 @@ class Boot {
 
 	// URI Rewriting Rules
 	LiftRules.statelessRewrite.prepend(NamedPF("SBWCasinoRewrites") {
-		// Rewrites /tables/:id => tables/show?tableId=:id
-	  	case RewriteRequest(ParsePath("tables" :: tableId :: Nil, "", true, false), GetRequest, _ ) => RewriteResponse("tables/show" :: Nil, Map("tableId" -> tableId))
-		// Rewrites /tables/:id/game => /games/show?tableId=:id
-		case RewriteRequest(ParsePath("tables" :: tableId :: "game" :: Nil, "", true, false), GetRequest, _ ) => RewriteResponse("games/show" :: Nil, Map("tableId" -> tableId))
+		// Rewrites GET /tables/:id => tables/show?tableId=:id
+	  	case RewriteRequest(ParsePath("tables" :: tableId :: Nil, "", true, false), _, _ ) => RewriteResponse("tables/show" :: Nil, Map("tableId" -> tableId))
+		// Rewrites GET /tables/:id/game => /games/show?tableId=:id
+		case RewriteRequest(ParsePath("tables" :: tableId :: "game" :: Nil, "", true, false), _, _ ) => RewriteResponse("games/show" :: Nil, Map("tableId" -> tableId))
 	})
 
     // Build SiteMap
