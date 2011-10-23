@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, h6, #navigation, .seat {
 }
 #house_banner {
   padding: 10px 0;
-  background: #222;
+ background: #222;
   text-align: center;
   color: #ccc;
 }
@@ -128,23 +128,44 @@ h1, h2, h3, h4, h5, h6, #navigation, .seat {
   background-color: #07702E;
   background-size: 16px 16px;
 }
-#main_table_wrapper, #table_info_wrapper {
-  padding-top: 40px;
-  margin-bottom: 70px;
+.house_table p {
+  font-size: 20px;
 }
-#table_info_wrapper {
+#back_button {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+}
+#table_section {
   position: relative;
 }
-#main_table_wrapper .house_table {
+#main_table_wrapper, #table_info_wrapper {
+  position: relative;
+  padding-top: 55px;
+  margin: 0 auto 85px;
+}
+#main_table_wrapper {
   width: 825px;
-  height: 395px;
+}
+#main_table_wrapper .house_table, #main_table_wrapper .table_seats_wrapper, #main_table_wrapper .player_cards_wrapper {
+  width: 825px;
+  height: 425px;
+  margin: 30px auto 0;
+}
+#main_table_wrapper .house_table {
   border: 10px solid #9D6220;
   border-radius: 80px;
 }
-#table_info_wrapper .house_table {
-  text-align: center;
+#table_info_wrapper {
+  width: 578px;
+}
+#table_info_wrapper .house_table, #table_info_wrapper .table_seats_wrapper, #table_info_wrapper .player_cards_wrapper {
   width: 578px;
   height: 275px;
+  margin: 30px auto 0;
+}
+#table_info_wrapper .house_table {
+  text-align: center;
   border: 10px solid #9D6220;
   border-radius: 80px;
 }
@@ -153,9 +174,6 @@ a.join_table_link {
 }
 #join_table_link {
   color: #222;
-}
-.house_table p {
-  font-size: 20px;
 }
 .table_overview {
   margin-top: 70px;
@@ -167,6 +185,7 @@ a.join_table_link {
   z-index: 4;
 }
 #main_table_wrapper .seat {
+  position: absolute;
   width: 80px;
   height: 80px;
   line-height: 80px;
@@ -186,6 +205,7 @@ a.join_table_link {
   line-height: 60px;
   border: 3px solid #000;
   border-radius: 38px;
+  position: absolute;
 }
 .seat {
   z-index: 1;
@@ -202,6 +222,7 @@ a.join_table_link {
   -o-box-shadow: 4px 1px 10px #333;
   box-shadow: 4px 1px 10px #333;
   cursor: pointer;
+  overflow: hidden;
 }
 .empty_seat {
   color: #222;
@@ -215,9 +236,11 @@ a.join_table_link {
   background: #ECB379;
   border: 2px solid #333;
 }
-.house_table_wrapper .dealer_seat {
+.dealer_seat {
   color: #000;
   background: #953e56;
+}
+.house_table_wrapper .dealer_seat {
   -webkit-transform: translate(0, -.5em);
   -moz-transform: translate(0, -.5em);
   -os-transform: translate(0, -.5em);
@@ -254,80 +277,52 @@ a.join_table_link {
   -ms-transform: translate(8.9em, -4.6em);
 }
 #main_table_wrapper .dealer_seat {
-  color: #000;
-  background: #953e56;
-  -webkit-transform: translate(0, -2em);
-  -moz-transform: translate(0, -.5em);
-  -os-transform: translate(0, -.5em);
-  -ms-transform: translate(0, -.5em);
+  top: -75px;
+  left: 360px;
 }
 #main_table_wrapper .seat_1 {
-  -webkit-transform: translate(-23.5em, 10.5em);
-  -moz-transform: translate(-23.5em, 10.5em);
-  -os-transform: translate(-23.5em, 10.5em);
-  -ms-transform: translate(-23.5em, 10.5em);
+  left: -80px;
+  bottom: 90px;
 }
 #main_table_wrapper .seat_2 {
-  -webkit-transform: translate(-17em, 14.2em);
-  -moz-transform: translate(-17em, 14.2em);
-  -os-transform: translate(-17em, 14.2em);
-  -ms-transform: translate(-17em, 14.2em);
+  bottom: -100px;
+  left: 60px;
 }
 #main_table_wrapper .seat_3 {
-  -webkit-transform: translate(0, 9.8em);
-  -moz-transform: translate(0, 9.8em);
-  -os-transform: translate(0, 9.8em);
-  -ms-transform: translate(0, 9.8em);
+  bottom: -100px;
+  left: 360px;
 }
 #main_table_wrapper .seat_4 {
-  -webkit-transform: translate(15em, 5.5em);
-  -moz-transform: translate(15em, 5.5em);
-  -os-transform: translate(15em, 5.5em);
-  -ms-transform: translate(15em, 5.5em);
+  right: -100px;
+  bottom: 90px;
 }
 #main_table_wrapper .seat_5 {
-  -webkit-transform: translate(21.9em, -6.3em);
-  -moz-transform: translate(21.9em, -6.3em);
-  -os-transform: translate(21.9em, -6.3em);
-  -ms-transform: translate(21.9em, -6.3em);
+  bottom: -100px;
+  right: 75px;
 }
 #table_info_wrapper .dealer_seat {
-  color: #000;
-  background: #953e56;
-  -webkit-transform: translate(0, -1.5em);
-  -moz-transform: translate(0, -1.5em);
-  -os-transform: translate(0, -1.5em);
-  -ms-transform: translate(0, -1.5em);
+  left: 260px;
+  top: -55px;
 }
 #table_info_wrapper .seat_1 {
-  -webkit-transform: translate(-16.5em, 6.5em); 
-  -moz-transform: translate(-16.5em, 6.5em); 
-  -os-transform: translate(-16.5em, 6.5em);
-  -ms-transform: translate(-16.5em, 6.5em);
+  bottom: 35px;
+  left: -60px;
 }
 #table_info_wrapper .seat_2 {
-  -webkit-transform: translate(-10em, 9.2em);
-  -moz-transform: translate(-10em, 9.2em);
-  -os-transform: translate(-10em, 9.2em);
-  -ms-transform: translate(-10em, 9.2em);
+  bottom: -75px;
+  left: 70px;
 }
 #table_info_wrapper .seat_3 {
-  -webkit-transform: translate(0, 6em);
-  -moz-transform: translate(0, 6em);
-  -os-transform: translate(0, 6em);
-  -ms-transform: translate(0, 6em);
+  bottom: -75px;
+  left: 260px;
 }
 #table_info_wrapper .seat_4 {
-  -webkit-transform: translate(11em, 2.7em);
-  -moz-transform: translate(11em, 2.7em);
-  -os-transform: translate(11em, 2.7em);
-  -ms-transform: translate(11em, 2.7em);
+  bottom: -75px;
+  right: 60px;
 }
 #table_info_wrapper .seat_5 {
-  -webkit-transform: translate(16.2em, -6.3em);
-  -moz-transform: translate(16.2em, -6.3em);
-  -os-transform: translate(16.2em, -6.3em);
-  -ms-transform: translate(16.2em, -6.3em);
+  bottom: 35px;
+  right: -75px;
 }
 .player_cards_wrapper {
   position: absolute;
@@ -354,7 +349,7 @@ a.join_table_link {
 }
 #main_table_wrapper .card_wrapper {
   width: 100px;
-  margin: 0 auto;
+  position: absolute;
 }
 #main_table_wrapper .card {
   width: 35px;
@@ -365,41 +360,28 @@ a.join_table_link {
 }
 #main_table_wrapper .dealer_cards {
   color: #000;
-  background: #953e56;
-  -webkit-transform: translate(0, -2em);
-  -moz-transform: translate(0, -.5em);
-  -os-transform: translate(0, -.5em);
-  -ms-transform: translate(0, -.5em);
+  top: 15px;
+  left: 360px;
 }
 #main_table_wrapper .seat_1_cards {
-  -webkit-transform: translate(-28.5em, 8.5em);
-  -moz-transform: translate(-28.5em, 8.5em);
-  -os-transform: translate(-28.5em, 8.5em);
-  -ms-transform: translate(-28.5em, 8.5em);
+  bottom: 115px;
+  left: 15px;
 }
 #main_table_wrapper .seat_2_cards {
-  -webkit-transform: translate(-24em, 14.2em);
-  -moz-transform: translate(-24em, 14.2em);
-  -os-transform: translate(-24em, 14.2em);
-  -ms-transform: translate(-24em, 14.2em);
+  bottom: 5px;
+  left: 75px;
 }
 #main_table_wrapper .seat_3_cards {
-  -webkit-transform: translate(0, 9.8em);
-  -moz-transform: translate(0, 9.8em);
-  -os-transform: translate(0, 9.8em);
-  -ms-transform: translate(0, 9.8em);
+  bottom: 5px;
+  left: 360px;
 }
 #main_table_wrapper .seat_4_cards {
-  -webkit-transform: translate(21em, 5.5em);
-  -moz-transform: translate(21em, 5.5em);
-  -os-transform: translate(21em, 5.5em);
-  -ms-transform: translate(21em, 5.5em);
+  right: 75px;
+  bottom: 5px;
 }
 #main_table_wrapper .seat_5_cards {
-  -webkit-transform: translate(24.9em, -9.3em);
-  -moz-transform: translate(24.9em, -9.3em);
-  -os-transform: translate(24.9em, -9.3em);
-  -ms-transform: translate(24.9em, -9.3em);
+  right: 0;
+  bottom: 115px;
 }
 #player_cards .card {
   width: 42px;
@@ -438,13 +420,12 @@ a.join_table_link {
   color: #feff03;
 }
 
+
+
+
+/* Styles for pull out panes on game page  */
 #basic_strategy_pane, #table_info_pane {
   top: 200px;
-  transition: all .2s ease-in-out; 
-  -moz-transition: all .2s ease-in-out; 
-  -webkit-transition: all .2s ease-in-out; 
-  -o-transition: all .2s ease-in-out; 
-  -ms-transition: all .2s ease-in-out; 
 }
 #basic_strategy_pane {
   position: absolute;
@@ -454,7 +435,7 @@ a.join_table_link {
   position: fixed;
   right: -605px;
 }
-#basic_strategy_pane.show, #table_info_pane.show {
+#basic_strategy_pane, #table_info_pane, #basic_strategy_pane.show, #table_info_pane.show {
   transition: all .2s ease-in-out; 
   -moz-transition: all .2s ease-in-out; 
   -webkit-transition: all .2s ease-in-out; 
@@ -465,7 +446,7 @@ a.join_table_link {
   left: 0;
 }
 #table_info_pane.show {
- right: 0;
+  right: 0;
 }
 #basic_strategy_table_wrapper, #table_info_content_wrapper {
   background: #000;
@@ -537,7 +518,9 @@ a.join_table_link {
 #table_info_pane.show:hover {
   right: 0;
 }
+/* End table game pane section */
 
+/* Edit user pane */
 #player_avatar_options img {
   display: none;
 }
@@ -546,3 +529,4 @@ a.join_table_link {
 }
 .image_shift_button {
 }
+/* End Edit User page section */
