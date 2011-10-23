@@ -3,6 +3,12 @@ html, body {
   width: 100%;
   height: 100%;
 }
+h1, h2, h3, h4, h5, h6, #navigation, .seat {
+  font-family: 'Actor', sans-serif;
+}
+.modal {
+  display:none;
+}
 .skip {
   clear: both;
 }
@@ -400,7 +406,7 @@ a.join_table_link {
   height: 66px;
 }
 #table_dash_board {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   z-index: 15;
   width: 100%;
@@ -433,7 +439,6 @@ a.join_table_link {
 }
 
 #basic_strategy_pane, #table_info_pane {
-  position: absolute;
   top: 200px;
   transition: all .2s ease-in-out; 
   -moz-transition: all .2s ease-in-out; 
@@ -442,9 +447,11 @@ a.join_table_link {
   -ms-transition: all .2s ease-in-out; 
 }
 #basic_strategy_pane {
+  position: absolute;
   left: -605px;
 }
 #table_info_pane {
+  position: fixed;
   right: -605px;
 }
 #basic_strategy_pane.show, #table_info_pane.show {

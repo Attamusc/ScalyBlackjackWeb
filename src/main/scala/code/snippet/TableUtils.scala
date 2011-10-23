@@ -46,7 +46,7 @@ class TableUtils {
 			            <div class="clearfix">
 			              <label for="convert_cash_amount">Number of Chips</label>
 			              <div class="input">
-			                <input type="text" name="convert_cash_amount" data-show-convert="target_cash_amount" data-rate="0.1" data-describe="${data} cash" />
+			                <input type="text" id="convert_cash_amount" name="convert_cash_amount" data-show-convert="target_cash_amount" data-rate="0.1" data-describe="${data} cash" />
 			                <span class="help-block">Current Rate $<b id="table_chip-rate">100 = 1000</b> chips</span>
 			              </div>
 			            </div>
@@ -68,9 +68,9 @@ class TableUtils {
 			        <div class="modal-body row">
 			          <fieldset class="span5">
 			            <div class="clearfix">
-			              <label for="convert_cash_amount">Amount in Wallet</label>
+			              <label for="convert_chip_amount">Amount in Wallet</label>
 			              <div class="input">
-			                <input type="text" name="convert_cash_amount" data-show-convert="target_chip_amount" data-rate="10" data-describe="{data} chips" />
+			                <input type="text" id="convert_chip_amount" name="convert_chip_amount" data-show-convert="target_chip_amount" data-rate="10" data-describe="{data} chips" />
 			                <span class="help-block">Current Rate $<b id="table_chip-rate">100 = 1000</b> chips</span>
 			              </div>
 			            </div>
