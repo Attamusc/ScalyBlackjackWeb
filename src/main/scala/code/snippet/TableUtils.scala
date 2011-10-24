@@ -20,7 +20,7 @@ class TableUtils {
 			case "2" => "*" #> "Table B"
 			case "3" => "*" #> "Table C"
 			case "4" => "*" #> "Table D"
-			case _ => "* *" #> "Table"
+			case _ => "*" #> "Table"
 		}
   	}
 	def getTableMinBet = {
@@ -31,7 +31,7 @@ class TableUtils {
 			case "2" => "*" #> "100"
 			case "3" => "*" #> "250"
 			case "4" => "*" #> "500"
-			case _ => "* *" #> "50"
+			case _ => "*" #> "50"
 		}
   	}
 	def joinTableLink = {
