@@ -13,6 +13,7 @@ import mapper._
 
 import code.model._
 
+import code.snippet.SessionHelper
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -47,6 +48,9 @@ class Boot {
 		// Rewrites GET /tables/:id/game => /games/show?tableId=:id
 		case RewriteRequest(ParsePath("tables" :: tableId :: "game" :: Nil, "", true, false), _, _ ) => RewriteResponse("games/show" :: Nil, Map("tableId" -> tableId))
 	})
+	
+	// Lift REST helper appending
+	LiftRules.statelessDispatchTable.append(SessionHelper)
 
     // Build SiteMap
     def sitemap = SiteMap(
@@ -84,8 +88,7 @@ class Boot {
     LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
     // Use HTML5 for rendering
-    LiftRules.htmlProperties.default.set((r: Req) =>
-      new Html5Properties(r.userAgent))    
+    LiftRules.htmlProperties.default.set((r: Req) => new Html5Properties(r.userAgent))    
 
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)
