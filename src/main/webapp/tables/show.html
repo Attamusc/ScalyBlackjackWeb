@@ -12,7 +12,7 @@
 	<lift:embed what="player_modals">
 		Modals up front!
 	</lift:embed>
-	<div class="container-fluid">
+	<div id="container" class="container-fluid">
 	      <div class="sidebar">
 	        <div class="page-head">
 	          <h4>Table Statistics</h4>
@@ -41,7 +41,7 @@
 	      <div class="content container">
 	        <div id="casino_floor">
 	          	<div id="table_section">
- 		          <a href="/" class="btn" id="back_button">Back to Casino</a>
+ 		          <a href="/" class="btn info" id="back_button">Back to Casino</a>
 		          <div id="table_info_wrapper">
 		            <div class="table_seats_wrapper">
 		              <div id="table_a_dealer_seat" class="seat dealer_seat">
@@ -67,7 +67,7 @@
 		              <div class="table_overview">
 		                <p><span class="lift:TableUtils.getTableName"></span></p>
 		                <p>Min bet: <em id="table_a_min_bet"<span class="lift:TableUtils.getTableMinBet"></span></em></p>
-		                <p><a id="join_table_link" href="#" data-controls-modal="trade_in_chips_modal" data-backdrop="true" data-keyboard="true">Join Table</a></p>
+		                <p><a id="join_table_link" href="#" class="btn primary" data-controls-modal="trade_in_chips_modal" data-backdrop="true" data-keyboard="true">Join Table</a></p>
 		              </div>
 		            </div>
 		          </div>

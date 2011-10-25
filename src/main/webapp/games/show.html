@@ -17,7 +17,8 @@
 			Form goes here...
 		  </div>
 	    </div>
-	<div id="casino_floor">
+        <div id="container">
+	  <div id="casino_floor">
 	      <div id="table_section">
 	        <div id="main_table_wrapper">
 	          <div class="table_seats_wrapper">
@@ -119,11 +120,29 @@
           </div>
 	  <div id="table_info_content_wrapper">
 	    <div class="page-header">
-              <h3 class="lift:TableUtils.getTableName"> Info:</h3>
+              <h3><span class="lift:TableUtils.getTableName"> Info:</span></h3>
             </div>
-	    <ul class="unstyled">
-              <li>Stuff 1</li><li>Stuff 2</li>
-            </ul>
+            <ul class="unstyled" id="stats_list">
+	      <li>
+	        Number of Players: <em>3</em>
+	      </li>
+	      <li>
+	        Number of Open Seats: <em>2</em>
+	      </li>
+	      <li>
+	        Total Hands Dealt: <em>42</em>
+	      </li>
+	      <li>
+	        Average Bet: <em>$75</em>
+	      </li>
+	      <li>
+	        Name of Dealer: <em>Jose</em>
+	      </li>
+	      <li>
+	        Started: <em>10/22/11 4:25am</em>
+	      </li>
+	    </ul>
 	  </div>
 	</div>
+    </div>
 </lift:surround>
