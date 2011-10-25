@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
+  <lift:embed what="fb_sdk">
+     load Facebook SDK here
+   </lift:embed>
   <div class="lift:NavBar.navGen?isLoggedIn=false"> 
     The Navigation bar will go here.
   </div>
@@ -24,6 +27,7 @@
   </lift:bind>
   <script src="/javascripts/jquery-1.6.4.min.js"></script>
   <script src="/javascripts/twitter_modal_plugin.js"></script>
+  <script src="//platform.twitter.com/widgets.js"></script>
   <script src="/javascripts/common.js"></script>
   <lift:bind name="extra-js" />
 
