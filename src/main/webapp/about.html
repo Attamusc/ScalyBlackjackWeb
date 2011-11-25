@@ -6,8 +6,21 @@
   </head>
   <body class="lift:content_id=main">
     <div id="main" class="lift:surround?with=default;at=content">
-	  <h1>About SBW Casino</h1>
-      <p>Please load me :'(</p>
+	    <div class="lift:comet?type=CometTable"> 
+            Some chat messages
+            <ul>
+              <li>Message...</li>
+              <li class="clearable">Another message</li>
+              <li class="clearable">A third message</li>
+            </ul>
+          </div>
+
+          <div>
+            <form class="lift:form.ajax">
+              <input class="lift:TableInput" id="chat_in"/>
+              <input type="submit" value="Say Something"/>
+            </form>
+        </div>
     </div>
   </body>
 </html>

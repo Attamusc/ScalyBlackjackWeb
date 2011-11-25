@@ -14,6 +14,7 @@ import mapper._
 import code.model._
 
 import code.snippet.SessionHelper
+import code.snippet.BjHelper
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -51,6 +52,7 @@ class Boot {
 	
 	// Lift REST helper appending
 	LiftRules.statelessDispatchTable.append(SessionHelper)
+	LiftRules.statelessDispatchTable.append(BjHelper)
 
     // Build SiteMap
     def sitemap = SiteMap(
