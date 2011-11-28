@@ -16,12 +16,15 @@
 package code
 package lib
 package bj
+
 import bj.actor.Player
 import bj.actor.House
 import bj.actor.Dealer
 import scala.actors.Actor
 import bj.actor.Go
 import bj.util.Log
+
+import comet.TableServer
 
 case class Done
 case class Launch
@@ -30,11 +33,13 @@ object Game {
   
   def init = {
     Log.debug("starting the house")
+    TableServer ! "starting the house"
     House.start
     
     Thread.sleep(1000)
     
     Log.debug("starting players")
+    TableServer ! "starting players"
     val players = List[Player](new Player("Ron", 100, 30))
     
     Player.start(players)
@@ -42,6 +47,7 @@ object Game {
     Thread.sleep(1000)
     
     Log.debug("telling house go")
+    TableServer ! "telling house go"
     House ! Go
   }
 }

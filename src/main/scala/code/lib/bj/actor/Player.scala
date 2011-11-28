@@ -24,6 +24,8 @@ import bj.card.Card
 import bj.util.Log
 import bj.hkeeping.Broke
 
+import comet.TableServer
+
 /** This object represents the player's class variables */
 object Player {
   /** Unique id counter for players */
@@ -69,12 +71,13 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
         // Receives message to tell player to place its bet
         case Go =>
           Log.debug(this+" received Go placing bet = "+betAmt+" from bankroll = "+bankroll)
+          TableServer ! this+" received Go placing bet = "+betAmt+" from bankroll = "+bankroll
           bet
           
         // Receives the dealer's up-card which is player's cue to play
         case Up(card) =>
           Log.debug(this + " received dealer's up card = " + card)
-
+          TableServer ! this + " received dealer's up card = " + card
           play(card)
 
         // Receives a card from the dealer
@@ -84,15 +87,18 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
         // Receives broke message
         case Broke =>
           Log.debug(this+ " received BROKE")
+          TableServer ! this+ " received BROKE"
           
         // Receives message about dealt card
         case Observe(card,player,shoeSize) =>
           Log.debug(this+" observed: "+card)
+          TableServer ! this+" observed: "+card
           observe(card,player,shoeSize)
           
         // Receives the table number I've been assigned to
         case TableNumber(tid : Int) =>
           Log.debug(this+" received table assignment tid = "+tid)
+          TableServer ! this+" received table assignment tid = "+tid
           assign(tid)
         
         case Win(gain) =>
@@ -101,6 +107,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
           bankroll += won
           
           Log.debug(this+" received WIN " + won + " new bankroll = "+bankroll)
+          TableServer ! this+" received WIN " + won + " new bankroll = "+bankroll
           
         case Loose(gain) =>
           val lost = betAmt * gain
@@ -108,18 +115,22 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
           bankroll += lost
           
           Log.debug(this+" received LOOSE " + lost + " new bankroll = "+bankroll)          
+          TableServer ! this+" received LOOSE " + lost + " new bankroll = "+bankroll
           
         case Push(gain) =>
           Log.debug(this+" received PUSH bankroll = "+bankroll)
+          TableServer ! this+" received PUSH bankroll = "+bankroll
           
         // Receives an ACK
         case Ok =>
           Log.debug(this + " received Ok")
+          TableServer ! this + " received Ok"
 
         // Receives something completely from left field
         case dontKnow =>
           // Got something we REALLY didn't expect
           Log.debug(this+" received unexpected: "+dontKnow)
+          TableServer ! this+" received unexpected: "+dontKnow
       }
     }
 
@@ -154,6 +165,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
     this.hit(card)
     
     Log.debug(this + " received card " + card + " hand sz = " + cards.size + " value = " + value)          
+    TableServer ! this + " received card " + card + " hand sz = " + cards.size + " value = " + value
 
     // If I've received more than two cards, the extras must be in
     // response to my requests
@@ -181,6 +193,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
     val request = analyze(upcard)
 
     Log.debug(this + " request = " + request)
+    TableServer ! this + " request = " + request
 
     // Don't send a request if we break since
     // deal will have moved on

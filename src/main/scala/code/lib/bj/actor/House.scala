@@ -24,6 +24,8 @@ import bj.hkeeping.NotOk
 import scala.actors.OutputChannel
 import bj.util.Log
 
+import comet.TableServer
+
 case class Bet(player: Int, amt: Double)
 case class GameStart(players : List[OutputChannel[Any]])
 case class GameOver(payouts : HashMap[Int,Outcome])
@@ -47,6 +49,7 @@ object House extends Actor {
         // to a table
         case Bet(pid : Int, bet : Double) =>
           Log.debug("house: received bet amt = "+bet)
+          TableServer ! "house: received bet amt = "+bet
           
           tables.find(t => t.bets.size < Table.MAX_PLAYERS && t.minBet <= bet) match {
             case None =>
@@ -54,6 +57,7 @@ object House extends Actor {
               
             case Some(table) =>
               Log.debug("house: sending table id = "+table.tid+" sender = "+sender)
+              TableServer ! "house: sending table id = "+table.tid+" sender = "+sender
               table ! Arrive(sender, pid, bet)
               
               sender ! TableNumber(table.tid)
@@ -62,12 +66,14 @@ object House extends Actor {
         // Receives a message to tell the tables to go
         case Go =>
           Log.debug("house: receive Go for "+tables.size+" tables")
+          TableServer ! "house: receive Go for "+tables.size+" tables"
           tables.foreach(t => t ! Go)
           
         // Receives something completely from left field
         case dontKnow =>
           // Got something we REALLY didn't expect
           Log.debug(this+" got "+dontKnow)          
+          TableServer ! this+" got "+dontKnow
         }
     }
   } 

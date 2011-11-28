@@ -7,14 +7,19 @@ import util._
 import Helpers._
 import actor._
 
+import lib.bj.Game
 import lib.bj.util.Log
 
 object TableServer extends LiftActor with ListenerManager {
-    private var table_patter : Vector[String] = Vector("Test")
+    private var table_patter : Vector[String] = Vector()
+    private var game_started = false
     
     def createUpdate = table_patter
     
     override def lowPriority = {
+        case "Start" =>
+            game_started = true
+            Game.init
         case s: String => 
             table_patter :+= s 
             Log.debug("Table Server says: " + s)

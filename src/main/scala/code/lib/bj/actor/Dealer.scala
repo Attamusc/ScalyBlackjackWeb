@@ -32,6 +32,8 @@ import scala.actors.OutputChannel
 import bj.table.Table
 import bj.util.Log
 
+import comet.TableServer
+
 case class Request
 case class Hit(pid:Int) extends Request
 case class Stay(pid:Int) extends Request
@@ -101,24 +103,26 @@ class Dealer extends Actor with Hand {
         // Receives players at the table
         case GameStart(players : List[OutputChannel[Any]]) => 
           Log.debug(this + " received game start w. "+players.size+" player mailboxes")
+          TableServer ! this + " received game start w. "+players.size+" player mailboxes"
           gameStart(players,sender)
         
         // Receives hit request from a player
         case Hit(pid) =>
           Log.debug(this+" received HIT from player("+pid+")")
-          
+          TableServer ! this+" received HIT from player("+pid+")"
           hit(pid,sender)          
 
         // Receives a stay request from a player
         case Stay(pid) =>
           Log.debug(this+" received STAY from player("+pid+")")
-
+          TableServer ! this+" received STAY from player("+pid+")"
           stay(pid,sender)
         // Receives something completely from left field
           
         case dontKnow =>
           // Got something we REALLY didn't expect
-          Log.debug(this+" got "+dontKnow)          
+          Log.debug(this+" got "+dontKnow) 
+          TableServer ! this+" got "+dontKnow         
       }
     }
   }
@@ -238,17 +242,20 @@ class Dealer extends Actor with Hand {
     hit(hole)
     
     Log.debug(this+" closing card1 = "+cards(0)+" card2 = "+cards(1))    
+    TableServer ! this+" closing card1 = "+cards(0)+" card2 = "+cards(1)
     
     while (value < 17 && !blackjack) {
       val card : Card = shoe.deal
       
       hit(card)
       
-      Log.debug(this+" hitting card = "+card+" value = "+value)      
+      Log.debug(this+" hitting card = "+card+" value = "+value)   
+      TableServer ! this+" hitting card = "+card+" value = "+value  
     }
     
     if(value > 21)
       Log.debug(this+" BROKE!!")
+      TableServer ! this+" BROKE!!"
     
     // Broadcast observations on all cards dealer's holding
     // except the up-card at index 0 -- players have already
@@ -306,7 +313,9 @@ class Dealer extends Actor with Hand {
     val card2 = shoe.deal
     
     Log.debug(this+" dealing "+card1)
-    Log.debug(this+" dealing "+card2)    
+    Log.debug(this+" dealing "+card2)
+    TableServer ! this+" dealing "+card1
+    TableServer ! this+" dealing "+card2   
     
     deal(player,card1)
     deal(player,card2)
