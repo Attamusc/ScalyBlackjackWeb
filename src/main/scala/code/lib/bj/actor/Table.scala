@@ -34,8 +34,9 @@ import bj.actor.Push
 import bj.actor.GameStart
 import bj.actor.Bet
 import bj.actor.GameOver
+import bj.util.Message
 
-import comet.TableServer
+import comet.Conductor
 
 /** This class implements the table static members */
 object Table  {
@@ -82,20 +83,20 @@ class Table(val minBet: Double) extends Actor {
         // Receives arrival of a player: mailbox is the player's
         case Arrive(mailbox : OutputChannel[Any], pid : Int, betAmt : Double) =>
           Log.debug(this+" received ARRIVE from "+mailbox+" amt = "+betAmt)
-          TableServer ! this+" received ARRIVE from "+mailbox+" amt = "+betAmt
+          Conductor ! this+" received ARRIVE from "+mailbox+" amt = "+betAmt
           
           arrive(mailbox,pid,betAmt)
 
         // Receive game over signal from the dealer
         case GameOver(pays : HashMap[Int,Outcome]) =>
           Log.debug(this + " received game over for "+pays.size+" players")
-          TableServer ! this + " received game over for "+pays.size+" players"
+          Conductor ! this + " received game over for "+pays.size+" players"
           gameOver(pays)
          
         // Receives game start signal from the house
         case Go =>
           Log.debug(this+" received Go for " + players.size + " players")
-          TableServer ! this+" received Go for " + players.size + " players"
+          Conductor ! this+" received Go for " + players.size + " players"
           go
 
       }
@@ -112,7 +113,7 @@ class Table(val minBet: Double) extends Actor {
     val reply = placed(source, Bet(pid, betAmt))
 
     Log.debug(this + " bet = " + reply)
-    TableServer ! this + " bet = " + reply
+    Conductor ! this + " bet = " + reply
 
     source ! reply    
   }
@@ -124,7 +125,7 @@ class Table(val minBet: Double) extends Actor {
     if (bettors.size != 0) {
 
       Log.debug(this + " dealing " + bettors.size + " bettors")
-      TableServer ! this + " dealing " + bettors.size + " bettors"
+      Conductor ! this + " dealing " + bettors.size + " bettors"
 
       dealer ! GameStart(bettors)
     }    
@@ -137,14 +138,14 @@ class Table(val minBet: Double) extends Actor {
    */
   def placed(mailbox : OutputChannel[Any], bet : Bet) : Reply = {
     Log.debug("table: placing bet amt = "+bet.amt+" num bets = "+bets.size)
-    TableServer ! "table: placing bet amt = "+bet.amt+" num bets = "+bets.size
+    Conductor ! "table: placing bet amt = "+bet.amt+" num bets = "+bets.size
     if(bet.amt <= 0 || bets.size >= Table.MAX_PLAYERS)
       return NotOk
             
     players.get(bet.player) match {
       case None =>
         Log.debug("table: adding new player id = "+bet.player)
-        TableServer ! "table: adding new player id = "+bet.player
+        Conductor ! "table: adding new player id = "+bet.player
         players += bet.player -> mailbox
 
         bets += bet.player -> bet.amt
@@ -153,12 +154,12 @@ class Table(val minBet: Double) extends Actor {
         bets.get(bet.player) match {
           case Some(oldAmt) =>
             Log.debug("table: updating bet for player id = "+bet.player)
-            TableServer ! "table: updating bet for player id = "+bet.player
+            Conductor ! "table: updating bet for player id = "+bet.player
             bets(bet.player) = (oldAmt + bet.amt)
 
           case None =>
             Log.debug("table: got bad bet")
-            TableServer ! "table: got bad bet"
+            Conductor ! "table: got bad bet"
                 
             return NotOk
         }
@@ -181,17 +182,17 @@ class Table(val minBet: Double) extends Actor {
     outcome match {
       case Win(gain) =>
         Log.debug("player(" + pid + ") won " + gain)
-        TableServer ! "player(" + pid + ") won " + gain
+        Conductor ! "player(" + pid + ") won " + gain
         players(pid) ! outcome
 
       case Loose(gain) =>
         Log.debug("player(" + pid + ") lost " + gain)
-        TableServer ! "player(" + pid + ") lost " + gain
+        Conductor ! "player(" + pid + ") lost " + gain
         players(pid) ! outcome
 
       case Push(gain) =>
         Log.debug("player(" + pid + ") push " + gain)
-        TableServer ! "player(" + pid + ") push " + gain
+        Conductor ! "player(" + pid + ") push " + gain
         players(pid) ! outcome
     }
   } 

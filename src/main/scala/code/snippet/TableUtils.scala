@@ -12,13 +12,13 @@ import js._
 import JsCmds._
 import JE._
 
-import comet.TableServer
+import comet.Conductor
 
 object Logger extends Logger
 
 object TableInput {
     def render = SHtml.onSubmit(s => {
-        TableServer ! s
+        Conductor ! s
         SetValById("chat_in", "")
     })
 }
