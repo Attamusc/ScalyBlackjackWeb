@@ -6,6 +6,9 @@ import http._
 import util._
 import Helpers._
 import actor._
+import js._
+import JsCmds._
+import JE._
 
 import lib.bj.Game
 import lib.bj.util.Log
@@ -36,8 +39,10 @@ class CometTable extends CometActor with CometListener{
         case v: Vector[String] => 
             patter = v
             Log.debug("Comet Table says: " + v)
-            reRender()
+            //reRender()
+            partialUpdate(JsRaw("CASINO.attendant.process_message('" + patter + "')"))
     }
 
-    def render = "li *" #> patter & ClearClearable
+    //def render = "li *" #> patter & ClearClearable 
+    def render = OnLoad(JsRaw("console.log('starting stuff...')"))
 }
