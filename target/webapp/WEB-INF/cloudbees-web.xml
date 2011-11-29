@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<cloudbees-web-app xmlns="http://www.cloudbees.com/xml/webapp/1">
+    <appid>scalyblackjack</appid>
+    <context-param>
+        <param-name>application.environment</param-name>
+        <param-value>prod</param-value>
+    </context-param>
+	<resource name="jdbc/scalyblackjackdb" auth="Container" type="javax.sql.DataSource">
+		<param name="username" value="sbjadmin" />
+		<param name="password" value="mysqladmin" />
+		<param name="url" value="jdbc:cloudbees://scalyblackjackdb" />
+	</resource>
+</cloudbees-web-app>

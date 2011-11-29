@@ -1,0 +1,4 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/Users/joeycarmello/Dropbox/me/school/distributed systems/ScalyBlackjackWeb/src/main/resources/props,/Users/joeycarmello/Dropbox/me/school/distributed systems/ScalyBlackjackWeb/target/scala-2.9.0.1/classes/props)[0m
+[0m[[0mdebug[0m] [0m	(/Users/joeycarmello/Dropbox/me/school/distributed systems/ScalyBlackjackWeb/src/main/resources/props/default.logback.xml,/Users/joeycarmello/Dropbox/me/school/distributed systems/ScalyBlackjackWeb/target/scala-2.9.0.1/classes/props/default.logback.xml)[0m
+[0m[[0mdebug[0m] [0m	(/Users/joeycarmello/Dropbox/me/school/distributed systems/ScalyBlackjackWeb/src/main/resources/props/default.props,/Users/joeycarmello/Dropbox/me/school/distributed systems/ScalyBlackjackWeb/target/scala-2.9.0.1/classes/props/default.props)[0m

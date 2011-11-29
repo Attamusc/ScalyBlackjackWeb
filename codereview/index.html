@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Deck Skeleton</title>
+	<meta name="viewport" content="width=1024, user-scalable=no">
+	<link href='http://fonts.googleapis.com/css?family=Paytone+One|Bitter' rel='stylesheet' type='text/css'>
+	<!-- Replace path with correct path to deck.core.css. -->
+	<link rel="stylesheet" href="core/deck.core.css" type="text/css">
+        <link rel="stylesheet" href="horizontal-slide.css" type="text/css">
+<style type="text/css">
+		h1, h2{
+			font-family: 'Paytone One', sans-serif !important;
+			color: #2bac1c;
+		}
+		.highlight{
+			font-weight: bold;
+		}
+		.slide h1{
+			font-size: 8em;
+			margin-bottom: .3em;
+		}
+		.slide h2{
+			font-size: 4em;
+		}
+		.slide h3{
+			font-size: 3em;
+			margin-top: 1em;
+		}
+		.slide div{
+			margin-bottom: 2em;
+		}
+		.nolist{
+			text-align: center;
+			list-style: none;
+			padding: 0;
+			margin-left: 0 !important;
+		}
+		.centered{
+			text-align: center;
+  			position: absolute;
+  			margin: 0;
+  			padding: 0;
+		  	left: 0;
+  			right: 0;
+  			top: 50%;
+		  	-webkit-transform: translate(0, -50%);
+  			-moz-transform: translate(0, -50%);
+		  	-ms-transform: translate(0, -50%);
+  			-o-transform: translate(0, -50%);
+		  	transform: translate(0, -50%);
+		}
+		.centered h1{
+			margin-top: -1em;
+		}
+		.center{
+			text-align: center;
+		}
+		img.left{
+			float: left;
+			margin-right: 2em;
+			max-width: 50%;
+			max-height: 50%;
+		}
+		.left {
+			float: left;
+		}
+		.right {
+			float: right;
+		}
+		.slide.left, .slide.right {
+			width: 450px;
+		}
+		.slide p, .slide ul, .slide ol{
+			font-size: 2em;
+		}
+		.lighter{
+			opacity: 0.4;
+		}
+	</style>
+	
+	<!-- Replace path with correct path to Modernizr file. -->
+	<script src="modernizr.custom.js"></script>
+</head>
+<body class="deck-container">
+
+<!-- Create any number of elements with class slide within the container -->
+<section class="slide">
+  <div class="centered">
+    <h1>&gt;</h1>
+    <h3 class="lighter"><i>hint:</i> use the arrows</h3>
+  </div>
+</section>
+<section class="slide">
+  <div class="centered">
+    <h1>Scaly Blackjack</h1>
+    <h3 class="lighter">Code Review</h3>
+  </div>	
+</section>
+
+<section class="slide">
+  <h2>Stuff</h2>
+  <ul>
+    <li class="slide">Stuff 1</li>
+    <li class="slide">Stuff 2</li>
+  </ul>
+</section>
+
+<!-- Other extension HTML snippets go here, at the bottom of the deck container. -->
+
+<!-- Update these paths to point to the correct files. -->
+<script src="jquery-1.7.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Add any other extension JS files here -->
+
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+~jetty-run
+sbt update
+update
+jetty-run
