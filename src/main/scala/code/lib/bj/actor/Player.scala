@@ -73,13 +73,13 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
         // Receives message to tell player to place its bet
         case Go =>
           Log.debug(this+" received Go placing bet = "+betAmt+" from bankroll = "+bankroll)
-          Conductor ! this+" received Go placing bet = "+betAmt+" from bankroll = "+bankroll
+          Conductor ! MessageFactory.message(name, pid.toString, "received Go placing bet = %d from bankroll = %d".format(betAmt.toInt, bankroll.toInt))
           bet
           
         // Receives the dealer's up-card which is player's cue to play
         case Up(card) =>
           Log.debug(this + " received dealer's up card = " + card)
-          Conductor ! this + " received dealer's up card = " + card
+          Conductor ! MessageFactory.message(name, pid.toString, "received dealer's up card = '%s'".format(card.toString))
           play(card)
 
         // Receives a card from the dealer
@@ -89,18 +89,18 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
         // Receives broke message
         case Broke =>
           Log.debug(this+ " received BROKE")
-          Conductor ! this+ " received BROKE"
+          Conductor ! MessageFactory.message(name, pid.toString, "received broke")
           
         // Receives message about dealt card
         case Observe(card,player,shoeSize) =>
           Log.debug(this+" observed: "+card)
-          Conductor ! this+" observed: "+card
+          Conductor ! MessageFactory.message(name, pid.toString, "observed player with pid '%d' receive a '%s'".format(player, card.toString))
           observe(card,player,shoeSize)
           
         // Receives the table number I've been assigned to
         case TableNumber(tid : Int) =>
           Log.debug(this+" received table assignment tid = "+tid)
-          Conductor ! this+" received table assignment tid = "+tid
+          Conductor ! MessageFactory.message(name, pid.toString, "received table assignment tid = %d".format(tid))
           assign(tid)
         
         case Win(gain) =>
@@ -109,7 +109,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
           bankroll += won
           
           Log.debug(this+" received WIN " + won + " new bankroll = "+bankroll)
-          Conductor ! this+" received WIN " + won + " new bankroll = "+bankroll
+          Conductor ! MessageFactory.result(name, pid.toString, "win", "%d".format(won.toInt))
           
         case Loose(gain) =>
           val lost = betAmt * gain
@@ -117,22 +117,22 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
           bankroll += lost
           
           Log.debug(this+" received LOOSE " + lost + " new bankroll = "+bankroll)          
-          Conductor ! this+" received LOOSE " + lost + " new bankroll = "+bankroll
+          Conductor ! MessageFactory.result(name, pid.toString, "loss", "%d".format(lost.toInt))
           
         case Push(gain) =>
           Log.debug(this+" received PUSH bankroll = "+bankroll)
-          Conductor ! this+" received PUSH bankroll = "+bankroll
+          Conductor ! MessageFactory.result(name, pid.toString, "push", "0")
           
         // Receives an ACK
         case Ok =>
           Log.debug(this + " received Ok")
-          Conductor ! this + " received Ok"
+          Conductor ! MessageFactory.message(name, pid.toString, "received OK")
 
         // Receives something completely from left field
         case dontKnow =>
           // Got something we REALLY didn't expect
           Log.debug(this+" received unexpected: "+dontKnow)
-          Conductor ! this+" received unexpected: "+dontKnow
+          Conductor ! MessageFactory.message(name, pid.toString, "received an unexpected value")
       }
     }
 
@@ -166,8 +166,9 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
     // Hit my hand with this card
     this.hit(card)
     
-    Log.debug(this + " received card " + card + " hand sz = " + cards.size + " value = " + value)          
-    Conductor ! this + " received card " + card + " hand sz = " + cards.size + " value = " + value
+    Log.debug(this + " received card " + card + " hand sz = " + cards.size + " value = " + value)
+    Conductor ! MessageFactory.update(name, pid.toString, card.toString)
+    Conductor ! MessageFactory.message(name, pid.toString, " received card '%s' hand sz = %d value = %d".format(card.toString, cards.size, value))
 
     // If I've received more than two cards, the extras must be in
     // response to my requests
@@ -195,7 +196,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
     val request = analyze(upcard)
 
     Log.debug(this + " request = " + request)
-    Conductor ! this + " request = " + request
+    Conductor ! MessageFactory.message(name, pid.toString, "request: " + request)
 
     // Don't send a request if we break since
     // deal will have moved on

@@ -113,7 +113,7 @@ class Table(val minBet: Double) extends Actor {
     val reply = placed(source, Bet(pid, betAmt))
 
     Log.debug(this + " bet = " + reply)
-    Conductor ! MessageFactory.message("table", tid.toString, " bet = ".format(reply.toString))
+    Conductor ! MessageFactory.message("table", tid.toString, " bet = %s".format(reply.toString))
 
     source ! reply    
   }
