@@ -23,7 +23,7 @@ import bj.hkeeping.Ok
 import bj.card.Card
 import bj.util.Log
 import bj.hkeeping.Broke
-import bj.util.Message
+import bj.util.MessageFactory
 
 import collection.mutable.HashMap
 import comet.Conductor

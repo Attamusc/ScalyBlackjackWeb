@@ -11,7 +11,7 @@ import net.liftweb.json.Serialization.write
 
 import lib.bj.Game
 import lib.bj.util.Log
-import lib.bj.util.Message
+import lib.bj.util.BaseMessage
 
 object Conductor extends LiftActor with ListenerManager {
     private var table_patter : Vector[String] = Vector()
@@ -25,9 +25,9 @@ object Conductor extends LiftActor with ListenerManager {
             Game.init
         case s: String => 
             table_patter :+= s 
-            Log.debug("Table Server says: " + s)
+            //Log.debug("Table Server says: " + s)
             updateListeners()
-        case message: Message =>
+        case message: BaseMessage =>
             table_patter :+= message.toJson
             updateListeners()
     } 
@@ -41,8 +41,9 @@ class Dispatcher extends CometActor with CometListener{
     override def lowPriority = {
         case v: Vector[String] => 
             patter = v
-            Log.debug("Comet Table says: " + v)
+            //Log.debug("Comet Table says: " + v)
             reRender()
+            //partialUpdate(JsRaw("CASINO.attendant.process_message('" + patter + "')"))
     }
 
     def render = "li *" #> patter & ClearClearable

@@ -25,7 +25,7 @@ import bj.actor.Dealer
 import scala.actors.Actor
 import bj.actor.Go
 import bj.util.Log
-import bj.util.Message
+import bj.util.MessageFactory
 
 import comet.Conductor
 
@@ -36,13 +36,13 @@ object Game {
   
   def init = {
     Log.debug("starting the house")
-    Conductor ! new Message("info", HashMap("message" -> "starting the house"))
+    Conductor ! MessageFactory.info("starting the house")
     House.start
     
     Thread.sleep(1000)
     
     Log.debug("starting players")
-    Conductor ! new Message("info", HashMap("message" -> "starting players"))
+    Conductor ! MessageFactory.info("starting players")
     val players = List[Player](new Player("Ron", 100, 30))
     
     Player.start(players)
@@ -50,7 +50,7 @@ object Game {
     Thread.sleep(1000)
     
     Log.debug("telling house go")
-    Conductor ! new Message("info", HashMap("message" -> "telling house go"))
+    Conductor ! MessageFactory.info("telling house go")
     House ! Go
   }
 }

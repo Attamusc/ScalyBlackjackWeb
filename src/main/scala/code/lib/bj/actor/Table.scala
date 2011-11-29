@@ -34,7 +34,7 @@ import bj.actor.Push
 import bj.actor.GameStart
 import bj.actor.Bet
 import bj.actor.GameOver
-import bj.util.Message
+import bj.util.MessageFactory
 
 import comet.Conductor
 
@@ -83,20 +83,20 @@ class Table(val minBet: Double) extends Actor {
         // Receives arrival of a player: mailbox is the player's
         case Arrive(mailbox : OutputChannel[Any], pid : Int, betAmt : Double) =>
           Log.debug(this+" received ARRIVE from "+mailbox+" amt = "+betAmt)
-          Conductor ! this+" received ARRIVE from "+mailbox+" amt = "+betAmt
+          Conductor ! MessageFactory.message("table", tid.toString, "received ARRIVE from %s amt = %d".format(mailbox.toString, betAmt.toInt))
           
           arrive(mailbox,pid,betAmt)
 
         // Receive game over signal from the dealer
         case GameOver(pays : HashMap[Int,Outcome]) =>
           Log.debug(this + " received game over for "+pays.size+" players")
-          Conductor ! this + " received game over for "+pays.size+" players"
+          Conductor ! MessageFactory.message("table", tid.toString, "received game over for %d players".format(pays.size))
           gameOver(pays)
          
         // Receives game start signal from the house
         case Go =>
           Log.debug(this+" received Go for " + players.size + " players")
-          Conductor ! this+" received Go for " + players.size + " players"
+          Conductor ! MessageFactory.message("table", tid.toString, "received Go for %d players".format(players.size))
           go
 
       }
@@ -113,7 +113,7 @@ class Table(val minBet: Double) extends Actor {
     val reply = placed(source, Bet(pid, betAmt))
 
     Log.debug(this + " bet = " + reply)
-    Conductor ! this + " bet = " + reply
+    Conductor ! MessageFactory.message("table", tid.toString, " bet = ".format(reply.toString))
 
     source ! reply    
   }
@@ -125,7 +125,7 @@ class Table(val minBet: Double) extends Actor {
     if (bettors.size != 0) {
 
       Log.debug(this + " dealing " + bettors.size + " bettors")
-      Conductor ! this + " dealing " + bettors.size + " bettors"
+      Conductor ! MessageFactory.message("table", tid.toString, "dealing %d bettors".format(bettors.size))
 
       dealer ! GameStart(bettors)
     }    
@@ -138,14 +138,14 @@ class Table(val minBet: Double) extends Actor {
    */
   def placed(mailbox : OutputChannel[Any], bet : Bet) : Reply = {
     Log.debug("table: placing bet amt = "+bet.amt+" num bets = "+bets.size)
-    Conductor ! "table: placing bet amt = "+bet.amt+" num bets = "+bets.size
+    Conductor ! MessageFactory.message("table", tid.toString, "placing bet amt = %d num bets = %d".format(bet.amt.toInt, bets.size))
     if(bet.amt <= 0 || bets.size >= Table.MAX_PLAYERS)
       return NotOk
             
     players.get(bet.player) match {
       case None =>
         Log.debug("table: adding new player id = "+bet.player)
-        Conductor ! "table: adding new player id = "+bet.player
+        Conductor ! MessageFactory.message("table", tid.toString, "adding new player id = %d".format(bet.player))
         players += bet.player -> mailbox
 
         bets += bet.player -> bet.amt
@@ -154,12 +154,12 @@ class Table(val minBet: Double) extends Actor {
         bets.get(bet.player) match {
           case Some(oldAmt) =>
             Log.debug("table: updating bet for player id = "+bet.player)
-            Conductor ! "table: updating bet for player id = "+bet.player
+            Conductor ! MessageFactory.message("table", tid.toString, "updating bet for player id = %d".format(bet.player))
             bets(bet.player) = (oldAmt + bet.amt)
 
           case None =>
             Log.debug("table: got bad bet")
-            Conductor ! "table: got bad bet"
+            Conductor ! MessageFactory.message("table", tid.toString, "got a bed bet")
                 
             return NotOk
         }
@@ -182,17 +182,17 @@ class Table(val minBet: Double) extends Actor {
     outcome match {
       case Win(gain) =>
         Log.debug("player(" + pid + ") won " + gain)
-        Conductor ! "player(" + pid + ") won " + gain
+        Conductor ! MessageFactory.message("table", tid.toString, "player(%d) won %d".format(pid, gain.toInt))
         players(pid) ! outcome
 
       case Loose(gain) =>
         Log.debug("player(" + pid + ") lost " + gain)
-        Conductor ! "player(" + pid + ") lost " + gain
+        Conductor ! MessageFactory.message("table", tid.toString, "player(%d) lost %d".format(pid, gain.toInt))
         players(pid) ! outcome
 
       case Push(gain) =>
         Log.debug("player(" + pid + ") push " + gain)
-        Conductor ! "player(" + pid + ") push " + gain
+        Conductor ! MessageFactory.message("table", tid.toString, "player(%d) push %d".format(pid, gain.toInt))
         players(pid) ! outcome
     }
   } 
