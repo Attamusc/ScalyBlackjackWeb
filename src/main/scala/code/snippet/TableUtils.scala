@@ -8,8 +8,20 @@ import net.liftweb._
 import http._
 import common._
 import util.Helpers._
+import js._
+import JsCmds._
+import JE._
+
+import comet.TableServer
 
 object Logger extends Logger
+
+object TableInput {
+    def render = SHtml.onSubmit(s => {
+        TableServer ! s
+        SetValById("chat_in", "")
+    })
+}
 
 class TableUtils {
   	def getTableName = {

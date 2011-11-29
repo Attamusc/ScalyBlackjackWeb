@@ -1,5 +1,4 @@
-if (!window.CASINO) { window.CASINO = {}; }
-
+var CASINO = CASINO || {};
 
 CASINO.reset = function() {
 
