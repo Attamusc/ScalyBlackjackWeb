@@ -11,6 +11,7 @@
       };
 
       this.info = $.extend({}, this.defaults, options);
+      this.hand = [];
       secret.id = id;
    }
 
@@ -19,8 +20,25 @@
    };
 
 
+   Player.prototype.updateChips = function (difference) {
+      if (!isNaN(difference)) {
+         this.chips += difference;
+         // update the view
+      }
+   };
+
+   Player.prototype.clearHand = function () {
+      this.hand.length = 0;
+      // TODO: update the view
+   };
+
+   Player.prototype.addCardToHand = function (card) {
+      this.hand.push(card);
+      // TODO: update the view
+   };
+
+
    var CASINO = CASINO || { generators : {}}; // Loose module pattern
    CASINO.generators.Player = Player;
-   // CASINO.players = {}; // will hold each active player. Index by player id
 
 }( jQuery ));

@@ -76,6 +76,14 @@
    };
 
 
+   // Table will manage distributing cards to the player's hands
+   Table.prototype.addCard = function (player_id, card) {
+      
+      var player = this.players[player_id];
+      player.addCardToHand(card);
+   };
+
+
    var CASINO = CASINO || { generators : {} }; // Loose module pattern
    CASINO.generators.Table = Table;
    CASINO.tables = {}; // will hold each active table. Indexed by table id
