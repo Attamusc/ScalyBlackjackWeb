@@ -6,19 +6,56 @@
   </head>
   <body class="lift:content_id=main">
     <div id="main" class="lift:surround?with=default;at=content">
-	    <div class="lift:comet?type=Dispatcher"> 
+        <lift:bind-at name="extra-js">
+    		<script>
+    		     $(document).ready(function() {
+    		         $('#bet-button').click(function(e) {    		             
+     		             $.post("/api/bj/bet",
+     		                {   
+     		                    tid: $(this).data('tid'), 
+     		                    pid: $(this).data('pid'),
+     		                    amount: $("#bet-amount").val()
+     		                },
+     		                function(data) {
+     		                    $("#bet-amount").val("");
+     		                    console.log(data);
+     		                });
+     		         });
+     		         
+    		         $('.player-button').click(function(e) {    		             
+    		             $.post("/api/bj/" + $(this).data('action'),
+    		                {   
+    		                    tid: $(this).data('tid'), 
+    		                    pid: $(this).data('pid')
+    		                },
+    		                function(data) {
+    		                    console.log(data);
+    		                });
+    		         });
+    		    });
+    		</script>
+    	</lift:bind-at>
+	    <lift:comet type="Dispatcher">
+	    <div> 
             Some chat messages
             <ul id="about_messages">
               <li>Message...</li>
               <li class="clearable">Another message</li>
               <li class="clearable">A third message</li>
             </ul>
-          </div>
-          <div>
-            <form class="lift:form.ajax">
-              <input class="lift:TableInput" id="chat_in"/>
-              <input type="submit" value="Say Something"/>
-            </form>
+        </div>
+        </lift:comet>
+        <div>
+            <input id="bet-amount" name="amount" value="" />
+            <button id="bet-button" class="btn" data-pid="1" data-tid="1">Bet</button>
+        </div>
+        <div>
+            <button class="btn player-button" data-pid="1" data-tid="1" data-action="hit">Hit</button>
+            <button class="btn player-button" data-pid="1" data-tid="1" data-action="stay">Stay</button>
+            <button class="btn player-button" data-pid="1" data-tid="1" data-action="double_down">Double Down</button>
+            <button class="btn player-button" data-pid="1" data-tid="1" data-action="split">Split</button>
+            <button class="btn player-button" data-pid="1" data-tid="1" data-action="surrender">Surrender</button>
+            <button class="btn player-button" data-pid="1" data-tid="1" data-action="insurance">Insurance</button>
         </div>
     </div>
   </body>
