@@ -424,7 +424,9 @@ a.join_table_link {
   color: #feff03;
 }
 
-
+#bet-amount {
+    width: 50%;
+}
 
 
 /* Styles for pull out panes on game page  */
