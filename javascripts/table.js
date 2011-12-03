@@ -5,8 +5,9 @@ $( function() {
 
       defaults : function () {
          return {
-            id: 0,
-            chips_to_cash_ratio: 1/100
+            id: 0,                           // identifier
+            chips_to_cash_ratio: (1 / 100),  // how much a player can join / leave with
+            in_play: false                   // whether in betting or game mode
          };
       },
 
