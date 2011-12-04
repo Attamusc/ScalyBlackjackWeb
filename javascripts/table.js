@@ -7,7 +7,11 @@ $( function() {
          return {
             id: 0,                           // identifier
             chips_to_cash_ratio: (1 / 100),  // how much a player can join / leave with
-            in_play: false                   // whether in betting or game mode
+            in_play: false,                  // whether in betting or game mode
+            min_bet: 50,
+            players: [],
+            seats: [],
+            hands: []
          };
       },
 
@@ -18,9 +22,9 @@ $( function() {
              v,              // value for iterator
              seat;           // an individual seat object
 
-         this.players = new CASINO.models.Players;
-         this.seats = new CASINO.models.Seats;
-         this.hands = new CASINO.models.Hands;
+         this.players = Backbone.Collection.nest(this, 'players', new CASINO.models.Players(this.get('players')));
+         this.seats = Backbone.Collection.nest(this, 'seats', new CASINO.models.Seats(this.get('seats')));
+         this.hands = Backbone.Collection.nest(this, 'hands', new CASINO.models.Hands(this.get('hands')));
 
          // Tables have 6 seats with 6 hands at each seat
          for (i = 0; i < 6; i += 1) {
@@ -50,12 +54,31 @@ $( function() {
 
       // Finds the hand for the given player, and adds the card to it
       dealCard: function (card, player_id) {
-         var self = this;
+         var self = this, player;
          self.hands.each( function (hand) {
-            if (!hand.get('seat').get('empty') && hand.get('seat').get('player').get('id') == player_id) {
-               hand.cards.add( card );
+            if (!hand.get('seat').get('empty')) {
+               player = hand.get('seat').get('player');
+               if (player.id == player_id) {
+                  hand.cards.add( card );
+               }
             }
          });
+      },
+
+
+      payout: function (chip_difference, player_id) {
+         var self = this;
+         self.players.each( function (player) {
+            if (player.get('id') == player_id) {
+               player.set({ chips: player.get('chips') + chip_difference });
+            }
+         });
+      },
+
+
+      clearCards: function() {
+         var self = this;
+         self.hands.reset();
       },
 
 
@@ -73,12 +96,22 @@ $( function() {
          }
          // otherwise, find an open seat
          else {
-            seat = this.seats.unoccupied()[0];
+            seat = this.seats.unoccupied()[0]; // TODO: index might explode
          }
 
          if (seat) {
             CASINO.log('seating ' + player.get('name') + ' (player #' + player.get('id')  + ') at seat #' + seat.get('position'));
             seat.set({ 'player': player, empty: false }); // update the model 
+         }
+      },
+
+      playerLeave: function (player_id) {
+         var self = this,
+             seat = self.seats.player(player_id);  // try finding this player's seat
+
+         if (seat) {
+            CASINO.log(seat.get('player').get('name') + ' at seat #' + seat.get('position') + ' left the table');
+            self.players.remove(seat.get('player'));
          }
       }
 
@@ -93,49 +126,55 @@ $( function() {
       initialize: function () {
          var self = this;    // reference to this for closures
 
-         this.model.players.bind('add', this.addPlayer, this);
-         this.model.players.bind('reset', this.addPlayers, this);
-         this.model.players.bind('all', this.render, this);
+         this.model.players.bind('add', this.renderSeats, this); // TODO: just render the specifc seat
+         this.model.players.bind('remove', this.playerLeaveSeat, this);
       },
-
-
-     // attempts to seat a player at an open seat
-     addPlayer: function (player) {
-        // There's no player view, so rather we will rerender the seat
-     },
-
-     // rerenders the seats for each of the players given
-     addPlayers: function (players) {
-        players.each(this.addPlayer);
-     },
-
-
-     // rerender the seat where the player was sitting
-     removePlayer: function (player) {
-
-     },
-
 
       // draws the table 
       render: function () {
          var self = this;
 
          self.el.html(self.template()); // render the base table
+         self.renderSeats();
+         self.renderHands();
+         return self;
+      },
 
-         self.$seats = $(self.el).find('.table_seats_wrapper');
-         self.$hands = $(self.el).find('.player_cards_wrapper');
+      playerJoinSeat: function (seat) {
+
+      },
+
+      playerLeaveSeat: function (player) {
+         var self = this,
+             seats = self.model.seats.occupied(),
+             $seats = $(self.el).find('.table_seats_wrapper');
+
+         _.each(seats, function (seat) {
+            if (seat.get('player').get('id') == player.get('id')) {
+               seat.set({'player': null, empty: true});
+               $seats.find('.seat_' + seat.get('position')).replaceWith( new CASINO.views.SeatView({ model: seat }).render().el );
+            }
+         });
+      },
+
+      renderSeats: function () {
+         var self = this;
+         self.$seats = $(self.el).find('.table_seats_wrapper').empty();
 
          self.model.seats.each( function (seat) { // render the seats at the table
             var seat_item = new CASINO.views.SeatView({ model: seat });
             self.$seats.append(seat_item.render().el);
          });
+      }, 
+
+      renderHands: function () {
+         var self = this;
+         self.$hands = $(self.el).find('.player_cards_wrapper').empty();
 
          self.model.hands.each( function (hand) {
             var hand_item = new CASINO.views.HandView({ model: hand }); // hands is a collection of collections
             self.$hands.append(hand_item.render().el);
          });
-
-         return self;
       }
 
    });

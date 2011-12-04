@@ -63,13 +63,14 @@ $(function () {
 
       defaults: function () {
          return {
-            seat: null
+            seat: null,
+            cards: []
          };
       },
 
       initialize: function () {
          var self = this;
-         self.cards = new CASINO.models.Cards;
+         self.cards = Backbone.Collection.nest(this, 'cards', new CASINO.models.Cards(this.get('cards')));
       }
       
    });

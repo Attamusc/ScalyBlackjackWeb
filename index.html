@@ -27,10 +27,10 @@
   <script src="javascripts/twitter_twipsy.js"></script>
   <script src="javascripts/twitter_popover.js"></script>
   <!-- <script src="//platform.twitter.com/widgets.js"></script> -->
-  <script src="javascripts/common.js"></script>
   <script src="javascripts/json2.js"></script>
   <script src="javascripts/underscore-1.1.6.js"></script>
   <script src="javascripts/backbone.js"></script>
+  <script src="javascripts/common.js"></script>
   <script src="javascripts/player.js"></script>
   <script src="javascripts/table.js"></script>
   <script src="javascripts/card.js"></script>
@@ -60,8 +60,18 @@
          };
       }());
 
+      // set our mode
+      CASINO.mode = CASINO.modes.IN_GAME;
 
-      CASINO.main_table = new CASINO.models.Table({ id: 1, chips_to_cash_ratio: 1/200 });
+      // model for the current game
+      // TODO: table needs to be dynamically loaded here on page load
+      CASINO.main_table = new CASINO.models.Table({
+         id: 1,
+         chips_to_cash_ratio: 1 / 200,
+         min_bet: 100
+      });
+
+      // view for the current game
       gameplay = new CASINO.views.GamePlayView({
          el: $('#game_play_view'),
          model: CASINO.main_table
@@ -88,14 +98,8 @@
          CASINO.main_table.dealCard( card, players[i % players.length].get('id') );
       }
 
-      // player popover
-      (function () {
-         $('#table_section').delegate('.player_seat', 'mouseover', function (e) {
-            var el = $(this);
-            el.twipsy({});
-            el.twipsy('show');
-         });
-      }());
+
+      //CASINO.main_table.playerLeave(4);
 
       // side panels
       $('#basic_strategy_handle, #table_info_handle').click(function(e) {
@@ -116,21 +120,6 @@
   <script type="text/template" id="hand-template">
   </script>
 
-  <script type="text/template" id="main-player-seat-template">
-    <div class="seat <%= dealer ? 'dealer_seat' : ('seat_' + position) %> <%= empty ? 'empty_seat' : 'player_seat' %>" 
-              data-placement="below" 
-      title="<%= player ? player.get('name') + ' (' + (player.get('a_real_boy') ? 'Human' : 'Bot') + ') ' + player.get('chips') + ' chips' : 'Empty' %>">
-
-      <% if (empty) { %>
-        Empty
-      <% } else if(player && player.get('avatar')) { %>
-        <img src="<%= player.get('avatar') %>" alt="<%= player.get('name') %> avatar"/>
-      <% } else { %>
-        <%= player.get('name') %>
-      <% } %>
-    </div>
-  </script>
-
   <script type="text/template" id="main-table-template">
     <div id="main_table_wrapper">
       <div class="table_seats_wrapper"></div>
@@ -142,13 +131,13 @@
     <div id="table_dash_board">
       <div class="container">
         <div class="span2 dash_section">
-          <p>Table Min bet: <b id="table_a_min_bet">50</b> chips</p>
+          <p>Table Min bet: <b id="table_a_min_bet"><%= min_bet %></b> chips</p>
         </div>
         <div class="span8 dash_section">
           <span class="betting_actions <%= in_play ? 'hide' : '' %>">
-            <input class="btn primary up_bet" value="+" type="button">
+            <input class="btn up_bet" value="+" type="button">
             <input class="btn primary" value="Bet 50" type="button">
-            <input class="btn primary down_bet" value="-" type="button">
+            <input class="btn down_bet" value="-" type="button">
           </span>
           <span class="game_actions <%= in_play ? '' : 'hide' %>">
             <input class="btn primary" value="Hit" type="button">
