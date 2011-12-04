@@ -40,9 +40,21 @@ case class Hit(pid:Int) extends Request
 case class Stay(pid:Int) extends Request
 case class DoubleDown(pid:Int) extends Request
 case class Split(pid:Int) extends Request
+case class Surrender(pid:Int) extends Request
+case class Insurance(pid:Int) extends Request
 
 case class Up(card : Card)
 case class Observe(card : Card, player : Int, shoeSize : Int)
+
+case class BetType(type: Int) { 
+    override def toString: String = {
+        type match {
+            case "1" => "Double Down"
+            case "2" => "Surrender"
+            case "3" => "Insurance"
+        }
+    }
+}
 
 case class Outcome
 case class Win(gain : Double) extends Outcome
@@ -76,7 +88,15 @@ class Dealer extends Actor with Hand {
   /** Hand-to-pid map */
   var handMap = HashMap[Object with Hand,Int]()
   
-  /** Shoe from whic cards are dealt */
+  /** pid-to-bet type map for anything other than a regular bet */
+  // 1 = Double Down
+  // 2 = Surrender
+  var betMap = HashMap[Int, Int]()
+  
+  /** List of pids of players who have insurance */
+  var insuredPlayer = List[Int]()
+  
+  /** Shoe from which cards are dealt */
   var shoe: Shoe = null
   
   /** Current player index */
@@ -118,8 +138,31 @@ class Dealer extends Actor with Hand {
           Log.debug(this+" received STAY from player("+pid+")")
           Conductor ! MessageFactory.message("dealer", did.toString, "received STAY from player(%d)".format(pid))
           stay(pid,sender)
-        // Receives something completely from left field
           
+        // Receives a double down request from the player
+        case DoubleDown(pid) =>
+            Log.debug(this+" received DOUBLEDOWN from player("+pid+")")
+            Conductor ! MessageFactory.message("dealer", did.toString, "received DOUBLEDOWN from player(%d)".format(pid))
+            sender ! BetType(1)
+            betMap += pid -> 1
+            hit(pid,sender)
+        
+        // Receives an insurance request from the player
+        case Insurance(pid) =>
+            Log.debug(this+" received INSURANCE from player("+pid+")")
+            Conductor ! MessageFactory.message("dealer", did.toString, "received INSURANCE from player(%d)".format(pid))
+            sender ! BetType(3)
+            insuredPlayers :+= pid 
+                
+        // Receives a surrender request from the player
+        case Surrender(pid) =>
+            Log.debug(this+" received SURRENDER from player("+pid+")")
+            Conductor ! MessageFactory.message("dealer", did.toString, "received SURRENDER from player(%d)".format(pid))
+            sender ! BetType(2)
+            betMap += pid -> 2
+            stay(pid,sender)
+            
+        // Receives something completely from left field
         case dontKnow =>
           // Got something we REALLY didn't expect
           Log.debug(this+" got "+dontKnow) 
@@ -131,7 +174,7 @@ class Dealer extends Actor with Hand {
   /** Initializes the game */
   def init {
     if(shoe == null)
-    	shoe = new Shoe(did)
+    	shoe = new Shoe(10)
 
     // Deal the up card
     hit(shoe.deal)

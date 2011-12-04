@@ -23,6 +23,9 @@ object Conductor extends LiftActor with ListenerManager {
         case "Start" =>
             game_started = true
             Game.init
+        case "Clear" =>
+            game_started = false
+            table_patter = Vector[String]()
         case s: String => 
             table_patter :+= s 
             //Log.debug("Table Server says: " + s)

@@ -32,6 +32,22 @@
     		                    console.log(data);
     		                });
     		         });
+    		         
+    		         // Throwaway code for testing stuff...
+    		         $('#start-house').click(function(e) {
+    		             $.get("/api/bj/start",
+    		                   function(data) {
+    		                       console.log(data);
+    		                   }
+    		             );
+    		         });
+    		         $('#clear-house').click(function(e) {
+     		             $.get("/api/bj/clear",
+     		                   function(data) {
+     		                       console.log(data);
+     		                   }
+     		             );
+     		         });
     		    });
     		</script>
     	</lift:bind-at>
@@ -56,9 +72,13 @@
                   <button class="btn player-button" data-pid="1" data-tid="1" data-action="surrender">Surrender</button>
                   <button class="btn player-button" data-pid="1" data-tid="1" data-action="insurance">Insurance</button>
 	          </div>
-	          <div class="span4 dash_section">
+	          <div class="span3 dash_section">
   	              <input id="bet-amount" name="amount" value="" />
-                    <button id="bet-button" class="btn" data-pid="1" data-tid="1">Bet</button>
+                  <button id="bet-button" class="btn" data-pid="1" data-tid="1">Bet</button>
+  	          </div>
+  	          <div class="span3 dash_section">
+  	             <button id="start-house" class="btn player-button">Start</button>
+  	             <button id="clear-house" class="btn player-button">Clear</button>
   	          </div>
 	        </div>
 	      </div>

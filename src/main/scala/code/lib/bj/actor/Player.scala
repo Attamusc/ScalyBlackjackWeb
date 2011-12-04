@@ -24,6 +24,7 @@ import bj.card.Card
 import bj.util.Log
 import bj.hkeeping.Broke
 import bj.util.MessageFactory
+import bj.util.BasicStrategy
 
 import collection.mutable.HashMap
 import comet.Conductor
@@ -62,6 +63,12 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
 
   /** Table id I've been assigned */
   var tableId : Int = -1
+  
+  /** Special bet type I've made, if any */
+  var betType : Int = 0
+  
+  /** If I've asked for an insurance bet */
+  var insured : Boolean = false
 
   /** Pretty-prints the player reference */
   override def toString: String = "(" + name + ", " + pid + ")"
@@ -85,6 +92,15 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
         // Receives a card from the dealer
         case card: Card =>         
           hitMe(card)
+          
+        case bet_type: BetType =>
+            Log.debug(this + " received dealer's confirmation of bet type of " + bet_type)
+            if(bet_type.type == 3) {
+                this.insured = true
+            }
+            else {
+                this.betType = bet_type.type
+            }
 
         // Receives broke message
         case Broke =>
@@ -191,9 +207,13 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
    */
   def play(upcard : Card) {
     this.upcard = upcard
+    
+    // Wait for a few seconds, to give the appearance of being a real player
+    Thread.sleep(3000)
 
     // Compute my play strategy
-    val request = analyze(upcard)
+    // If I performed a Double Down, then I must stay, so don't even both diving into the analyze function
+    val request = if(betType != 1) analyze(upcard) else Stay(pid)
 
     Log.debug(this + " request = " + request)
     Conductor ! MessageFactory.message(name, pid.toString, "request: " + request)
@@ -205,8 +225,26 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
     
   }
 
-  /** Analyzes my best play using a condensed form of Basic Strategy. */
+  /** Analyzes my best play using the Basic Strategy. */
   def analyze(upcard : Card) : Request = {
+      val upCardKey = if(upcard.value != 1) upcard.value.toString else "A"
+      
+      // Check my hand against the basic strategy
+      if(cards.size == 2) {
+          // Do I have a pair? NOTE: We us number instead of value to make sure the face cards are the same
+          if(cards(0).number == cards(1).number) {
+              return BasicStrategy.action(this.pid, "%d-%d".format(cards(0).value, cards(0).value), upCardKey)
+          }
+          // If I don't, check if I have an Ace
+          else if(cards(0).value == 1 || cards(1).value == 1) {
+              return BasicStrategy.action(this.pid, "A-%d".format(if(cards(0).value == 1) cards(1).value else cards(0).value), upCardKey)
+          }
+      } 
+      
+      // If we have more than two cards or we have neither a pair nor an ace, we just use the value as defined in the Basic Strategy
+      return BasicStrategy.action(this.pid, value.toString, upCardKey)
+      
+    /*
     // If my hand >= 17, we're staying
     if (value >= 17)
       return Stay(pid)
@@ -222,6 +260,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
     // Dealer must be showing, A, 7, 8, 9, or 10 so...
     // we must hit
     return Hit(pid)
+    */
   }
 
 }

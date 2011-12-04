@@ -26,7 +26,7 @@ object Card {
     val QUEEN = 12
     val KING = 13
     
-    // Note: these code are not card values
+    // Note: these codes are not card values
     val SPADE = 1
     val CLUB = 2
     val DIAMOND = 3
