@@ -23,6 +23,10 @@ $( function() {
              v,              // value for iterator
              seat;           // an individual seat object
 
+         if (!self.get('your_bet')) {
+            self.set({'your_bet': self.get('min_bet') });
+         }
+
          this.players = Backbone.Collection.nest(this, 'players', new CASINO.models.Players(this.get('players')));
          this.seats = Backbone.Collection.nest(this, 'seats', new CASINO.models.Seats(this.get('seats')));
          this.hands = Backbone.Collection.nest(this, 'hands', new CASINO.models.Hands(this.get('hands')));
@@ -130,44 +134,15 @@ $( function() {
          this.model.players.bind('add', this.renderSeats, this); // TODO: just render the specifc seat
          this.model.players.bind('remove', this.playerLeaveSeat, this);
          this.model.bind('change:in_play', this.renderTableState, this);
-
-          // need to mnaully fire the countdown on intialization 
-          // because the change event hasn't fired
-         if (!this.model.get('in_play')) {
-            self.startCountdown();
-         }
-      },
-
-      // draws the table 
-      render: function () {
-         var self = this;
-
-         self.el.html(self.template(self.model.toJSON())); // render the base table
-         self.renderSeats();
-         self.renderHands();
-         return self;
-      },
-
-      startCountdown: function () {
-         var self = this, 
-             counter = self.$('.counter'),
-             time = self.model.get('counter'),
-             count = function () {
-                time -= 1;  // TODO: counter should really be a date object and here just show the time left until that date. 
-                            //           - Prevents execution blocking from screwing with time
-                counter.html(time);
-                if (time == 0) {
-                   clearInterval(pid);
-                }
-             },
-
-             pid = setInterval(count, 1000);
       },
 
 
+
+
+      // TODO: should use this instead of rendering all of the seats every add
       playerJoinSeat: function (seat) {
-
       },
+
 
       playerLeaveSeat: function (player) {
          var self = this,
@@ -180,8 +155,46 @@ $( function() {
                $seats.find('.seat_' + seat.get('position')).replaceWith( new CASINO.views.SeatView({ model: seat }).render().el );
             }
          });
+
          return self;
       },
+
+
+      // draws the table 
+      render: function () {
+         var self = this;
+
+         self.el.html(self.template(self.model.toJSON())); // render the base table
+         self.renderSeats();
+         self.renderHands();
+
+         // need to mnaully fire the countdown on intialization 
+         // because the change event hasn't fired
+         if (!this.model.get('in_play')) {
+            self.startCountdown();
+         }
+
+         return self;
+      },
+
+
+      // Initializes a countdown counter in the message section of the table
+      startCountdown: function () {
+         var self = this, 
+             counter = self.$('.counter'),
+             time = self.model.get('counter'),
+             count = function () {
+                time -= 1;  // TODO: counter should really be a date object and here just show the time left until that date. 
+                            //           - Prevents execution blocking from screwing with time
+                counter.html(time);
+                if (time == 0) {
+                   clearInterval(pid); // hoisting magic
+                }
+             },
+
+             pid = setInterval(count, 1000); // yup, hoisting magic
+      },
+
 
       renderTableState: function (model, val) {
          var self = this; // closure protection!
@@ -192,6 +205,7 @@ $( function() {
          return self; // chaining!
       },
 
+
       renderSeats: function () {
          var self = this;
          self.$seats = $(self.el).find('.table_seats_wrapper').empty();
@@ -201,6 +215,7 @@ $( function() {
             self.$seats.append(seat_item.render().el);
          });
       }, 
+
 
       renderHands: function () {
          var self = this;

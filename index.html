@@ -69,7 +69,8 @@
          id: 1,
          chips_to_cash_ratio: 1 / 200,
          min_bet: 100,
-         in_play: false
+         in_play: false,
+         counter: 10
       });
 
       // view for the current game
@@ -141,8 +142,9 @@
         <div class="span8 dash_section">
           <span class="betting_actions <%= in_play ? 'hide' : '' %>">
             <input class="btn up_bet" value="+" type="button">
-            <input class="btn primary" value="Bet 50" type="button">
+            <input class="btn primary your_bet" value="Bet <%= min_bet %>" type="button">
             <input class="btn down_bet" value="-" type="button">
+            <input type="hidden" value="<%= min_bet %>" class="your_bet_field" />
           </span>
           <span class="game_actions <%= in_play ? '' : 'hide' %>">
             <input class="btn primary" value="Hit" type="button">
