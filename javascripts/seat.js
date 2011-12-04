@@ -64,7 +64,7 @@ $(function () {
 
       intialize: function () {
          var self = this;
-         this.model.bind('change', this.render, this);
+         this.model.bind('change:player', this.render, this);
       },
 
       // player popover
@@ -72,7 +72,7 @@ $(function () {
          $(this.el).twipsy({}).twipsy('show');
       },
 
-      render: function () {
+      render: function () { // this is all because backbone doesn't support associations natively...
          var self = this,
              attrs = self.model.attributes,
              el = $(self.el).empty()

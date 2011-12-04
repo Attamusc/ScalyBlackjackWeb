@@ -61,9 +61,20 @@ $( function() {
       dealCard: function (card, player_id) {
          var self = this, player;
          self.hands.each( function (hand) {
+
             if (!hand.get('seat').get('empty')) {
                player = hand.get('seat').get('player');
+
+               // card belongs to this player
                if (player.id == player_id) {
+                  // card visibility if dealer
+                  if (player.get('dealer')) {
+                     if (hand.cards.length == 0) { // dealer's first card is facedown
+                        card.set({visible: false});
+                     } else if (hand.cards.length == 2) { // if dealer hits, flip their first card
+                        hand.cards.at(0).set({visible: true});
+                     }
+                  }
                   hand.cards.add( card );
                }
             }
@@ -118,6 +129,8 @@ $( function() {
             CASINO.log(seat.get('player').get('name') + ' at seat #' + seat.get('position') + ' left the table');
             self.players.remove(seat.get('player'));
          }
+
+         // TODO: remove the player's cards if they exist
       }
 
    });
@@ -131,16 +144,15 @@ $( function() {
       initialize: function () {
          var self = this;    // reference to this for closures
 
-         this.model.players.bind('add', this.renderSeats, this); // TODO: just render the specifc seat
+         this.model.players.bind('add', this.renderSeats, this); //, this.playerJoinSeat, this); // TODO: just render the specifc seat
          this.model.players.bind('remove', this.playerLeaveSeat, this);
-         this.model.bind('change:in_play', this.renderTableState, this);
+         this.model.players.bind('change', this.updatePlayerSeat, this);
+         this.model.bind('change:in_play', this.render, this);//this.renderTableState, this);
       },
 
 
+      playerJoinSeat: function (player) {
 
-
-      // TODO: should use this instead of rendering all of the seats every add
-      playerJoinSeat: function (seat) {
       },
 
 
@@ -160,9 +172,25 @@ $( function() {
       },
 
 
+      updatePlayerSeat: function (player) {
+         var self = this,
+             seats = self.model.seats.occupied(),
+             $seats = $(self.el).find('.table_seats_wrapper');
+
+         _.each(seats, function (seat) {
+            if (seat.get('player').get('id') == player.id) {
+               $seats.find('.seat_' + seat.get('position')).replaceWith( new CASINO.views.SeatView({ model: seat }).render().el );
+            }
+         });
+
+         return self;
+      },
+
+
       // draws the table 
       render: function () {
-         var self = this;
+         var self = this, 
+             dealer = self.model.hands.dealer();
 
          self.el.html(self.template(self.model.toJSON())); // render the base table
          self.renderSeats();
@@ -172,6 +200,11 @@ $( function() {
          // because the change event hasn't fired
          if (!this.model.get('in_play')) {
             self.startCountdown();
+
+            // TODO: this doesn't feel right but it works with the flow
+            if(dealer && dealer.cards.length == 2) { // flip the dealer's first card over if rendering with cards on the table and in_play set to true 
+               dealer.cards.at(0).set({visible: true});
+            }
          }
 
          return self;
@@ -193,16 +226,6 @@ $( function() {
              },
 
              pid = setInterval(count, 1000); // yup, hoisting magic
-      },
-
-
-      renderTableState: function (model, val) {
-         var self = this; // closure protection!
-         self.el.html(self.template(self.model.toJSON())); // just updating the table message
-         if (!self.model.get('in_play')) {
-            self.startCountdown(); // countdown timer!
-         }
-         return self; // chaining!
       },
 
 

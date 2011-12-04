@@ -66,10 +66,9 @@ $( function () {
  
 
       swap_actions: function (model, in_play) {
-
          var self = this;
-         self.$('.' + (in_play ? 'game_actions' : 'betting_actions')).addClass('hide');
-         self.$('.' + (in_play ? 'betting_actions' : 'game_actions')).removeClass('hide');
+         self.$('.' + (in_play ? 'betting_actions' : 'game_actions')).addClass('hide');
+         self.$('.' + (in_play ? 'game_actions' : 'betting_actions')).removeClass('hide');
       },
 
 

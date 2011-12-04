@@ -37,7 +37,7 @@ $(function () {
       template: _.template($('#card-template').html()),
    
       initialize: function () {
-         this.model.bind('destroy', this.remove, this);
+         this.model.bind('change:visible', this.render, this);
       },
    
       render: function () {
@@ -45,6 +45,7 @@ $(function () {
              card = self.model;
 
          $(this.el).html(this.template(this.model.toJSON()))
+            .removeClass('show_back')
             .addClass(card.get('suit') + '_card ' + (card.get('visible') ? '' : 'show_back'));
 
          return this;
@@ -82,7 +83,12 @@ $(function () {
          var self = this;
       },
 
-      model: CASINO.models.Hand
+      model: CASINO.models.Hand,
+
+      dealer: function () {
+         var list = this.filter( function (hand) { return hand.get('seat').get('player') && hand.get('seat').get('player').get('dealer') });
+         return list.length > 0 ? list[0] : false;
+      }
    });
 
 

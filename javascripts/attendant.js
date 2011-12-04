@@ -71,6 +71,7 @@ CASINO.attendant = (function( $ ) {
                if card is an array of cards, batch dealing will take place!
                  - card suit should fall in the set [red, black]
                  - card value should fall in the set [2-10, J, Q, K, A]
+               if player is the dealer, flip their first card
             
                {hands: [ player_id: integer, card: { suit: red|black, value: string }] }
              */

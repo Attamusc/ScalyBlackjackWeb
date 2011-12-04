@@ -80,6 +80,7 @@
       });
 
       // add some players
+      // TODO: from server
       players = [
          new CASINO.models.User({ dealer: true, id: 0, a_real_boy: false, client_user: false, name: 'Greg', chips: 20000000, avatar: 'images/avatars/cute_1.jpg' }),
          new CASINO.models.User({ id: 1, a_real_boy: true, client_user: true, name: 'Joey', chips: 20000, avatar: 'images/avatars/cute_2.jpg' }),
@@ -89,19 +90,22 @@
          new CASINO.models.User({ id: 5, a_real_boy: false, client_user: false, name: 'Ron', chips: 10000000, avatar: 'images/avatars/cute_6.jpg' })
       ];
 
-      CASINO.main_table.players.add(players);
+     CASINO.main_table.players.add(players);
 
       // give cards to the players
       for (i = 0, len = players.length * 2; i < len; i += 1) {
          card = deck.draw(); // draw a card
-         if (i == 0) {
-            card.set({ visible: false });
-         }
          CASINO.main_table.dealCard( card, players[i % players.length].get('id') );
       }
 
 
-      //CASINO.main_table.playerLeave(4);
+      // CASINO.main_table.playerLeave(4);
+
+      CASINO.main_table.dealCard( card, players[0].get('id') );
+      //CASINO.main_table.set({in_play: true});
+
+      CASINO.main_table.payout(-5, 1);
+
 
       // side panels
       $('#basic_strategy_handle, #table_info_handle').click(function(e) {
