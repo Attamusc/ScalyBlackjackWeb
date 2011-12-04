@@ -68,7 +68,8 @@
       CASINO.main_table = new CASINO.models.Table({
          id: 1,
          chips_to_cash_ratio: 1 / 200,
-         min_bet: 100
+         min_bet: 100,
+         in_play: false
       });
 
       // view for the current game
@@ -122,6 +123,10 @@
 
   <script type="text/template" id="main-table-template">
     <div id="main_table_wrapper">
+      <div class="table_message <%= in_play ? 'hide' : '' %>">
+        <div class="table_message_content"></div>
+        <div class="table_timer <%= in_play ? 'hide' : '' %>">Bet in: <span class="counter"><%= counter %></span></div>
+      </div>
       <div class="table_seats_wrapper"></div>
       <div class="house_table player_cards_wrapper"></div>
     </div>

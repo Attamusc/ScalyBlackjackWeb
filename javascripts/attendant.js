@@ -21,9 +21,10 @@ CASINO.attendant = (function( $ ) {
    }
 
 
-   // receives a message in a psuedo JSONP call from lift
-   // messages are expected in the minimum form:
-   //     { type: string, data: {stuff...} }
+   /* receives a message in a psuedo JSONP call from lift
+      messages are expected in the minimum form:
+        { type: string, data: {stuff...} }
+    */
    api.process_message = function( message ) {
 
       about_message.append('<li>' + message + '</li>');
@@ -66,33 +67,71 @@ CASINO.attendant = (function( $ ) {
                break;
 
 
-            case 'deal_card': // give a card to a player
-               /* INFO: 
-                  if card is an array of cards, batch dealing will take place!
-                  card suit should fall in the set [red, black]
-                  card value should fall in the set [2-10, J, Q, K, A]
-               
-                  {player_id: integer, card: {suit: red|black, value: string}}
-                */
+            /* Deal a card to a player
+               if card is an array of cards, batch dealing will take place!
+                 - card suit should fall in the set [red, black]
+                 - card value should fall in the set [2-10, J, Q, K, A]
+            
+               {hands: [ player_id: integer, card: { suit: red|black, value: string }] }
+             */
+            case 'deal_card':
 
                // find the table
                var i, len, // looping stuffs 
                    table = table(message.data.table_id);
 
                // we are just going to go ahead and assume cards are well-formed for now
-               if ($.isArray(message.data.card)) {
-                  for (i = 0, len = message.data.card.length; i < len; i += 1) {
-                     table.dealCard(message.data.card[i], message.data.player_id);
-                  }
-               } else {
-                  table.dealCard(message.data.card, message.data.player_id);
+               for (i = 0, len = message.data.hands.length; i < len; i += 1) {
+                  table.dealCard(message.data.hands[i].card, message.data.hands[i].player_id);
                }
                break;
 
 
-            case 'waiting_on_you': // prompt user for a move
-               // TODO: debating if we need this. Do players really need to act in turn?
+            /* Prepares the table for the next round
+                - Pays the players their payout
+                - Starts the betting countdown
+                - Switches the mode of the table to betting mode
+                - Shows results of previous round
 
+                {table_id: integer, results: [{ player_id: integer, payout: integer, message: string }] }
+             */
+            case 'end_game':
+
+               // find the table
+               var i, len, // looping stuffs
+                   table = table(message.data.table_id);
+
+               for (i = 0, len = message.mdata.results.length; i < len; i += 1) {
+                  table.payout(message.data.results[i].payout, message.data.results[i].player_id); // pay the player their winnings
+                  // TODO: show the result message somewhere
+               }
+               table.set({ in_play: false }); // Starts the betting countdown automatically, TODO: do we want to set the counter to like the cutoff datetime
+
+               break;
+
+
+            /* Betting is finished, clear the table
+                - Clears the cards off the table
+                - Deals cards
+                - Switches the mode of the table to in_game mode
+
+                {table_id: integer, cards: [{cards objects from deal_cards above...}] }
+             */
+            case 'new_game':
+               // find the table
+               var i, len, // looping stuffs
+                   table = table(message.data.table_id);
+
+                   table.clearCards(); // clears the cards
+                   table.set({ in_play: true });
+                   api.process_message({card: message.data.cards}); // defer to process the message. Code reuse!
+               break;
+
+
+            // prompt user for a move
+            case 'waiting_on_you':
+               // TODO: debating if we need this. Do players really need to act in turn?
+               // If we do want it, something like {player_id: integer } .... and maybe what they are waiting for them to do so {message: string}
                break;
 
 

@@ -5,9 +5,10 @@ $( function() {
 
       defaults : function () {
          return {
-            id: 0,                           // identifier
-            chips_to_cash_ratio: (1 / 100),  // how much a player can join / leave with
-            in_play: false,                  // whether in betting or game mode
+            id: 0,                              // identifier
+            chips_to_cash_ratio: (1 / 100),     // how much a player can join / leave with
+            in_play: false,                     // whether in betting or game mode
+            counter: 30,
             min_bet: 50,
             players: [],
             seats: [],
@@ -78,7 +79,7 @@ $( function() {
 
       clearCards: function() {
          var self = this;
-         self.hands.reset();
+         self.hands.reset(); // TODO: we don't want to wipe the hands, just the cards in them
       },
 
 
@@ -128,17 +129,41 @@ $( function() {
 
          this.model.players.bind('add', this.renderSeats, this); // TODO: just render the specifc seat
          this.model.players.bind('remove', this.playerLeaveSeat, this);
+         this.model.bind('change:in_play', this.renderTableState, this);
+
+          // need to mnaully fire the countdown on intialization 
+          // because the change event hasn't fired
+         if (!this.model.get('in_play')) {
+            self.startCountdown();
+         }
       },
 
       // draws the table 
       render: function () {
          var self = this;
 
-         self.el.html(self.template()); // render the base table
+         self.el.html(self.template(self.model.toJSON())); // render the base table
          self.renderSeats();
          self.renderHands();
          return self;
       },
+
+      startCountdown: function () {
+         var self = this, 
+             counter = self.$('.counter'),
+             time = self.model.get('counter'),
+             count = function () {
+                time -= 1;  // TODO: counter should really be a date object and here just show the time left until that date. 
+                            //           - Prevents execution blocking from screwing with time
+                counter.html(time);
+                if (time == 0) {
+                   clearInterval(pid);
+                }
+             },
+
+             pid = setInterval(count, 1000);
+      },
+
 
       playerJoinSeat: function (seat) {
 
@@ -155,6 +180,16 @@ $( function() {
                $seats.find('.seat_' + seat.get('position')).replaceWith( new CASINO.views.SeatView({ model: seat }).render().el );
             }
          });
+         return self;
+      },
+
+      renderTableState: function (model, val) {
+         var self = this; // closure protection!
+         self.el.html(self.template(self.model.toJSON())); // just updating the table message
+         if (!self.model.get('in_play')) {
+            self.startCountdown(); // countdown timer!
+         }
+         return self; // chaining!
       },
 
       renderSeats: function () {

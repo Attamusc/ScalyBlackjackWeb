@@ -156,6 +156,22 @@ h1, h2, h3, h4, h5, h6, #navigation, .seat {
   height: 300px;
   margin: 30px auto 0;
 }
+#main_table_wrapper .table_message {
+  color: #222;
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+  top: 225px;
+  left: 350px;
+  z-index: 10;
+  padding: 15px;
+  border: 2px solid #444;
+  background: #ddd;
+  border-radius: 5px;
+}
+.table_timer .counter {
+  color: #99291c;
+}
 #main_table_wrapper .house_table {
   border: 10px solid #9D6220;
   border-radius: 80px;
