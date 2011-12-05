@@ -12,16 +12,16 @@ import JE._
 
 import lib.bj.Game
 import comet.Conductor
+import comet.PlayerAction
+import comet.PlayerBet
 
 object BjHelper extends RestHelper {
     serve {
         case "api" :: "bj" :: "bet" :: _ Post _ =>
-            val message = "(action: %s, pid: %s, tid: %s, amount: %s)".format("bet", S.param("pid").openOr(""), S.param("tid").openOr(""), S.param("amount").openOr(""))
-            Conductor ! message
+            Conductor ! new PlayerBet(S.param("pid").openOr("").toInt, S.param("tid").openOr("").toInt, S.param("amount").openOr("").toInt)
             JString("Ok")
         case "api" :: "bj" :: player_action :: _ Post _ =>
-            val message = "(action: %s, pid: %s, tid: %s)".format(player_action, S.param("pid").openOr(""), S.param("tid").openOr(""))
-            Conductor ! message
+            Conductor ! new PlayerAction(player_action, S.param("pid").openOr("").toInt, S.param("tid").openOr("").toInt)
             JString("Ok")
         case "api" :: "bj" :: "start" :: _ Get _ =>
             Conductor ! "Start"

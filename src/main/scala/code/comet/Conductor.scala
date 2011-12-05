@@ -13,8 +13,18 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.write
 
 import lib.bj.Game
+import lib.bj.actor.House
+import lib.bj.actor.Hit
+import lib.bj.actor.Stay
+import lib.bj.actor.Split
+import lib.bj.actor.DoubleDown
+import lib.bj.actor.Insurance
+import lib.bj.actor.Surrender
 import lib.bj.util.Log
 import lib.bj.util.BaseMessage
+
+case class PlayerAction(val action: String, val pid: Int, val tid: Int)
+case class PlayerBet(val pid: Int, val tid: Int, val amount: Int)
 
 object Conductor extends LiftActor with ListenerManager {
     private var table_patter : Vector[String] = Vector()
@@ -36,6 +46,17 @@ object Conductor extends LiftActor with ListenerManager {
             //table_patter :+= s
             //Log.debug("Table Server says: " + s)
             updateListeners()
+        case action : PlayerAction =>
+            Log.debug("(action: %s, pid: %s, tid: %s)".format(action.action, action.pid, action.tid))
+            val dealer = House.getDealerForTable(action.tid)
+            action.action match {
+                case "hit" => dealer ! Hit(action.pid)
+                case "stay" => dealer ! Stay(action.pid)
+                case "double_down" => dealer ! DoubleDown(action.pid)
+                case "split" => dealer ! Split(action.pid)
+                case "surrender" => dealer ! Surrender(action.pid)
+                case "insurance" => dealer ! Insurance(action.pid)
+            }
         case message: BaseMessage =>
             //table_patter :+= message.toJson
             patter_update = message.toJson

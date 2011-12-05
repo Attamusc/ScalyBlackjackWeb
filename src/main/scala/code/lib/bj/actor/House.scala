@@ -77,5 +77,14 @@ object House extends Actor {
           Conductor ! MessageFactory.info("house: recieved an unknown value")
         }
     }
-  } 
+  }
+  
+  def getDealerForTable(tid: Int) : Dealer = {
+      this.tables.find(t => t.tid == tid) match {
+          case None =>
+            return null
+          case Some(table) =>
+            return table.dealer
+      }
+  }
 }

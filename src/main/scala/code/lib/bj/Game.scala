@@ -45,7 +45,7 @@ object Game {
     
     Log.debug("Starting Players")
     Conductor ! MessageFactory.info("Starting Players")
-    val players = List[Player](new Player("Ron", 10000, 100, 0, false))
+    val players = List[Player](new Player("Sean", 10000, 100, 0, true), new Player("Gaby", 10000, 100, 0, false), new Player("RonBot", 10000, 100, 0, false))
     
     Player.start(players)
     
