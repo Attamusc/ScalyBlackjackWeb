@@ -51,10 +51,12 @@
     		    });
     		</script>
     	</lift:bind-at>
+    	<span class="lift:TableUtils.setTableSessionId"></span>
+	    <span class="lift:TableUtils.genTableDispatcher"></span>
+	    <!--
 	    <lift:comet type="Dispatcher">
-	    <!-- Inline style as this is throw away, so no reason to add it to the CSS sheet... -->
-	    <div style="width:75%;margin-left:auto;margin-right:auto;"> 
-            Some chat messages
+	    <div style="width:75%;margin-left:auto;margin-right:auto;margin-bottom:50px;"> 
+            <h2>Blackjack Table Message Dump</h2>
             <ul id="about_messages">
               <li>Message...</li>
               <li class="clearable">Another message</li>
@@ -62,9 +64,10 @@
             </ul>
         </div>
         </lift:comet>
+        -->
         <div id="table_dash_board">
 	        <div class="container">
-	          <div class="span9 dash_section"> <!-- TODO: do something when buttons are clicked! -->
+	          <div class="span9 dash_section">
 	              <button class="btn player-button" data-pid="0" data-tid="0" data-action="hit">Hit</button>
                   <button class="btn player-button" data-pid="0" data-tid="0" data-action="stay">Stay</button>
                   <button class="btn player-button" data-pid="0" data-tid="0" data-action="double_down">Double Down</button>

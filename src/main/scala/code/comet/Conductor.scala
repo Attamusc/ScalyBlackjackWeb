@@ -21,14 +21,21 @@ import lib.bj.actor.DoubleDown
 import lib.bj.actor.Insurance
 import lib.bj.actor.Surrender
 import lib.bj.util.Log
+import lib.bj.util.BaseStatus
 import lib.bj.util.BaseMessage
+import lib.bj.util.PlayerMessage
+import lib.bj.util.DealerMessage
+
+import model.User
+
+import snippet.TableSession
 
 case class PlayerAction(val action: String, val pid: Int, val tid: Int)
 case class PlayerBet(val pid: Int, val tid: Int, val amount: Int)
 
 object Conductor extends LiftActor with ListenerManager {
     private var table_patter : Vector[String] = Vector()
-    private var patter_update : String = ""
+    private var patter_update : BaseMessage = new BaseMessage()
     private var game_started = false
     
     def createUpdate = {
@@ -50,16 +57,19 @@ object Conductor extends LiftActor with ListenerManager {
             Log.debug("(action: %s, pid: %s, tid: %s)".format(action.action, action.pid, action.tid))
             val dealer = House.getDealerForTable(action.tid)
             action.action match {
-                case "hit" => dealer ! Hit(action.pid)
-                case "stay" => dealer ! Stay(action.pid)
-                case "double_down" => dealer ! DoubleDown(action.pid)
-                case "split" => dealer ! Split(action.pid)
-                case "surrender" => dealer ! Surrender(action.pid)
-                case "insurance" => dealer ! Insurance(action.pid)
+                case "hit" => Game.informPlayerOfAction(dealer, action.pid, Hit(action.pid))
+                case "stay" => Game.informPlayerOfAction(dealer, action.pid, Stay(action.pid))
+                case "double_down" => Game.informPlayerOfAction(dealer, action.pid, DoubleDown(action.pid))
+                case "split" => Game.informPlayerOfAction(dealer, action.pid, Split(action.pid))
+                case "surrender" => Game.informPlayerOfAction(dealer, action.pid, Surrender(action.pid))
+                case "insurance" => Game.informPlayerOfAction(dealer, action.pid, Insurance(action.pid))
             }
+        case message: BaseStatus =>
+            //patter_update = message
+            //updateListeners()
         case message: BaseMessage =>
             //table_patter :+= message.toJson
-            patter_update = message.toJson
+            patter_update = message
             updateListeners()
     } 
 }
@@ -71,11 +81,18 @@ class Dispatcher extends CometActor with CometListener{
     def registerWith = Conductor
 
     override def lowPriority = {
-        case s : String =>
-            patter :+= s
-            Log.debug("Comet Table says: '" + s + "'")
-            partialUpdate(JsRaw("CASINO.attendant.process_message('" + s + "')"))
-            //partialUpdate(JsRaw("CASINO.attendant.process_message('" + s + "')"))
+        case message : PlayerMessage =>
+            if(message.tid.toString == this.name.openOr("")) {
+                patter :+= message.message.toJson
+                Log.debug("Comet Table says: '" + message.message.toJson + "'")
+                partialUpdate(JsRaw("CASINO.attendant.process_message('" + message.message.toJson + "')"))
+            }
+        case message : DealerMessage =>
+            if(message.tid.toString == this.name.openOr("")) {
+                patter :+= message.message.toJson
+                Log.debug("Comet Table says: '" + message.message.toJson + "'")
+                partialUpdate(JsRaw("CASINO.attendant.process_message('" + message.message.toJson + "')"))
+            }
         case v: Vector[String] => 
             patter = v
             //Log.debug("Comet Table says: " + v)

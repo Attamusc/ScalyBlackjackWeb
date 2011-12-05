@@ -15,6 +15,9 @@ import JE._
 import comet.Conductor
 
 object Logger extends Logger
+object TableSession {
+    object tid extends SessionVar[String]("")
+}
 
 object TableInput {
     def render = SHtml.onSubmit(s => {
@@ -24,6 +27,27 @@ object TableInput {
 }
 
 class TableUtils {
+    def setTableSessionId = {
+        TableSession.tid(S.param("tableId").openOr("0"))
+        "*" #> ""
+    }
+    
+    def getTableSessionId = "*" #> TableSession.tid
+    
+    def genTableDispatcher = {
+        //"*" #> <lift:comet type="Dispatcher" name={"%s".format(S.param("tableId").openOr("0"))} />
+        "*" #> <lift:comet type="Dispatcher" name={"%s".format(S.param("tableId").openOr("0"))}>
+	    <div style="width:75%;margin-left:auto;margin-right:auto;margin-bottom:50px;"> 
+            <h2>Blackjack Table Message Dump</h2>
+            <ul id="about_messages">
+              <li>Message...</li>
+              <li class="clearable">Another message</li>
+              <li class="clearable">A third message</li>
+            </ul>
+        </div>
+        </lift:comet>
+    }
+    
   	def getTableName = {
 		var tableId = S.param("tableId").openOr("0")
 		Logger.debug("The requested table has the id " + tableId)

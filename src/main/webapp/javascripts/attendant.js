@@ -18,6 +18,11 @@ CASINO.attendant = (function( $ ) {
 
      if (message && message.type) {
         switch (message.type) {
+           case  'joiner': // message for when a player joins a game
+              // {sender: house, id: player_id}
+              console.log(message.message);
+              $('.player-button, #bet-button').data("pid", message.id);
+              break;
            case  'info': // purely for logging
               console.log(message.message);
               break;

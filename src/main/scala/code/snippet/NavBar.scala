@@ -9,20 +9,14 @@ import http._
 import common._
 import util.Helpers._
 
+import model.User
+
 class NavBar {
   	def navGen = {
-		Session.isLoggedIn match {
+		User.loggedIn_? match {
 			case false => "*" #> <lift:embed what="base_nav" />
 			case true => "*" #> <lift:embed what="logged_in_nav" />
 			case _ => "*" #> <div>Whoops!!!</div>
-		}
-	}
-	
-	def sessionToggleLink = {
-		Session.isLoggedIn match {
-			case false =>
-			case true =>
-			case _ =>
 		}
 	}
 }

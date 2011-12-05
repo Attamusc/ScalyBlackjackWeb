@@ -56,7 +56,7 @@ class Table(val minBet: Double) extends Actor {
   val tid = Table.id
   
   /** Dealer for this table */
-  var dealer = new Dealer
+  var dealer = new Dealer(this.tid)
 
   /** True if this table is involved in a game */
   var trucking: Boolean = false

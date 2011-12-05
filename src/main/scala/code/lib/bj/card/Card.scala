@@ -47,6 +47,48 @@ case class Card (number : Int, suite : Int) {
   /** Flattens the value of card */
   def flat(value : Int) = if(value <= 10) value else 10  
   
+  /** Returns the suit of the card in short form */
+  def shortSuite : String = {
+      suite match {
+        case Card.SPADE =>
+          return "Spades"
+
+        case Card.CLUB =>
+          return "Clubs"
+
+        case Card.HEART =>
+          return "Hearts"
+
+        case Card.DIAMOND =>
+          return "Diamonds"
+
+        case _ =>
+          return "?"
+      }
+  }
+  
+  def shortValue : String = {
+      number match {
+        case n : Int if n >= 2 && n <= 10 =>
+          return n + ""
+
+        case Card.JACK =>
+          return "J"
+
+        case Card.QUEEN =>
+          return "Q"
+
+        case Card.KING =>
+          return "K"
+
+        case Card.ACE =>
+          return "A"
+
+        case _ =>
+          return "?"
+      }
+  }
+  
   /** Returns the pretty value of the card */
   override def toString : String = {
     var s : String = ""

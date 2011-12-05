@@ -126,7 +126,7 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
           bankroll += won
           
           Log.debug(this+" received WIN " + won + " new bankroll = "+bankroll)
-          Conductor ! MessageFactory.result(name, pid.toString, "win", "%d".format(won.toInt))
+          Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "win", "%d".format(won.toInt))
           
         case Loose(gain) =>
           val lost = betAmt * gain
@@ -134,11 +134,11 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
           bankroll += lost
           
           Log.debug(this+" received LOOSE " + lost + " new bankroll = "+bankroll)          
-          Conductor ! MessageFactory.result(name, pid.toString, "loss", "%d".format(lost.toInt))
+          Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "loss", "%d".format(lost.toInt))
           
         case Push(gain) =>
           Log.debug(this+" received PUSH bankroll = "+bankroll)
-          Conductor ! MessageFactory.result(name, pid.toString, "push", "0")
+          Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "push", "0")
           
         // Receives an ACK
         case Ok =>
@@ -184,12 +184,12 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
     this.hit(card)
     
     Log.debug(this + " received card " + card + " hand sz = " + cards.size + " value = " + value)
-    Conductor ! MessageFactory.update(name, pid.toString, card.toString)
+    Conductor ! MessageFactory.player_update(this.tableId, pid.toString, cards.size - 1, card.shortSuite, card.shortValue)
     Conductor ! MessageFactory.message(name, pid.toString, " received card %s hand sz = %d value = %d".format(card.toString, cards.size, value))
 
     // If I'm a bot and I've received more than two cards, the extras must be in
     // response to my requests
-    if (!this.realBoy && cards.size > 2)
+    if (!this.realBoy && cards.size > 2 && !this.broke)
       play(this.upcard)    
   }
   
@@ -234,7 +234,8 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
       if(cards.size == 2) {
           // Do I have a pair? NOTE: We us number instead of value to make sure the face cards are the same
           if(cards(0).number == cards(1).number) {
-              return BasicStrategy.action(this.pid, "%d-%d".format(cards(0).value, cards(0).value), upCardKey)
+              val shortValue = if(cards(0).number == 1) "A" else cards(0).value
+              return BasicStrategy.action(this.pid, "%d-%d".format(shortValue, shortValue), upCardKey)
           }
           // If I don't, check if I have an Ace
           else if(cards(0).value == 1 || cards(1).value == 1) {
@@ -262,6 +263,11 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
     // we must hit
     return Hit(pid)
     */
+  }
+  
+  def sendRequest(dealer: Dealer, request: Request) = {
+      Log.debug(this + " has been informed that it's remote player want to send " + request + " to " + dealer)
+      dealer ! request
   }
 
 }

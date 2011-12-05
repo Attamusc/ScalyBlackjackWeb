@@ -34,6 +34,7 @@ import scala.actors.OutputChannel
 import bj.table.Table
 import bj.util.Log
 import bj.util.MessageFactory
+import bj.Game
 
 import comet.Conductor
 
@@ -71,9 +72,9 @@ object Dealer {
 
 /**
  * This class implements the dealer.
- * @param table The table I'm associated with.
+ * @param tableId The table I'm associated with.
  */
-class Dealer extends Actor with Hand {  
+class Dealer(tableId: Int) extends Actor with Hand {  
   /** Unique dealer id */
   Dealer.id += 1
   val did = Dealer.id
@@ -133,13 +134,13 @@ class Dealer extends Actor with Hand {
         case Hit(pid) =>
           Log.debug(this+" received HIT from player("+pid+")")
           Conductor ! MessageFactory.message("dealer", did.toString, "received HIT from player(%d)".format(pid))
-          hit(pid,sender)          
+          hit(pid, Game.findPlayerByPid(pid))          
 
         // Receives a stay request from a player
         case Stay(pid) =>
           Log.debug(this+" received STAY from player("+pid+")")
           Conductor ! MessageFactory.message("dealer", did.toString, "received STAY from player(%d)".format(pid))
-          stay(pid,sender)
+          stay(pid, Game.findPlayerByPid(pid))
           
         // Receives a double down request from the player
         case DoubleDown(pid) =>
@@ -147,7 +148,7 @@ class Dealer extends Actor with Hand {
             Conductor ! MessageFactory.message("dealer", did.toString, "received DOUBLEDOWN from player(%d)".format(pid))
             sender ! BetType(1)
             betMap += pid -> 1
-            hit(pid,sender)
+            hit(pid, Game.findPlayerByPid(pid))
         
         // Receives an insurance request from the player
         case Insurance(pid) =>
@@ -162,7 +163,7 @@ class Dealer extends Actor with Hand {
             Conductor ! MessageFactory.message("dealer", did.toString, "received SURRENDER from player(%d)".format(pid))
             sender ! BetType(2)
             betMap += pid -> 2
-            stay(pid,sender)
+            stay(pid, Game.findPlayerByPid(pid))
             
         // Receives something completely from left field
         case dontKnow =>
@@ -182,6 +183,7 @@ class Dealer extends Actor with Hand {
 
     // Deal the up card
     hit(shoe.deal)
+    Conductor ! MessageFactory.dealer_update(this.tableId, 0, cards(0).shortSuite, cards(0).shortValue)
     
     // Deal the hole card but don't put it yet into dealer's hand
     hole = shoe.deal
@@ -289,9 +291,10 @@ class Dealer extends Actor with Hand {
     // Hit dealer's hand with the hole card
     hit(hole)
     
-    Log.debug(this+" closing card1 = "+cards(0)+" card2 = "+cards(1))    
-    Conductor ! MessageFactory.update("dealer", did.toString, cards(0).toString)
-    Conductor ! MessageFactory.update("dealer", did.toString, cards(1).toString)
+    Log.debug(this+" closing card1 = "+cards(0)+" card2 = "+cards(1))
+    Conductor ! MessageFactory.dealer_update(this.tableId, 1, cards(1).shortSuite, cards(1).shortValue)  
+    // Conductor ! MessageFactory.update("dealer", did.toString, cards(0).toString)
+    // Conductor ! MessageFactory.update("dealer", did.toString, cards(1).toString)
     
     while (value < 17 && !blackjack) {
       val card : Card = shoe.deal
@@ -299,12 +302,12 @@ class Dealer extends Actor with Hand {
       hit(card)
       
       Log.debug(this+" hitting card = "+card+" value = "+value)   
-      Conductor ! MessageFactory.update("dealer", did.toString, card.toString)
+      Conductor ! MessageFactory.dealer_update(this.tableId, cards.size - 1, card.shortSuite, card.shortValue)
     }
     
     if(value > 21)
       Log.debug(this+" BROKE!!")
-      Conductor ! MessageFactory.result("dealer", did.toString, "broke", "0")
+      // Conductor ! MessageFactory.result("dealer", did.toString, "broke", "0")
     
     // Broadcast observations on all cards dealer's holding
     // except the up-card at index 0 -- players have already

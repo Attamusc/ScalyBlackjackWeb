@@ -48,6 +48,8 @@ class Boot {
 	  	case RewriteRequest(ParsePath("tables" :: tableId :: Nil, "", true, false), _, _ ) => RewriteResponse("tables/show" :: Nil, Map("tableId" -> tableId))
 		// Rewrites GET /tables/:id/game => /games/show?tableId=:id
 		case RewriteRequest(ParsePath("tables" :: tableId :: "game" :: Nil, "", true, false), _, _ ) => RewriteResponse("games/show" :: Nil, Map("tableId" -> tableId))
+		// Rewrites GET /about/:id/ => /about?tableId=:id
+		case RewriteRequest(ParsePath("about" :: tableId :: Nil, "", true, false), _, _ ) => RewriteResponse("about" :: Nil, Map("tableId" -> tableId))
 	})
 	
 	// Lift REST helper appending

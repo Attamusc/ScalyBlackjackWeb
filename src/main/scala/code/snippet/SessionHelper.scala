@@ -16,11 +16,11 @@ object SessionHelper extends RestHelper {
 	serve {
 		case "login" :: _ Post _ => 
 			Session.isLoggedIn = true
-			CurrentPlayer.playerName = S.param("email").openOr("")
+			//CurrentPlayer.playerName = S.param("email").openOr("")
 			RedirectResponse("/") 
 		case "logout" :: _ Get _ => 
 			Session.isLoggedIn = false
-			CurrentPlayer.playerName = ""
+			//CurrentPlayer.playerName = ""
 			RedirectResponse("/")
 	}
 }

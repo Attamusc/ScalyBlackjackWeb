@@ -25,6 +25,7 @@ import bj.actor.Dealer
 import scala.actors.Actor
 import bj.actor.Go
 import bj.util.Log
+import bj.actor.Request
 import bj.util.MessageFactory
 
 import comet.Conductor
@@ -35,6 +36,7 @@ case class Launch
 object Game {
     
   private val botNames : Vector[String] = Vector("RonBot", "John", "Russell", "George", "April", "Steve", "Phillip", "Agnes", "Beatrice", "Eugene", "Joanne", "Blanche", "Maryann", "Jodi", "Timothy", "Bruce", "Justin", "Keith", "William", "Richard")
+  private var players = List[Player](new Player("Sean", 10000, 100, 0, true), new Player("Gaby", 10000, 100, 0, false), new Player("RonBot", 10000, 100, 0, false))
   
   def init = {
     Log.debug("Starting the House")
@@ -45,7 +47,6 @@ object Game {
     
     Log.debug("Starting Players")
     Conductor ! MessageFactory.info("Starting Players")
-    val players = List[Player](new Player("Sean", 10000, 100, 0, true), new Player("Gaby", 10000, 100, 0, false), new Player("RonBot", 10000, 100, 0, false))
     
     Player.start(players)
     
@@ -54,6 +55,19 @@ object Game {
     Log.debug("Telling the House Go")
     Conductor ! MessageFactory.info("Telling the House Go")
     House ! Go
+  }
+  
+  def findPlayerByPid(pid: Int) : Player = {
+      players.find(p => p.pid == pid) match {
+          case None => return null
+          case Some(player) => return player
+      }
+  }
+  
+  def informPlayerOfAction(dealer: Dealer, pid: Int, request: Request) = {
+      val player: Player = this.findPlayerByPid(pid)
+      Log.debug("Remote Player(" + pid + ") sent a " + request + " request to " + dealer)
+      player.sendRequest(dealer, request)
   }
   
   def addPlayerToTable(name: String, tid: Int) = {
