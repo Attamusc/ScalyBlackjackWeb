@@ -219,9 +219,11 @@ class Dealer(tableId: Int) extends Actor with Hand {
    * @param pid Player id
    * @param source Source actor of the message.
    */
-  def hit(pid : Int, player : OutputChannel[Any]) {
-    if (!valid(player))
-      player ! NotOk
+  def hit(pid : Int, player : Player) {
+    if (!valid(player)) {
+        Log.debug(this + " received a bad player of " + player)
+        player ! NotOk
+    }
 
     else {
       val card = shoe.deal
@@ -243,9 +245,11 @@ class Dealer(tableId: Int) extends Actor with Hand {
    * @param pid Player id
    * @param source Source actor of the message.
    */  
-  def stay(pid : Int, source : OutputChannel[Any]) {
-    if (!valid(source))
+  def stay(pid : Int, source : Player) {
+    if (!valid(source)) {
+      Log.debug(this + " received a bad player of " + source)
       source ! NotOk
+    }
       
     source ! Ok
 
@@ -328,6 +332,7 @@ class Dealer(tableId: Int) extends Actor with Hand {
     
     for(hand <- hands) {
       val pid = handMap(hand)
+      Log.debug(this + " performing a payout to player(" + pid + ")")
       
       // Player looses
       if(hand.broke)
@@ -354,6 +359,13 @@ class Dealer(tableId: Int) extends Actor with Hand {
     }
     
     table ! GameOver(pays)
+    
+    /** Since the game is now over, reset everything necessary to start a new game */
+    this.hands = List[Object with Hand]()
+    this.handMap = HashMap[Object with Hand,Int]()
+    this.betMap = HashMap[Int, Int]()
+    this.insuredPlayers = List[Int]()
+    resetCards
   }  
   
   /**

@@ -70,6 +70,12 @@ object Game {
       player.sendRequest(dealer, request)
   }
   
+  def placeBet(pid: Int, tableId: Int, amount: Int) = {
+      val player: Player = this.findPlayerByPid(pid)
+        Log.debug("Remote Player(" + pid + ") sent a bet request for table " + tableId + " of an amount " + amount.toInt)
+        player.setAndProcessBet(amount, tableId)
+  }
+  
   def addPlayerToTable(name: String, tid: Int) = {
       
   }

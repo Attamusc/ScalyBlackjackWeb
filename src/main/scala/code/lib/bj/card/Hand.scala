@@ -76,4 +76,9 @@ trait Hand {
      * Hits this hand.
      */
     def hit(card : Card) : Unit =  cards = cards ::: List(card)
+    
+    /**
+     * Resets the cards in the hand
+     */
+    def resetCards = { cards = List[Card]() }
 }

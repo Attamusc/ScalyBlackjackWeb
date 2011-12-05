@@ -24,6 +24,7 @@ import bj.hkeeping.NotOk
 import scala.actors.OutputChannel
 import bj.util.Log
 import bj.util.MessageFactory
+import bj.Game
 
 import comet.Conductor
 
@@ -59,7 +60,7 @@ object House extends Actor {
             case Some(table) =>
               Log.debug("house: sending table id = "+table.tid+" sender = "+sender)
               Conductor ! MessageFactory.info("house: sending table id = %d sender = %s".format(table.tid, sender))
-              table ! Arrive(sender, pid, bet)
+              table ! Arrive(Game.findPlayerByPid(pid), pid, bet)
               
               //sender ! TableNumber(table.tid)
           }

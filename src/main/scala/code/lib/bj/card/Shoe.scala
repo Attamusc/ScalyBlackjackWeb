@@ -40,6 +40,10 @@ class Shoe(seed : Long) {
      * Deals a card from the deck
      */
     def deal: Card = {
+        if(size == burnIndex) {
+            create
+        }
+        
         val card = shoe(0)
 
         shoe = shoe.drop(1)

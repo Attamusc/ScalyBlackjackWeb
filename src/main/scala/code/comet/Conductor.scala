@@ -55,6 +55,9 @@ object Conductor extends LiftActor with ListenerManager {
             //table_patter :+= s
             //Log.debug("Table Server says: " + s)
             updateListeners()
+        case bet: PlayerBet =>
+            Log.debug("(action: bet, pid: %s, tid: %s, amount: %s)".format(bet.pid, bet.tid, bet.amount))
+            Game.placeBet(bet.pid.toInt, bet.tid.toInt, bet.amount.toInt)
         case action : PlayerAction =>
             Log.debug("(action: %s, pid: %s, tid: %s)".format(action.action, action.pid, action.tid))
             val dealer = House.getDealerForTable(action.tid)

@@ -52,7 +52,7 @@ object Player {
  * @param tableId Table id I've been assigned
  * @param realBoy Whether the player is a real person or not
  */
-class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: Int, realBoy: Boolean) extends Actor with Hand {
+class Player(name: String, var bankroll: Double, var betAmt: Double, var tableId: Int, realBoy: Boolean) extends Actor with Hand {
   /**
    * Get the player's unique id
    * Note: this assumes players are constructed serially!
@@ -80,7 +80,8 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
         case Go =>
           Log.debug(this+" received Go placing bet = "+betAmt+" from bankroll = "+bankroll)
           Conductor ! MessageFactory.message(name, pid.toString, "received Go placing bet = %d from bankroll = %d".format(betAmt.toInt, bankroll.toInt))
-          bet
+          if(!this.realBoy)
+            bet
           
         // Receives the dealer's up-card which is player's cue to play
         case Up(card) =>
@@ -128,6 +129,8 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
           Log.debug(this+" received WIN " + won + " new bankroll = "+bankroll)
           Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "win", "%d".format(won.toInt))
           
+          resetCards
+          
         case Loose(gain) =>
           val lost = betAmt * gain
           
@@ -136,9 +139,13 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
           Log.debug(this+" received LOOSE " + lost + " new bankroll = "+bankroll)          
           Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "loss", "%d".format(lost.toInt))
           
+          resetCards
+          
         case Push(gain) =>
           Log.debug(this+" received PUSH bankroll = "+bankroll)
           Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "push", "0")
+          
+          resetCards
           
         // Receives an ACK
         case Ok =>
@@ -265,8 +272,14 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: In
     */
   }
   
+  def setAndProcessBet(newBet: Int, tableId: Int) = {
+      this.betAmt = newBet.toDouble
+      this.tableId = tableId
+      bet
+  }
+  
   def sendRequest(dealer: Dealer, request: Request) = {
-      Log.debug(this + " has been informed that it's remote player want to send " + request + " to " + dealer)
+      Log.debug(this + " has been informed that it's remote player wants to send " + request + " to " + dealer)
       dealer ! request
   }
 

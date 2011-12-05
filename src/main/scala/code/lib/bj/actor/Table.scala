@@ -70,6 +70,9 @@ class Table(val minBet: Double) extends Actor {
   /** House mail box */
   var house : OutputChannel[Any] = null
   
+  /** Current game number being played */
+  var gameNumber : Int = 0
+  
   /** Starts the table */
   start
 
@@ -169,7 +172,16 @@ class Table(val minBet: Double) extends Actor {
   }
   
   /** Handles game over */
-  def gameOver(pays : HashMap[Int,Outcome]) = pays.foreach(p => pay(p))
+  def gameOver(pays : HashMap[Int,Outcome]) = {
+      pays.foreach(p => pay(p))
+      
+      // Wait 10 seconds to receive new bets, then relaunch myself
+      Thread.sleep(10000)
+      
+      if(this.gameNumber < 2)
+        this.gameNumber += 1
+        this ! Go
+  }
   
   /**
    * Sends payment to player.
