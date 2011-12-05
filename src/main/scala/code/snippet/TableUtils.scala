@@ -1,6 +1,7 @@
 package code 
 package snippet 
 
+import java.util.Date
 import scala.xml.{NodeSeq, Text}
 import code.lib._
 import lib._
@@ -36,7 +37,7 @@ class TableUtils {
     
     def genTableDispatcher = {
         //"*" #> <lift:comet type="Dispatcher" name={"%s".format(S.param("tableId").openOr("0"))} />
-        "*" #> <lift:comet type="Dispatcher" name={"%s".format(S.param("tableId").openOr("0"))}>
+        "*" #> <lift:comet type="Dispatcher" name={"%s-%d".format(S.param("tableId").openOr("0"), new Date().getTime)}>
 	    <div style="width:75%;margin-left:auto;margin-right:auto;margin-bottom:50px;"> 
             <h2>Blackjack Table Message Dump</h2>
             <ul id="about_messages">

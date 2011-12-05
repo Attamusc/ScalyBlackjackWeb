@@ -1,6 +1,8 @@
 package code
 package comet
 
+import scala.util.matching.Regex
+
 import net.liftweb._
 import http._
 import util._
@@ -77,18 +79,21 @@ object Conductor extends LiftActor with ListenerManager {
 class Dispatcher extends CometActor with CometListener{
     private var patter : Vector[String] = Vector()
     private var update : String = "This is a test"
+    private val tableIdRegex = new Regex("""(\d+)-\d+""")
     
     def registerWith = Conductor
 
     override def lowPriority = {
         case message : PlayerMessage =>
-            if(message.tid.toString == this.name.openOr("")) {
+            val tableIdRegex(tid) = this.name.openOr("")
+            if(message.tid.toString == tid) {
                 patter :+= message.message.toJson
                 Log.debug("Comet Table says: '" + message.message.toJson + "'")
                 partialUpdate(JsRaw("CASINO.attendant.process_message('" + message.message.toJson + "')"))
             }
         case message : DealerMessage =>
-            if(message.tid.toString == this.name.openOr("")) {
+            val tableIdRegex(tid) = this.name.openOr("")
+            if(message.tid.toString == tid) {
                 patter :+= message.message.toJson
                 Log.debug("Comet Table says: '" + message.message.toJson + "'")
                 partialUpdate(JsRaw("CASINO.attendant.process_message('" + message.message.toJson + "')"))
