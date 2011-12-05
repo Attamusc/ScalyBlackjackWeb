@@ -17,6 +17,8 @@
 package code
 package lib
 package bj.actor
+
+import java.util.Date
 import scala.actors.Actor
 import bj.hkeeping.Ok
 import bj.hkeeping.NotOk
@@ -46,12 +48,12 @@ case class Insurance(pid:Int) extends Request
 case class Up(card : Card)
 case class Observe(card : Card, player : Int, shoeSize : Int)
 
-case class BetType(type: Int) { 
+case class BetType(bid: Int) { 
     override def toString: String = {
-        type match {
-            case "1" => "Double Down"
-            case "2" => "Surrender"
-            case "3" => "Insurance"
+        this.bid match {
+            case 1 => "Double Down"
+            case 2 => "Surrender"
+            case 3 => "Insurance"
         }
     }
 }
@@ -94,7 +96,7 @@ class Dealer extends Actor with Hand {
   var betMap = HashMap[Int, Int]()
   
   /** List of pids of players who have insurance */
-  var insuredPlayer = List[Int]()
+  var insuredPlayers = List[Int]()
   
   /** Shoe from which cards are dealt */
   var shoe: Shoe = null
@@ -173,8 +175,10 @@ class Dealer extends Actor with Hand {
   
   /** Initializes the game */
   def init {
-    if(shoe == null)
-    	shoe = new Shoe(10)
+    if(shoe == null) {
+        val randSeed = new Date().getTime
+    	shoe = new Shoe(randSeed)
+	}
 
     // Deal the up card
     hit(shoe.deal)

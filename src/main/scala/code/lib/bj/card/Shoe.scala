@@ -18,7 +18,7 @@ package lib
 package bj.card
 
 /** This class implements the shoe from which we deal cards. */
-class Shoe(seed : Int) {
+class Shoe(seed : Long) {
     /** Number of decks in the shoe */
     val DECK_COUNT = 6
 

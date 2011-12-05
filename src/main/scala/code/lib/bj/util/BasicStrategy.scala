@@ -7,6 +7,7 @@ import bj.actor.Hit
 import bj.actor.Stay
 import bj.actor.DoubleDown
 import bj.actor.Split
+import bj.actor.Surrender
 
 import collection.immutable.HashMap
 

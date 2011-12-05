@@ -110,7 +110,7 @@ class Table(val minBet: Double) extends Actor {
    * @param betAmt Player's bet amount
    */
   def arrive(source : OutputChannel[Any], pid : Int, betAmt : Double) {
-    val reply = placed(source, Bet(pid, betAmt))
+    val reply = placed(source, Bet(pid, betAmt, this.tid))
 
     Log.debug(this + " bet = " + reply)
     Conductor ! MessageFactory.message("table", tid.toString, " bet = %s".format(reply.toString))

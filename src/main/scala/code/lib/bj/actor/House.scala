@@ -27,7 +27,7 @@ import bj.util.MessageFactory
 
 import comet.Conductor
 
-case class Bet(player: Int, amt: Double)
+case class Bet(player: Int, amt: Double, tid: Int)
 case class GameStart(players : List[OutputChannel[Any]])
 case class GameOver(payouts : HashMap[Int,Outcome])
 case class Arrive(mailbox : OutputChannel[Any], player : Int, betAmt : Double)
@@ -38,7 +38,7 @@ case class Go
 object House extends Actor {
   var nextId = 0
   
-  var tables = List[Table](new Table(100), new Table(25), new Table(5))
+  var tables = List[Table](new Table(100), new Table(250), new Table(500), new Table(1000))
   
   override def toString = "house("+nextId+")"
    
@@ -48,11 +48,11 @@ object House extends Actor {
       react {
         // Receives a bet from a player and matches it
         // to a table
-        case Bet(pid : Int, bet : Double) =>
+        case Bet(pid : Int, bet : Double, tid: Int) =>
           Log.debug("house: received bet amt = "+bet)
           Conductor ! MessageFactory.info("house: received bet amt = %d".format(bet.toInt))
           
-          tables.find(t => t.bets.size < Table.MAX_PLAYERS && t.minBet <= bet) match {
+          tables.find(t => t.tid == tid && t.bets.size < Table.MAX_PLAYERS && t.minBet <= bet) match {
             case None =>
               sender ! NotOk
               
@@ -61,7 +61,7 @@ object House extends Actor {
               Conductor ! MessageFactory.info("house: sending table id = %d sender = %s".format(table.tid, sender))
               table ! Arrive(sender, pid, bet)
               
-              sender ! TableNumber(table.tid)
+              //sender ! TableNumber(table.tid)
           }
           
         // Receives a message to tell the tables to go

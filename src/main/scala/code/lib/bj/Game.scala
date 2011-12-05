@@ -33,24 +33,34 @@ case class Done
 case class Launch
 
 object Game {
+    
+  private val botNames : Vector[String] = Vector("RonBot", "John", "Russell", "George", "April", "Steve", "Phillip", "Agnes", "Beatrice", "Eugene", "Joanne", "Blanche", "Maryann", "Jodi", "Timothy", "Bruce", "Justin", "Keith", "William", "Richard")
   
   def init = {
-    Log.debug("starting the house")
-    Conductor ! MessageFactory.info("starting the house")
+    Log.debug("Starting the House")
+    Conductor ! MessageFactory.info("Starting the House")
     House.start
     
     Thread.sleep(1000)
     
-    Log.debug("starting players")
-    Conductor ! MessageFactory.info("starting players")
-    val players = List[Player](new Player("Ron", 500, 30))
+    Log.debug("Starting Players")
+    Conductor ! MessageFactory.info("Starting Players")
+    val players = List[Player](new Player("Ron", 10000, 100, 0, false))
     
     Player.start(players)
     
     Thread.sleep(1000)
     
-    Log.debug("telling house go")
-    Conductor ! MessageFactory.info("telling house go")
+    Log.debug("Telling the House Go")
+    Conductor ! MessageFactory.info("Telling the House Go")
     House ! Go
+  }
+  
+  def addPlayerToTable(name: String, tid: Int) = {
+      
+  }
+  
+  private def assignBotsToTables = {
+      
   }
 }

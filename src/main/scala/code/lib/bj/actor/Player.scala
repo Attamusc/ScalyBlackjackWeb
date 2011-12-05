@@ -49,8 +49,10 @@ object Player {
  * @param name Name of the player
  * @param bankroll Bankroll of the player to start
  * @param betAmt Minimum amount player will bet
+ * @param tableId Table id I've been assigned
+ * @param realBoy Whether the player is a real person or not
  */
-class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor with Hand {
+class Player(name: String, var bankroll: Double, var betAmt: Double, tableId: Int, realBoy: Boolean) extends Actor with Hand {
   /**
    * Get the player's unique id
    * Note: this assumes players are constructed serially!
@@ -60,9 +62,6 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
 
   /** Dealer's up-card */
   var upcard : Card = _
-
-  /** Table id I've been assigned */
-  var tableId : Int = -1
   
   /** Special bet type I've made, if any */
   var betType : Int = 0
@@ -86,8 +85,10 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
         // Receives the dealer's up-card which is player's cue to play
         case Up(card) =>
           Log.debug(this + " received dealer's up card = " + card)
-          Conductor ! MessageFactory.message(name, pid.toString, "received dealer's up card = '%s'".format(card.toString))
-          play(card)
+          Conductor ! MessageFactory.message(name, pid.toString, "received up card = %s".format(card.toString))
+          // Only perform the auto-logic if this is a Bot player and not a real player
+          if(!this.realBoy)
+            play(card)
 
         // Receives a card from the dealer
         case card: Card =>         
@@ -95,11 +96,11 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
           
         case bet_type: BetType =>
             Log.debug(this + " received dealer's confirmation of bet type of " + bet_type)
-            if(bet_type.type == 3) {
+            if(bet_type.bid == 3) {
                 this.insured = true
             }
             else {
-                this.betType = bet_type.type
+                this.betType = bet_type.bid
             }
 
         // Receives broke message
@@ -110,7 +111,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
         // Receives message about dealt card
         case Observe(card,player,shoeSize) =>
           Log.debug(this+" observed: "+card)
-          Conductor ! MessageFactory.message(name, pid.toString, "observed player with pid '%d' receive a '%s'".format(player, card.toString))
+          Conductor ! MessageFactory.message(name, pid.toString, "observed player with pid %d receive a %s".format(player, card.toString))
           observe(card,player,shoeSize)
           
         // Receives the table number I've been assigned to
@@ -159,7 +160,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
    * @param tid Table id
    */
   def assign(tid : Int) {
-    
+
   }
   
   /**
@@ -184,11 +185,11 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
     
     Log.debug(this + " received card " + card + " hand sz = " + cards.size + " value = " + value)
     Conductor ! MessageFactory.update(name, pid.toString, card.toString)
-    Conductor ! MessageFactory.message(name, pid.toString, " received card '%s' hand sz = %d value = %d".format(card.toString, cards.size, value))
+    Conductor ! MessageFactory.message(name, pid.toString, " received card %s hand sz = %d value = %d".format(card.toString, cards.size, value))
 
-    // If I've received more than two cards, the extras must be in
+    // If I'm a bot and I've received more than two cards, the extras must be in
     // response to my requests
-    if (cards.size > 2)
+    if (!this.realBoy && cards.size > 2)
       play(this.upcard)    
   }
   
@@ -197,7 +198,7 @@ class Player(name: String, var bankroll: Double, betAmt: Double) extends Actor w
     if (bankroll < betAmt)
       return
 
-    House ! Bet(pid, betAmt)
+    House ! Bet(pid, betAmt, tableId)
   }
   
   /**
