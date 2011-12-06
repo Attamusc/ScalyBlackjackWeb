@@ -75,7 +75,7 @@ $( function () {
       render: function () {
 
          var self = this;
-         self.el.html(self.template(self.model.toJSON()));
+ //        self.el.html(self.template(self.model.toJSON()));
       }
  
    });

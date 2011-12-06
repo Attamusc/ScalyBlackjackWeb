@@ -44,9 +44,11 @@
           // TODO: here's where we will bootstrap cards already on the table
           for (i = 0, len = players.length * 2; i < len; i += 1) {
              // card = deck.draw(); // draw a card
-             // CASINO.main_table.dealCard( card, players[i % players.length].get('id') );
+              CASINO.main_table.dealCard( new CASINO.models.Card({suit: 'black', value: 'A'}), players[i % players.length].get('id') );
           }
 
+
+          CASINO.main_table.clearCards();
 
           $('#basic_strategy_handle, #table_info_handle').click(function(e) {
               $(this).parent().toggleClass('show');
@@ -143,7 +145,7 @@
 <script type="text/template" id="card-template">
   <span class="card_value"><%= value %></span>
   <% if (!visible) { %>
-    <img src="images/back_small.png" />
+    <img src="/images/back_small.png" />
   <% } %>
 </script>
 
