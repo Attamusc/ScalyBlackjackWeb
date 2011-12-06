@@ -4,7 +4,7 @@ $( function () {
 
    CASINO.views.GamePlayView = Backbone.View.extend({
 
-      template: _.template($('#gameplay-template').html()),
+      //template: _.template($('#gameplay-template').html()),
 
       events: {
          'click .up_bet': 'upBet',

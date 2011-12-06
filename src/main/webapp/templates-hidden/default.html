@@ -34,14 +34,31 @@
   <lift:bind name="content">
     Main content will go here.
   </lift:bind>
-  <script src="/javascripts/jquery-1.6.4.min.js"></script>
-  <script src="/javascripts/twitter_modal_plugin.js"></script>
-  <script src="//platform.twitter.com/widgets.js"></script>
-  <script src="/javascripts/common.js"></script>
-  <script src="/javascripts/player.js"></script>
-  <script src="/javascripts/table.js"></script>
-  <script src="/javascripts/attendant.js"></script>
-  <!-- TODO: bind with handler for injecting what is going on -->
+
+  <script>
+    var CASINO = {
+      views: {},
+      models: {}
+    };
+  </script>
+
+
+<script src="/javascripts/jquery-1.7.1.min.js"></script>
+<script src="/javascripts/twitter_modal_plugin.js"></script>
+<script src="/javascripts/twitter_twipsy.js"></script>
+<script src="/javascripts/twitter_popover.js"></script>
+<script src="//platform.twitter.com/widgets.js"></script>
+<script src="/javascripts/json2.js"></script>
+<script src="/javascripts/underscore-1.1.6.js"></script>
+<script src="/javascripts/backbone.js"></script>
+<script src="/javascripts/common.js"></script>
+<script src="/javascripts/player.js"></script>
+<script src="/javascripts/table.js"></script>
+<script src="/javascripts/card.js"></script>
+<script src="/javascripts/seat.js"></script>
+<script src="/javascripts/game.js"></script>
+<script src="/javascripts/attendant.js"></script>
+
   <lift:bind name="extra-js" />
   </body>
 </html>
