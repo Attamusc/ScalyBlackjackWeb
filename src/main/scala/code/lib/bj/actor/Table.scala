@@ -182,12 +182,12 @@ class Table(val minBet: Double) extends Actor {
       playersCopy.values.foreach(p => p ! Go)
       
       // NOTE: Should send a time as well
-      Conductor ! MessageFactory.game_over(this.tid)
+      //Conductor ! MessageFactory.game_over(this.tid)
       
       // Wait 10 seconds to receive new bets, then relaunch myself
       Thread.sleep(10000)
       
-      Conductor ! MessageFactory.new_game(this.tid)
+      //Conductor ! MessageFactory.new_game(this.tid)
       
       this ! Go
   }
