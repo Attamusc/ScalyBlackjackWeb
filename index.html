@@ -41,6 +41,7 @@
   
 <script>
    $(document).ready(function() {
+
       var i,  // loop counter
           len, // number of iterations
           gameplay, players, deck, card;
@@ -101,8 +102,8 @@
 
       // CASINO.main_table.playerLeave(4);
 
-      CASINO.main_table.dealCard( card, players[0].get('id') );
-      //CASINO.main_table.set({in_play: true});
+      //CASINO.main_table.dealCard( card, players[0].get('id') );
+      CASINO.main_table.set({in_play: true});
 
       CASINO.main_table.payout(-5, 1);
 
