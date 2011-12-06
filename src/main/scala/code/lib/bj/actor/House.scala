@@ -28,6 +28,8 @@ import bj.Game
 
 import comet.Conductor
 
+class TableInfo(tid: Int, minBet: Int)
+
 case class Bet(player: Int, amt: Double, tid: Int)
 case class GameStart(players : List[OutputChannel[Any]])
 case class GameOver(payouts : HashMap[Int,Outcome])
@@ -87,5 +89,15 @@ object House extends Actor {
           case Some(table) =>
             return table.dealer
       }
+  }
+  
+  def findTableByTid(tid: Int) : Table = {
+      this.tables.find(t => t.tid == tid) match {
+            case None =>
+              return null
+            case Some(table) =>
+                //Game.getPlayersByTid(table.tid)
+                return table
+        }
   }
 }

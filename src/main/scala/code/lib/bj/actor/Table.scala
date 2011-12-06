@@ -121,6 +121,9 @@ class Table(val minBet: Double) extends Actor {
   /** Handles game start */
   def go {
     val bettors = players.foldLeft(List[OutputChannel[Any]]())((xs, x) => xs ::: List(x._2))
+    
+    // Inform the Conductor that a new game is about to take place
+    Conductor ! MessageFactory.new_game(this.tid)
 
     if (bettors.size != 0) {
 
@@ -178,16 +181,16 @@ class Table(val minBet: Double) extends Actor {
       this.players = HashMap[Int, OutputChannel[Any]]()
       this.bets = HashMap[Int, Double]()
       
+      Thread.sleep(1000)
+      
+      // NOTE: Should send a time as well
+      Conductor ! MessageFactory.end_game(this.tid)
+      
       // Tell all the players to replace their bets for the next game
       playersCopy.values.foreach(p => p ! Go)
       
-      // NOTE: Should send a time as well
-      //Conductor ! MessageFactory.game_over(this.tid)
-      
       // Wait 10 seconds to receive new bets, then relaunch myself
       Thread.sleep(10000)
-      
-      //Conductor ! MessageFactory.new_game(this.tid)
       
       this ! Go
   }

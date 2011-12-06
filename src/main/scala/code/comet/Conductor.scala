@@ -25,8 +25,7 @@ import lib.bj.actor.Surrender
 import lib.bj.util.Log
 import lib.bj.util.BaseStatus
 import lib.bj.util.BaseMessage
-import lib.bj.util.PlayerMessage
-import lib.bj.util.DealerMessage
+import lib.bj.util.Update
 
 import model.User
 
@@ -37,7 +36,7 @@ case class PlayerBet(val pid: Int, val tid: Int, val amount: Int)
 
 object Conductor extends LiftActor with ListenerManager {
     private var table_patter : Vector[String] = Vector()
-    private var patter_update : BaseMessage = new BaseMessage()
+    private var patter_update : BaseMessage = new BaseMessage(-1, new Update())
     private var game_started = false
     
     def createUpdate = {
@@ -87,18 +86,11 @@ class Dispatcher extends CometActor with CometListener{
     def registerWith = Conductor
 
     override def lowPriority = {
-        case message : PlayerMessage =>
+        case message : BaseMessage =>
             val tableIdRegex(tid) = this.name.openOr("")
             if(message.tid.toString == tid) {
                 patter :+= message.message.toJson
-                Log.debug("Comet Table says: '" + message.message.toJson + "'")
-                partialUpdate(JsRaw("CASINO.attendant.process_message('" + message.message.toJson + "')"))
-            }
-        case message : DealerMessage =>
-            val tableIdRegex(tid) = this.name.openOr("")
-            if(message.tid.toString == tid) {
-                patter :+= message.message.toJson
-                Log.debug("Comet Table says: '" + message.message.toJson + "'")
+                Log.debug("Dispatcher(" + this.name.openOr("") + ") says: '" + message.message.toJson + "'")
                 partialUpdate(JsRaw("CASINO.attendant.process_message('" + message.message.toJson + "')"))
             }
         case v: Vector[String] => 

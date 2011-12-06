@@ -17,6 +17,15 @@ package code
 package lib
 package bj.card
 
+import net.liftweb.json._
+import net.liftweb.json.Serialization.write
+
+case class CardInfo(card_number: Int, suit: String, value: String) {
+    implicit val formats = DefaultFormats
+    
+    def toJson = write(this)
+}
+
 /** This object implements static members of card. */
 object Card {
     // Note: these codes are not necessarily card values
@@ -45,7 +54,11 @@ case class Card (number : Int, suite : Int) {
   def value = flat(number)
   
   /** Flattens the value of card */
-  def flat(value : Int) = if(value <= 10) value else 10  
+  def flat(value : Int) = if(value <= 10) value else 10
+  
+  def toInfo(card_number: Int) : CardInfo = {
+      return new CardInfo(card_number, this.shortSuite, this.shortValue)
+  }
   
   /** Returns the suit of the card in short form */
   def shortSuite : String = {

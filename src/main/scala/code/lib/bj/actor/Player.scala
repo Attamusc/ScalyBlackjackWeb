@@ -26,8 +26,18 @@ import bj.hkeeping.Broke
 import bj.util.MessageFactory
 import bj.util.BasicStrategy
 
+import net.liftweb.json._
+import net.liftweb.json.Serialization.write
+
 import collection.mutable.HashMap
 import comet.Conductor
+
+// {id: integer, dealer: false, a_real_boy: true|false, client_user: true|false, name: string, avatar: string, chips: integer}
+case class PlayerInfo(id: Int, dealer: Boolean, a_real_boy: Boolean, client_user: Boolean, name: String, avatar: String, chips: Int) {
+    implicit val formats = DefaultFormats
+    
+    def toJson = write(this)
+}
 
 /** This object represents the player's class variables */
 object Player {
@@ -127,7 +137,7 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, var tableId
           bankroll += won
           
           Log.debug(this+" received WIN " + won + " new bankroll = "+bankroll)
-          Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "win", "%d".format(won.toInt))
+          Conductor ! MessageFactory.game_result(this.tableId, pid, "win", won.toInt)
           
           resetCards
           
@@ -137,13 +147,13 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, var tableId
           bankroll += lost
           
           Log.debug(this+" received LOOSE " + lost + " new bankroll = "+bankroll)          
-          Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "loss", "%d".format(lost.toInt))
+          Conductor ! MessageFactory.game_result(this.tableId, pid, "loss", lost.toInt)
           
           resetCards
           
         case Push(gain) =>
           Log.debug(this+" received PUSH bankroll = "+bankroll)
-          Conductor ! MessageFactory.player_result(this.tableId, pid.toString, "push", "0")
+          Conductor ! MessageFactory.game_result(this.tableId, pid, "push", 0)
           
           resetCards
           
@@ -191,7 +201,7 @@ class Player(name: String, var bankroll: Double, var betAmt: Double, var tableId
     this.hit(card)
     
     Log.debug(this + " received card " + card + " hand sz = " + cards.size + " value = " + value)
-    Conductor ! MessageFactory.player_update(this.tableId, pid.toString, cards.size - 1, card.shortSuite, card.shortValue)
+    Conductor ! MessageFactory.deal_card(this.tableId, this.pid, card.toInfo(cards.size - 1))
     Conductor ! MessageFactory.message(name, pid.toString, " received card %s hand sz = %d value = %d".format(card.toString, cards.size, value))
 
     // If I'm a bot and I've received more than two cards, the extras must be in

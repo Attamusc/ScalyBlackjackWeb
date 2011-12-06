@@ -35,6 +35,7 @@ import bj.table.Table
 import bj.util.Log
 import bj.util.MessageFactory
 import bj.Game
+import bj.card.CardInfo
 
 import comet.Conductor
 
@@ -178,12 +179,12 @@ class Dealer(tableId: Int) extends Actor with Hand {
   def init {
     if(shoe == null) {
         val randSeed = new Date().getTime
-    	shoe = new Shoe(randSeed)
+    	shoe = new Shoe(randSeed, this.did)
 	}
 
     // Deal the up card
     hit(shoe.deal)
-    Conductor ! MessageFactory.dealer_update(this.tableId, 0, cards(0).shortSuite, cards(0).shortValue)
+    Conductor ! MessageFactory.deal_card(this.tableId, -1, cards(0).toInfo(0))
     
     // Deal the hole card but don't put it yet into dealer's hand
     hole = shoe.deal
@@ -298,7 +299,7 @@ class Dealer(tableId: Int) extends Actor with Hand {
     hit(hole)
     
     Log.debug(this+" closing card1 = "+cards(0)+" card2 = "+cards(1))
-    Conductor ! MessageFactory.dealer_update(this.tableId, 1, cards(1).shortSuite, cards(1).shortValue)  
+    Conductor ! MessageFactory.deal_card(this.tableId, -1, cards(1).toInfo(1))  
     // Conductor ! MessageFactory.update("dealer", did.toString, cards(0).toString)
     // Conductor ! MessageFactory.update("dealer", did.toString, cards(1).toString)
     
@@ -308,7 +309,7 @@ class Dealer(tableId: Int) extends Actor with Hand {
       hit(card)
       
       Log.debug(this+" hitting card = "+card+" value = "+value)   
-      Conductor ! MessageFactory.dealer_update(this.tableId, cards.size - 1, card.shortSuite, card.shortValue)
+      Conductor ! MessageFactory.deal_card(this.tableId, -1, card.toInfo(cards.size - 1))
     }
     
     if(value > 21)

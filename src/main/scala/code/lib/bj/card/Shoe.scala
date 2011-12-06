@@ -18,12 +18,12 @@ package lib
 package bj.card
 
 /** This class implements the shoe from which we deal cards. */
-class Shoe(seed : Long) {
+class Shoe(seed : Long, id: Int) {
     /** Number of decks in the shoe */
     val DECK_COUNT = 6
 
     /** Our random number generator for shuffling, etc. */
-    val rnd = new java.util.Random(seed)
+    val rnd = new java.util.Random(seed + (id * 100))
     
     /** Burn card at this index */
     var burnIndex : Int = _

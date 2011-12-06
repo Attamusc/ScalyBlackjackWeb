@@ -36,7 +36,7 @@ case class Launch
 object Game {
     
   private val botNames : Vector[String] = Vector("RonBot", "John", "Russell", "George", "April", "Steve", "Phillip", "Agnes", "Beatrice", "Eugene", "Joanne", "Blanche", "Maryann", "Jodi", "Timothy", "Bruce", "Justin", "Keith", "William", "Richard")
-  private var players = List[Player](new Player("Sean", 1000000, 1000, 0, true), new Player("Gaby", 1000000, 1000, 0, false), new Player("RonBot", 1000000, 1000, 1, false))
+  private var players = List[Player](new Player("Sean", 1000000, 1000, 0, false), new Player("Gaby", 1000000, 1000, 0, false), new Player("RonBot", 1000000, 1000, 0, false))
   
   def init = {
     Log.debug("Starting the House")
@@ -74,6 +74,10 @@ object Game {
       val player: Player = this.findPlayerByPid(pid)
         Log.debug("Remote Player(" + pid + ") sent a bet request for table " + tableId + " of an amount " + amount.toInt)
         player.setAndProcessBet(amount, tableId)
+  }
+  
+  def findPlayersByTid(tid: Int) : List[Player] = {
+      return this.players.filter(p => p.tableId == tid)
   }
   
   def addPlayerToTable(name: String, tid: Int) = {

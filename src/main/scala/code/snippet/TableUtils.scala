@@ -12,6 +12,9 @@ import util.Helpers._
 import js._
 import JsCmds._
 import JE._
+import bj.actor.House
+import bj.Game
+import bj.util.Log
 
 import comet.Conductor
 
@@ -121,5 +124,68 @@ class TableUtils {
 			          <input type="submit" value="Sit" class="btn primary" />
 			        </div>
 		        </form>
+	}
+	
+	def renderBootstrap = {
+	    val tableId = S.param("tableId").openOr("-1").toInt
+	    val concernedTable = House.findTableByTid(tableId)
+	    val players = Game.findPlayersByTid(tableId)
+	    
+	    Log.debug("" + concernedTable)
+	    Log.debug("" + players)
+           "*" #> Script(JsRaw("""$(document).ready(function() {
+              var i,  // loop counter
+              len, // number of iterations
+              gameplay, players, deck, card;
+
+
+              // set our mode
+              CASINO.mode = CASINO.modes.IN_GAME;
+
+              // model for the current game
+              // TODO: here"s where we can bootstrap the table
+              CASINO.main_table = new CASINO.models.Table({
+                 id: """ + concernedTable.tid + """,
+                 chips_to_cash_ratio: 1 / 200,
+                 min_bet: """ + concernedTable.minBet.toInt + """,
+                 in_play: true,
+                 counter: 5
+              });
+
+
+              // view for the current game
+              gameplay = new CASINO.views.GamePlayView({
+                 el: $("#game_play_view"),
+                 model: CASINO.main_table
+              });
+
+              // add some players
+              // TODO: here"s where we can bootstrap the players currently at the table
+              players = [
+                 new CASINO.models.User({ dealer: true, id: 0, a_real_boy: false, client_user: false, name: "Greg", chips: 20000000, avatar: "/images/avatars/cute_1.jpg" }),
+                 new CASINO.models.User({ id: 1, a_real_boy: true, client_user: true, name: "Joey", chips: 20000, avatar: "/images/avatars/cute_2.jpg" }),
+                 new CASINO.models.User({ id: 2, a_real_boy: true, client_user: false, name: "Sean", chips: 40000, avatar: "/images/avatars/cute_3.jpg" }),
+                 new CASINO.models.User({ id: 3, a_real_boy: true, client_user: false, name: "Neal", chips: 15000, avatar: "/images/avatars/cute_4.jpg" }),
+                 new CASINO.models.User({ id: 4, a_real_boy: false, client_user: false, name: "Jon", chips: 1000, avatar: "/images/avatars/cute_5.jpg" }),
+                 new CASINO.models.User({ id: 5, a_real_boy: false, client_user: false, name: "Ron", chips: 10000000, avatar: "/images/avatars/cute_6.jpg" })
+              ];
+
+              CASINO.main_table.players.add(players);
+
+              // give cards to the players
+              // TODO: here"s where we will bootstrap cards already on the table
+              for (i = 0, len = players.length * 2; i < len; i += 1) {
+                 // card = deck.draw(); // draw a card
+                  CASINO.main_table.dealCard( new CASINO.models.Card({suit: "black", value: "A"}), players[i % players.length].get("id") );
+              }
+
+
+              CASINO.main_table.clearCards();
+
+              $("#basic_strategy_handle, #table_info_handle").click(function(e) {
+                  $(this).parent().toggleClass("show");
+              });
+           });"""))
+
 	}
 }

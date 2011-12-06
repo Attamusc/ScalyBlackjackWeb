@@ -6,12 +6,19 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.write
 import collection.mutable.HashMap
 
+import bj.actor.PlayerInfo
+import bj.card.CardInfo
+
 object MessageFactory {
     def info(message:String) = new Info("info", message)
     def message(sender:String, id:String, message:String) = new Message("message", sender, id, message)
-    def dealer_update(tid: Int, cardNum: Int, suit: String, value: String) = new DealerMessage(tid, new CardUpdate("update", "dealer", "-1", cardNum, suit, value))
-    def player_update(tid: Int, pid:String, cardNum: Int, suit:String, value: String) = new PlayerMessage(tid, new CardUpdate("update", "player", pid, cardNum, suit, value))
-    def player_result(tid: Int, pid:String, status:String, payout:String) = new PlayerMessage(tid, new ResultUpdate("result", "player", pid, status, payout))
+    
+    def join_table(tid: Int, player: PlayerInfo) = new BaseMessage(tid, new JoinTable("join_table", tid, player))
+    def leave_table(tid: Int, pid: Int) = new BaseMessage(tid, new LeaveTable("leave_table", tid, pid))
+    def deal_card(tid: Int, pid:Int, card: CardInfo) = new BaseMessage(tid, new DealCard("deal_card", tid, pid, card))
+    def game_result(tid: Int, pid:Int, status:String, payout:Int) = new BaseMessage(tid, new GameResult("game_result", tid, pid, status, payout))
+    def end_game(tid: Int) = new BaseMessage(tid, new EndGame("end_game", tid))
+    def new_game(tid: Int) = new BaseMessage(tid, new NewGame("new_game", tid))
 }
 
 case class BaseStatus {
@@ -30,12 +37,28 @@ case class Update {
     def toJson = write(this)
 }
 
-// {type: update, sender: player|dealer, id: player_id|-1, suit: String, value: Int}
-case class CardUpdate(`type` : String, sender:String, id:String, cardNum: Int, suit: String, value: String) extends Update
+// Join Table message: join_table
+// {table_id: integer, player: {id: integer, dealer: false, a_real_boy: true|false, client_user: true|false, name: string, avatar: string, chips: integer}}
+case class JoinTable(`type` : String, table_id: Int, player: PlayerInfo) extends Update
 
-// {type: result, sender: player|dealer, id: player_id|-1, status:String, payout:String}
-case class ResultUpdate(`type`:String, sender:String, id:String, status:String, payout:String) extends Update
+// Leave Table message: leave_table
+// {player_id: integer, table_id: integer}
+case class LeaveTable(`type` : String, table_id: Int, player_id: Int) extends Update
 
-case class BaseMessage
-case class PlayerMessage(tid: Int, message: Update) extends BaseMessage
-case class DealerMessage(tid: Int, message: Update) extends BaseMessage
+// Deal Card message: deal_card
+// {table_id: integer, player_id: integer, card: {card_number: integer, suit: string, value: string}}
+case class DealCard(`type` : String, table_id: Int, player_id: Int, card: CardInfo) extends Update
+
+// Game Result message: game_result
+// {table_id: integer, player_id: integer, status: String, payout: integer}
+case class GameResult(`type` : String, table_id: Int, player_id: Int, status: String, payout: Int) extends Update
+
+// End Game message: end_game
+// {table_id: integer }
+case class EndGame(`type` : String, table_id: Int) extends Update
+
+// New Game message: new_game
+// {table_id: integer }
+case class NewGame(`type` : String, table_id: Int) extends Update
+
+case class BaseMessage(tid: Int, message: Update)
