@@ -58,6 +58,12 @@ $( function() {
       },
 
 
+      // convenience method to return the current user from the players collection
+      currentUser: function () {
+         return this.players.current();
+      },
+
+
       // Finds the hand for the given player, and adds the card to it
       dealCard: function (card, player_id) {
          var self = this, 

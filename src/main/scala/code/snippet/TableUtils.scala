@@ -188,4 +188,31 @@ class TableUtils {
            });"""))
 
 	}
+
+
+	def renderPlayerActions = {
+	    val tableId = S.param("tableId").openOr("-1").toInt
+	    val concernedTable = House.findTableByTid(tableId)
+
+            "*" #> <div class="span2 dash_section">
+	             <p>Table Min bet: <b id="table_a_min_bet">{concernedTable.minBet.toInt}</b> chips</p>
+	           </div>
+	           <div class="span8 dash_section">
+	             <span class="betting_actions hide">
+	               <button class="btn up_bet">+</button>
+	               <button class="btn primary your_bet">{"Bet " + concernedTable.minBet.toInt}</button>
+	               <button class="btn down_bet">-</button>
+	               <input type="hidden" value={"" + concernedTable.minBet.toInt} id="your_bet_field" />
+	             </span>
+	             <span class="game_actions">
+	               <button class="btn primary player_button" data-action="hit">Hit</button>
+	               <button class="btn primary player_button" data-action="stay">Stay</button> 
+	               <button class="btn primary player_button" data-action="double_down">Double Down</button>
+	               <button class="btn primary player_button" data-action="surrender">Surrender</button>
+	               <button class="btn primary player_button" data-action="insurance">Insurance</button>
+	               <!-- <button class="btn primary player-button" data-action="split">Split</button> -->
+	             </span>
+	           </div>
+
+	}
 }

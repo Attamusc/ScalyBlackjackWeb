@@ -9,8 +9,11 @@ $( function () {
       events: {
          'click .up_bet': 'upBet',
          'click .down_bet': 'downBet',
-         'click .your_bet': 'submitBet'
+         'click .your_bet': 'submitBet',
+         'click .player_button': 'submitAction'
       },
+
+      apiEndpoint: '/api/bj/',
 
       initialize: function () {
 
@@ -54,7 +57,7 @@ $( function () {
 
       setBet: function (new_bet) {
          var self = this;
-         self.$('.your_bet').val('Bet ' + new_bet);
+         self.$('.your_bet').text('Bet ' + new_bet);
          $('#your_bet_field').val(new_bet);
          self.model.set({'your_bet': new_bet});
       },
@@ -62,7 +65,36 @@ $( function () {
 
       submitBet: function (e) {
          e.preventDefault();
-         // TODO: submit the comet form for betting with the value in the hidden field, $('.your_bet_field')
+         var self = this,
+             bet = $('#your_bet_field').val();
+
+         $.post(self.apiEndpoint + 'bet',
+            {
+               tid: self.model.get('id'),
+               pid: self.model.currentUser().get('id'),
+               amount: bet
+            },
+            function(data) {
+               console.log(data);
+            }
+         );
+      },
+
+
+      submitAction: function (e) {
+         e.preventDefault();
+         var self = this,
+             target = $(e.target);
+
+         $.post(self.apiEndpoint + target.data('action'),
+            {
+               tid: self.model.get('id'),
+               pid: self.model.currentUser().get('id')
+            },
+            function(data) {
+               console.log(data);
+            }
+         );
       },
  
 

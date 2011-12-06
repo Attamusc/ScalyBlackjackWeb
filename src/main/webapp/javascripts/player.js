@@ -37,7 +37,13 @@ $( function () {
 
    // A table will have a collection of players
    CASINO.models.Players = Backbone.Collection.extend({
-      model: CASINO.models.User
+
+      model: CASINO.models.User,
+
+      current: function () {
+         var list = this.filter (function(player) { return player.get('client_user'); });
+         return list.length > 0 ? list[0] : false;
+      }
    });
 
 });

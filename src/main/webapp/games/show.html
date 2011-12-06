@@ -24,28 +24,10 @@
     <div id="game_play_view">
       <div id="table_dash_board">
         <div class="container">
-          <div class="span2 dash_section">
-            <p>Table Min bet: <b id="table_a_min_bet"><%= min_bet %></b> chips</p>
-          </div>
-          <div class="span8 dash_section">
-            <span class="betting_actions hide">
-              <input class="btn up_bet" value="+" type="button">
-              <input class="btn primary your_bet" value="Bet <%= min_bet %>" type="button">
-              <button id="bet-button" class="btn" data-pid="0" data-tid="0">Bet</button>
-              <input class="btn down_bet" value="-" type="button">
-              <input type="hidden" value="<%= min_bet %>" id="your_bet_field" />
-            </span>
-            <span class="game_actions">
-              <button class="btn primary player-button" data-pid="0" data-tid="0" data-action="hit">Hit</button>
-              <button class="btn primary player-button" data-pid="0" data-tid="0" data-action="stay">Stay</button>
-              <button class="btn primary player-button" data-pid="0" data-tid="0" data-action="double_down">Double Down</button>
-              <!-- <button class="btn primary player-button" data-pid="0" data-tid="0" data-action="split">Split</button> -->
-              <button class="btn primary player-button" data-pid="0" data-tid="0" data-action="surrender">Surrender</button>
-              <button class="btn primary player-button" data-pid="0" data-tid="0" data-action="insurance">Insurance</button>
-            </span>
-          </div>
-          <div class="span2 dash_section"><p class="betting_actions hide %>">Waiting for bet...</p><p class="game_actions">Hand total: <b id="player-    hand-total">{{Total}}</b></p></div> 
-          <div class="span2 dash_section"><a data-keyboard="true" data-backdrop="true" data-controls-modal="trade_in_cash_modal" class="cash_out_button btn primary" href="index.html">Cash Out</a></di    v>
+          <span class="lift:TableUtils.renderPlayerActions"></span>
+
+          <div class="span2 dash_section"><p class="betting_actions hide %>">Waiting for bet...</p><p class="game_actions">Hand total: <b id="player-hand-total">{{Total}}</b></p></div>
+          <div class="span2 dash_section"><a data-keyboard="true" data-backdrop="true" data-controls-modal="trade_in_cash_modal" class="cash_out_button btn primary" href="index.html">Cash Out</a></div>
         </div>
       </div>
       
