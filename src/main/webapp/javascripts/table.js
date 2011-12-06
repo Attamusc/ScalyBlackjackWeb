@@ -8,7 +8,8 @@ $( function() {
             id: 0,                              // identifier
             chips_to_cash_ratio: (1 / 100),     // how much a player can join / leave with
             in_play: false,                     // whether in betting or game mode
-            counter: 30,
+            counter: 10,
+            message: null,
             min_bet: 50,
             players: [],
             seats: [],
@@ -59,7 +60,10 @@ $( function() {
 
       // Finds the hand for the given player, and adds the card to it
       dealCard: function (card, player_id) {
-         var self = this, player;
+         var self = this, 
+             player, // interator object
+             dup;    // protection against duplicate cards
+
          self.hands.each( function (hand) {
 
             if (!hand.get('seat').get('empty')) {
@@ -67,26 +71,43 @@ $( function() {
 
                // card belongs to this player
                if (player.id == player_id) {
-                  // card visibility if dealer
-                  if (player.get('dealer')) {
-                     if (hand.cards.length == 0) { // dealer's first card is facedown
-                        card.set({visible: false});
-                     } else if (hand.cards.length == 2) { // if dealer hits, flip their first card
-                        hand.cards.at(0).set({visible: true});
+                  // don't allow duplicate cards to be dealt to a player
+                  dup = hand.cards.filter( function (c) { return card.get('card_number') === c.get('card_number'); });
+
+                  if (dup.length == 0) {
+                     // card visibility if dealer
+                     if (player.get('dealer')) {
+                        if (hand.cards.length == 0) { // dealer's first card is facedown
+                           card.set({visible: false});
+                        } else if (hand.cards.length == 2) { // if dealer hits, flip their first card
+                           hand.cards.at(0).set({visible: true});
+                        }
                      }
+
+                     hand.cards.add( card );
                   }
-                  hand.cards.add( card );
                }
             }
          });
       },
 
 
-      payout: function (chip_difference, player_id) {
-         var self = this;
+      payout: function (chip_difference, player_id, message) {
+         var self = this,
+             seat;
+
          self.players.each( function (player) {
             if (player.get('id') == player_id) {
                player.set({ chips: player.get('chips') + chip_difference });
+               if (player.get('client_user')) {
+                  self.set({ message: message }); // only set the message if it's the payout for the client user
+               }
+
+               // find the seat and make people notice what happened
+               seat = self.seats.player(player_id);
+               if (seat) { // should always be true but you can't be too careful
+                  seat.set({ notice: chip_difference <= 0 ? -1 : 1 });
+               }
             }
          });
       },
@@ -94,15 +115,13 @@ $( function() {
 
       clearCards: function() {
          var self = this;
-         // self.hands.reset(); // TODO: we don't want to wipe the hands, just the cards in them
          self.hands.each( function (hand) {
-            hand.cards.reset();// = new CASINO.models.Cards();
+            hand.cards.reset();
          });
       },
 
 
       setPlayerSeat: function (player) {
-
          var seat; // the seat the player will sit at
 
          // if the user is a dealer, use dealer seat
@@ -139,7 +158,6 @@ $( function() {
    });
 
 
-
    CASINO.views.MainTableView = Backbone.View.extend({
 
       template: _.template($('#main-table-template').html()),
@@ -151,6 +169,7 @@ $( function() {
          this.model.players.bind('remove', this.playerLeaveSeat, this);
          this.model.players.bind('change', this.updatePlayerSeat, this);
          this.model.bind('change:in_play', this.render, this);
+         this.model.bind('change:message', this.setMessage, this);
       },
 
 
@@ -214,6 +233,12 @@ $( function() {
       },
 
 
+      setMessage: function (model, val) {
+         var self = this;
+         self.$('.table_message_content').text(val).parent().show();
+      },
+
+
       // Initializes a countdown counter in the message section of the table
       startCountdown: function () {
          var self = this, 
@@ -229,6 +254,8 @@ $( function() {
              },
 
              pid = setInterval(count, 1000); // yup, hoisting magic
+
+         self.$('.table_message_content').text(self.model.get('message'));
       },
 
 

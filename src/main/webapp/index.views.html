@@ -1,0 +1,75 @@
+<script>
+   $(document).ready(function() {
+
+      var i,  // loop counter
+          len, // number of iterations
+          gameplay, players, deck, card;
+
+      deck = (function () {
+         
+         var suits = ['red', 'black'],
+             values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
+
+         return {
+            draw: function () { 
+               return new CASINO.models.Card({ 
+                          suit: suits[Math.floor(Math.random() * suits.length)],
+                          value: values[Math.floor(Math.random() * values.length)] 
+               });
+            }
+         };
+      }());
+
+      // set our mode
+      CASINO.mode = CASINO.modes.IN_GAME;
+
+      // model for the current game
+      // TODO: table needs to be dynamically loaded here on page load
+      CASINO.main_table = new CASINO.models.Table({
+         id: 1,
+         chips_to_cash_ratio: 1 / 200,
+         min_bet: 100,
+         in_play: false,
+         counter: 10
+      });
+
+      // view for the current game
+      gameplay = new CASINO.views.GamePlayView({
+         el: $('#game_play_view'),
+         model: CASINO.main_table
+      });
+
+      // add some players
+      // TODO: from server
+      players = [
+         new CASINO.models.User({ dealer: true, id: 0, a_real_boy: false, client_user: false, name: 'Greg', chips: 20000000, avatar: 'images/avatars/cute_1.jpg' }),
+         new CASINO.models.User({ id: 1, a_real_boy: true, client_user: true, name: 'Joey', chips: 20000, avatar: 'images/avatars/cute_2.jpg' }),
+         new CASINO.models.User({ id: 2, a_real_boy: true, client_user: false, name: 'Sean', chips: 40000, avatar: 'images/avatars/cute_3.jpg' }),
+         new CASINO.models.User({ id: 3, a_real_boy: true, client_user: false, name: 'Neal', chips: 15000, avatar: 'images/avatars/cute_4.jpg' }),
+         new CASINO.models.User({ id: 4, a_real_boy: false, client_user: false, name: 'Jon', chips: 1000, avatar: 'images/avatars/cute_5.jpg' }),
+         new CASINO.models.User({ id: 5, a_real_boy: false, client_user: false, name: 'Ron', chips: 10000000, avatar: 'images/avatars/cute_6.jpg' })
+      ];
+
+     CASINO.main_table.players.add(players);
+
+      // give cards to the players
+      for (i = 0, len = players.length * 2; i < len; i += 1) {
+         card = deck.draw(); // draw a card
+         CASINO.main_table.dealCard( card, players[i % players.length].get('id') );
+      }
+
+
+      // CASINO.main_table.playerLeave(4);
+
+      //CASINO.main_table.dealCard( card, players[0].get('id') );
+      CASINO.main_table.set({in_play: true});
+
+      CASINO.main_table.payout(-5, 1);
+
+
+      // side panels
+      $('#basic_strategy_handle, #table_info_handle').click(function(e) {
+          $(this).parent().toggleClass('show');
+      });
+   });
+</script>

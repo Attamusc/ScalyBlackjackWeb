@@ -10,7 +10,8 @@ $(function () {
             position: 0,
             empty: true,
             player: null,
-            client_user: false
+            client_user: false,
+            notice: null
          };
       },
 
@@ -62,15 +63,47 @@ $(function () {
          'mouseover':   'twipsy_awesomeness'
       },
 
-      intialize: function () {
+
+      initialize: function () {
          var self = this;
          this.model.bind('change:player', this.render, this);
+         this.model.bind('change:notice', this.noticeChipChange, this);
       },
+
+
+      noticeChipChange: function (model, val) {
+         var self = this;
+         if (model.get('notice') === -1) {
+            self.flash('red');
+         } else if (model.get('notice') === 1) {
+            self.flash('green');
+         }
+      },
+
+
+      flash: function (color) {
+         var self = this,
+             $el = $(self.el),
+             prev_color = $el.css('border-color'),
+             i;
+
+         $el.css('borderColor', color);
+
+         for (i = 1; i < 8; i += 1) {
+            ( function (i) {
+               setTimeout(function() {
+                  $el.css('borderColor', i % 2 == 1 ? prev_color : color);
+               }, i * 400);
+            }(i));
+         }
+      },
+
 
       // player popover
       twipsy_awesomeness: function (e) {
          $(this.el).twipsy({}).twipsy('show');
       },
+
 
       render: function () { // this is all because backbone doesn't support associations natively...
          var self = this,
