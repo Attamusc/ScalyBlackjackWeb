@@ -94,12 +94,21 @@ $( function() {
 
 
       payout: function (chip_difference, player_id, message) {
-         var self = this;
+         var self = this,
+             seat;
+
          self.players.each( function (player) {
             if (player.get('id') == player_id) {
                player.set({ chips: player.get('chips') + chip_difference });
                if (player.get('client_user')) {
                   self.set({ message: message }); // only set the message if it's the payout for the client user
+               }
+
+               // find the seat and make people notice what happened
+               seat = self.seats.player(player_id);
+               if (seat) { // should always be true but you can't be too careful
+CASINO.log('fasdfjasdfkfaskd');
+                  seat.set({ notice: chip_difference <= 0 ? -1 : 1 });
                }
             }
          });
@@ -228,8 +237,6 @@ $( function() {
 
 
       setMessage: function (model, val) {
-         CASINO.log(val);
-         CASINO.log(model);
          var self = this;
          self.$('.table_message_content').text(val).parent().show();
       },
