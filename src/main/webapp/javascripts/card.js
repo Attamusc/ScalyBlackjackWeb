@@ -8,6 +8,7 @@ $(function () {
          return {
             suit: 'red',
             value: 'A',
+            card_number: 0,
             visible: true
          };
       },
