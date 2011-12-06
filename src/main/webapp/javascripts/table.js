@@ -229,7 +229,6 @@ $( function() {
          if (!this.model.get('in_play')) {
             self.startCountdown();
 
-            // TODO: this doesn't feel right but it works with the flow
             if(dealer && dealer.cards.length == 2) { // flip the dealer's first card over if rendering with cards on the table and in_play set to true 
                dealer.cards.at(0).set({visible: true});
             }
@@ -240,8 +239,14 @@ $( function() {
 
 
       setMessage: function (model, val) {
-         var self = this;
+         var self = this,
+             dealer = self.model.hands.dealer();
+
          self.$('.table_message_content').text(val).parent().show();
+
+         if(dealer && dealer.cards.length == 2) { // flip the dealer's first card over if rendering with cards on the table and in_play set to true 
+            dealer.cards.at(0).set({ visible: true });
+         }
       },
 
 

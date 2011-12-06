@@ -89,7 +89,7 @@ $(function () {
 
          $el.css('borderColor', color);
 
-         for (i = 1; i < 8; i += 1) {
+         for (i = 1; i < 12; i += 1) {
             ( function (i) {
                setTimeout(function() {
                   $el.css('borderColor', i % 2 == 1 ? prev_color : color);

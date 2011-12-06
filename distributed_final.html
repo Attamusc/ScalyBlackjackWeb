@@ -19,11 +19,10 @@
 
   <body style='display: none'>
 
-    <section class='slides layout-regular template-default'>
+    <section class='slides layout-regular'>
       
       <!-- Your slides (<article>s) go here. Delete or comment out the
            slides below. -->
-        
         
       
       <article>
@@ -40,287 +39,391 @@
       </article>
       
       <article>
-        <p>
         <h3>
-          
-        </h3>
-        <p>
-        </p>
-        <p>
-          There is more text just underneath with a <code>code sample: 5px</code>.
-        </p>
-      </article>
-
-      <article>
-        <h3>
-          Slide with bullet points and a longer title, just because we
-          can make it longer
+          Recap
         </h3>
         <ul>
-          <li>
-            Use this template to create your presentation
-          </li>
-          <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
-          </li>
-          <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
-          </li>
-          <li>
-            At all times strive to maintain Google's corporate look and feel
-          </li>
+          <li>Webapp Approach</li>
+          <li>Live Updates</li>
+          <li>Completely Decoupled Architecture</li>
         </ul>
       </article>
 
       <article>
-        <h3>
-          Slide with bullet points that builds
-        </h3>
-        <ul class="build">
-          <li>
-            This is an example of a list
-          </li>
-          <li>
-            The list items fade in
-          </li>
-          <li>
-            Last one!
-          </li>
-        </ul>
-
-        <div class="build">
-          <p>Any element with child nodes can build.</p>
-          <p>It doesn't have to be a list.</p>
-        </div>
+        <p>
+          <h1>
+            <a href="http://scalyblackjack.attamusc.cloudbees.net/" target="_blank" style="text-decoration:none;color:#bada55;">Demo</a>
+          </h1>
+        </p>
       </article>
 
-      <article class='smaller'>
+      <article>
         <h3>
-          Slide with bullet points (small font)
+          What's going on?
         </h3>
         <ul>
-          <li>
-            Use this template to create your presentation
-          <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
-          <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
-          <li>
-            At all times strive to maintain Google's corporate look and feel
+          <li>Basic Strategy</li>
+          <li>Conductor</li>
+          <li>Attendant</li>
         </ul>
       </article>
 
-      <article>
-        <h3>
-          Slide with a table
-        </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke Mahé
-            <td>
-              V.P. of Keepin’ It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
       </article>
-      
-      <article class='smaller'>
-        <h3>
-          Slide with a table (smaller text)
-        </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke Mahé
-            <td>
-              V.P. of Keepin’ It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
-      </article>
-      
-      <article>
-        <h3>
-          Styles
-        </h3>
-        <ul>
-          <li>
-            <span class='red'>class="red"</span>
-          <li>
-            <span class='blue'>class="blue"</span>
-          <li>
-            <span class='green'>class="green"</span>
-          <li>
-            <span class='yellow'>class="yellow"</span>
-          <li>
-            <span class='black'>class="black"</span>
-          <li>
-            <span class='white'>class="white"</span>
-          <li>
-            <b>bold</b> and <i>italic</i>
-        </ul>
-      </article>
-      
-      <article>
-        <h2>
-          Segue slide
-        </h2>
+        <img src="https://docs.google.com/drawings/pub?id=1TTcYFbunNnVW3Pf23aIdNelcY53JB3rYJU-6nlDdSsM&amp;w=960&amp;h=720">
       </article>
 
       <article>
         <h3>
-          Slide with an image
-        </h3>
-        <p>
-          <img style='height: 500px' src='images/example-graph.png'>
-        </p>
-        <div class='source'>
-          Source: Sergey Brin
-        </div>
-      </article>
-
-      <article>
-        <h3>
-          Slide with an image (centered)
-        </h3>
-        <p>
-          <img class='centered' style='height: 500px' src='images/example-graph.png'>
-        </p>
-        <div class='source'>
-          Source: Larry Page
-        </div>
-      </article>
-
-      <article class='fill'>
-        <h3>
-          Image filling the slide (with optional header)
-        </h3>
-        <p>
-          <img src='images/example-cat.jpg'>
-        </p>
-        <div class='source white'>
-          Source: Eric Schmidt
-        </div>
-      </article>
-
-      <article>
-        <h3>
-          This slide has some code
+          Basic Strategy
         </h3>
         <section>
-        <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
+        <pre style="height:500px;overflow:auto;">
+package code
+package lib
+package bj.util
+
+import bj.actor.Request
+import bj.actor.Hit
+import bj.actor.Stay
+import bj.actor.DoubleDown
+import bj.actor.Split
+import bj.actor.Surrender
+
+import collection.immutable.HashMap
+
+import comet.Conductor
+
+object BasicStrategy {
+    val strategyHash : HashMap[String, HashMap[String, String]] = HashMap(
+        "A-2"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "A-3"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit"),
+        "A-4"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "Hit",           "2" -> "Hit" ),
+        "A-5"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "Hit",           "2" -> "Hit" ),
+        "A-6"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "DoubleDown",    "2" -> "Hit" ),
+        "A-7"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Stay",          "7" -> "Stay",          "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "DoubleDown",    "2" -> "DoubleDown" ),
+        "A-8"   ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "DoubleDown",    "2" -> "DoubleDown" ),
+        "A-9"   ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "DoubleDown",    "2" -> "DoubleDown" ),
+        "A-10"  ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "2"     ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Hit",           "5" -> "Hit",           "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "3"     ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Hit",           "5" -> "Hit",           "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "4"     ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Hit",           "5" -> "Hit",           "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "5"     ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Hit",           "5" -> "Hit",           "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "6"     ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Hit",           "5" -> "Hit",           "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "7"     ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Hit",           "5" -> "Hit",           "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "8"     ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Hit",           "5" -> "Hit",           "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "9"     ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "DoubleDown",    "2" -> "Hit" ),
+        "10"    ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "DoubleDown",    "8" -> "DoubleDown",    "7" -> "DoubleDown",    "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "DoubleDown",    "2" -> "DoubleDown" ),
+        "11"    ->  HashMap( "A" -> "Hit",       "10" -> "DoubleDown",  "9" -> "DoubleDown",    "8" -> "DoubleDown",    "7" -> "DoubleDown",    "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "DoubleDown",    "2" -> "DoubleDown" ),
+        "12"    ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Hit",           "2" -> "Hit" ),
+        "13"    ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "14"    ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "15"    ->  HashMap( "A" -> "Hit",       "10" -> "Surrender",   "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "16"    ->  HashMap( "A" -> "Surrender", "10" -> "Surrender",   "9" -> "Surrender",     "8" -> "Hit",           "7" -> "Hit",           "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "17"    ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "18"    ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "19"    ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "20"    ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "21"    ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "2-2"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Split",         "6" -> "Split",         "5" -> "Split",         "4" -> "Split",         "3" -> "Split",         "2" -> "Split" ),
+        "3-3"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Split",         "6" -> "Split",         "5" -> "Split",         "4" -> "Split",         "3" -> "Split",         "2" -> "Split" ),
+        "4-4"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Split",         "5" -> "Split",         "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit"),
+        "5-5"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "DoubleDown",    "8" -> "DoubleDown",    "7" -> "DoubleDown",    "6" -> "DoubleDown",    "5" -> "DoubleDown",    "4" -> "DoubleDown",    "3" -> "DoubleDown",    "2" -> "DoubleDown" ),
+        "6-6"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Hit",           "6" -> "Hit",           "5" -> "Hit",           "4" -> "Hit",           "3" -> "Hit",           "2" -> "Hit" ),
+        "7-7"   ->  HashMap( "A" -> "Hit",       "10" -> "Hit",         "9" -> "Hit",           "8" -> "Hit",           "7" -> "Split",         "6" -> "Split",         "5" -> "Split",         "4" -> "Split",         "3" -> "Split",         "2" -> "Split" ),
+        "8-8"   ->  HashMap( "A" -> "Split",     "10" -> "Split",       "9" -> "Split",         "8" -> "Split",         "7" -> "Split",         "6" -> "Split",         "5" -> "Split",         "4" -> "Split",         "3" -> "Split",         "2" -> "Split" ),
+        "9-9"   ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Split",         "8" -> "Split",         "7" -> "Stay",          "6" -> "Split",         "5" -> "Split",         "4" -> "Split",         "3" -> "Split",         "2" -> "Split" ),
+        "10-10" ->  HashMap( "A" -> "Stay",      "10" -> "Stay",        "9" -> "Stay",          "8" -> "Stay",          "7" -> "Stay",          "6" -> "Stay",          "5" -> "Stay",          "4" -> "Stay",          "3" -> "Stay",          "2" -> "Stay" ),
+        "A-A"   ->  HashMap( "A" -> "Split",     "10" -> "Split",       "9" -> "Split",         "8" -> "Split",         "7" -> "Split",         "6" -> "Split",         "5" -> "Split",         "4" -> "Split",         "3" -> "Split",         "2" -> "Split" )
+    )
+    
+
+
+    def action(pid: Int, handKey: String, dealerUpCard: String) : Request = {
+        strategyHash(handKey)(dealerUpCard) match {
+            case "Hit" =>
+                Conductor ! "Player(%d) says: The Basic Strategy says to HIT with a key of '%s' and an upcard of '%s'".format(pid, handKey, dealerUpCard)
+                Hit(pid)
+            case "Stay" => 
+                Conductor ! "Player(%d) says: The Basic Strategy says to STAY with a key of '%s' and an upcard of '%s'".format(pid, handKey, dealerUpCard)
+                Stay(pid)
+            case "DoubleDown" => 
+                Conductor ! "Player(%d) says: The Basic Strategy says to DOUBLEDOWN with a key of '%s' and an upcard of '%s'".format(pid, handKey, dealerUpCard)
+                DoubleDown(pid)
+            case "Split" => 
+                Conductor ! "Player(%d) says: The Basic Strategy says to SPLIT with a key of '%s' and an upcard of '%s'".format(pid, handKey, dealerUpCard)
+                //Split(pid)
+                Hit(pid)
+            case "Surrender" => 
+                Conductor ! "Player(%d) says: The Basic Strategy says to SURRENDER with a key of '%s' and an upcard of '%s'".format(pid, handKey, dealerUpCard)
+                Surrender(pid)
+            case _ =>
+                // In the event something weird happens, tell the player to stay so that the game can continue
+                Stay(pid)
+        }
+    } 
+}
+
+
+
+
+/** Analyzes my best play using the Basic Strategy. */
+  def analyze(upcard : Card) : Request = {
+      val upCardKey = if(upcard.value != 1) upcard.value.toString else "A"
+      
+      // Check my hand against the basic strategy
+      if(cards.size == 2) {
+          // Do I have a pair? NOTE: We us number instead of value to make sure the face cards are the same
+          if(cards(0).number == cards(1).number) {
+              val shortValue = if(cards(0).number == 1) "A" else cards(0).value
+              return BasicStrategy.action(this.pid, "%d-%d".format(shortValue, shortValue), upCardKey)
+          }
+          // If I don't, check if I have an Ace
+          else if(cards(0).value == 1 || cards(1).value == 1) {
+              return BasicStrategy.action(this.pid, "A-%d".format(if(cards(0).value == 1) cards(1).value else cards(0).value), upCardKey)
+          }
+      } 
+      
+      // If we have more than two cards or we have neither a pair nor an ace, we just use the value as defined in the Basic Strategy
+      return BasicStrategy.action(this.pid, value.toString, upCardKey)
+}
+
+        </pre>
+        </section>
+      </article>
+
+      <article>
+        <h3>
+          The Conductor
+        </h3>
+        <section>
+        <pre style="height:500px;overflow:auto;">
+object Conductor extends LiftActor with ListenerManager {
+    private var table_patter : Vector[String] = Vector()
+    private var patter_update : BaseMessage = new BaseMessage(-1, new Update())
+    private var game_started = false
+    
+    def createUpdate = {
+        patter_update
+        //table_patter
     }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+    
+    override def lowPriority = {
+        case "Start" =>
+            game_started = true
+            Game.init
+        case "Clear" =>
+            game_started = false
+        case s: String => 
+            //table_patter :+= s
+            //Log.debug("Table Server says: " + s)
+            updateListeners()
+        case bet: PlayerBet =>
+            Log.debug("(action: bet, pid: %s, tid: %s, amount: %s)".format(bet.pid, bet.tid, bet.amount))
+            Game.placeBet(bet.pid.toInt, bet.tid.toInt, bet.amount.toInt)
+        case action : PlayerAction =>
+            Log.debug("(action: %s, pid: %s, tid: %s)".format(action.action, action.pid, action.tid))
+            val dealer = House.getDealerForTable(action.tid)
+            action.action match {
+                case "hit" => Game.informPlayerOfAction(dealer, action.pid, Hit(action.pid))
+                case "stay" => Game.informPlayerOfAction(dealer, action.pid, Stay(action.pid))
+                case "double_down" => Game.informPlayerOfAction(dealer, action.pid, DoubleDown(action.pid))
+                case "split" => Game.informPlayerOfAction(dealer, action.pid, Split(action.pid))
+                case "surrender" => Game.informPlayerOfAction(dealer, action.pid, Surrender(action.pid))
+                case "insurance" => Game.informPlayerOfAction(dealer, action.pid, Insurance(action.pid))
+            }
+        case message: BaseStatus =>
+            //patter_update = message
+            //updateListeners()
+        case message: BaseMessage =>
+            //table_patter :+= message.toJson
+            patter_update = message
+            updateListeners()
+    } 
+}
+
+class Dispatcher extends CometActor with CometListener{
+    private var patter : Vector[String] = Vector()
+    private var update : String = "This is a test"
+    private val tableIdRegex = new Regex("""(\d+)-\d+""")
+    
+    def registerWith = Conductor
+
+    override def lowPriority = {
+        case message : BaseMessage =>
+            val tableIdRegex(tid) = this.name.openOr("")
+            if(message.tid.toString == tid) {
+                patter :+= message.message.toJson
+                Log.debug("Dispatcher(" + this.name.openOr("") + ") says: '" + message.message.toJson + "'")
+                partialUpdate(JsRaw("CASINO.attendant.process_message('" + message.message.toJson + "')"))
+            }
+        case v: Vector[String] => 
+            patter = v
+            //Log.debug("Comet Table says: " + v)
+            //reRender()
+            //partialUpdate(JsRaw("CASINO.attendant.process_message('" + patter + "')"))
+    }
+
+    def render = {
+        "li *" #> patter & ClearClearable
+    }
+}
 </pre>
         </section>
       </article>
       
       <article class='smaller'>
         <h3>
-          This slide has some code (small font)
+          The Attendant
         </h3>
         <section>
-        <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+        <pre style="height:500px;overflow:auto;">
+// Attendant singleton
+// 
+CASINO.attendant = (function( $ ) {
+
+   var api = {}; // public api literal
+
+   // attempts to find the table by the given id
+   function find_table (table_id) {
+      var found = false;
+      if (CASINO.mode === CASINO.modes.IN_GAME || CASINO.mode === CASINO.modes.VIEW_GAME) {
+         found = CASINO.main_table;
+      } else {
+         // Something else to find the table on the floor. Will probably Loop through CASINO.tables
+      }
+
+      return found;
+   }
+
+
+   /* receives a message in a psuedo JSONP call from lift
+      // TODO: may have to parse the message into an object literal first
+      messages are expected in the minimum form:
+        { type: string, stuff... }
+    */
+   api.process_message = function( message ) {
+
+      if (message && message.type) {
+
+         console.log('processing message: ' + message.type);
+
+         switch (message.type) { //  Note to self. "fine , you can use a switch statement. Just keep checking for fallthroughs"
+
+
+            /* Seats a player at the given table
+
+               - client_user should always be false because it will be bootstapped on pageload
+               - dealer should always be false because it will be added on page load
+               - if we don't bother letting users edit their profile and pick their avatar, just use a random http://placekitten.com/:integer/:integer url
+               - chips is the number of chips they apparently 
+               
+               {table_id: integer, player: {id: integer, dealer: false, a_real_boy: true|false, client_user: true|false, name: string, avatar: string, chips: integer}}
+             */
+            case 'join_table':
+               var i, len, // looping stuffs 
+                   table = find_table(message.table_id);
+
+               table.players.add( new CASINO.models.User( message.player ) );
+               break;
+
+
+            /* Removes a player from the given table
+
+               {player_id: integer, table_id: integer}
+             */
+            case 'leave_table':
+
+               var i, len, // looping stuffs 
+                   table = find_table(message.table_id);
+
+               table.playerLeave( message.player_id );
+               break;
+
+
+            /* Deal a card to a player
+               - card suit should fall in the set [red, black]
+               - card value should fall in the set [2-10, J, Q, K, A]
+            
+               {table_id: integer, player_id: integer, card: {card_number: integer, suit: red|black, value: string} }
+             */
+            case 'deal_card':
+
+               // find the table
+               var i, len, // looping stuffs 
+                   table = find_table(message.table_id);
+
+               table.dealCard(new CASINO.models.Card(message.card), message.player_id);
+               break;
+
+
+            /* Reveals the results to a player
+                - Pays the players their payout
+                - If the player is the current user, show the result message
+                - Fun animation or something
+
+                {table_id: integer, player_id: integer, payout: integer, status: string }
+             */
+            case 'game_result':
+
+               // find the table
+               var i, len, // looping stuffs
+                   table = find_table(message.table_id);
+
+               table.payout(message.payout, message.player_id, 'Status: ' + message.status); // pay the player their winnings
+               break;
+
+
+            /* Prepares the table for the next round
+                - Starts the betting countdown
+                - Switches the mode of the table to betting mode
+
+                {table_id: integer}
+             */
+            case 'end_game':
+
+               // find the table
+               var i, len, // looping stuffs
+                   table = find_table(message.table_id);
+
+               table.set({ in_play: false }); // Starts the betting countdown automatically, TODO: do we want to set the counter to like the cutoff datetime
+
+               break;
+
+
+            /* Betting is finished, clear the table
+                - Clears the cards off the table
+                - Switches the mode of the table to in_game mode
+
+                {table_id: integer}
+             */
+            case 'new_game':
+               // find the table
+               var i, len, // looping stuffs
+                   table = find_table(message.table_id);
+
+               table.clearCards(); // clears the cards
+               table.set({ in_play: true });
+               break;
+
+
+            default:
+               console.log('Unhandled message type: ' + message.type);
+         }
+      }
+   };
+
+   return api;
+
+}( jQuery ));
 </pre>
         </section>
       </article>
       
-      <article>
-        <q>
-          The best way to predict the future is to invent it.
-        </q>
-        <div class='author'>
-          Alan Kay
-        </div>
-      </article>
-      
-      <article class='smaller'>
-        <q>
-          A distributed system is one in which the failure of a computer 
-          you didn’t even know existed can render your own computer unusable.
-        </q>
-        <div class='author'>
-          Leslie Lamport
-        </div>
-      </article>
-      
-      <article class='nobackground'>
-        <h3>
-          A slide with an embed + title
-        </h3>
-        
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-
-      <article class='nobackground'>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-
-      <article class='fill'>
-        <h3>
-          Full-slide embed with (optional) slide title on top
-        </h3>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
       
       <article>
-        <h3>
-          Thank you!
-        </h3>
-        
-        <ul>
-          <li>
-            <a href='http://www.google.com'>google.com</a>
-        </ul>
+        <h1>
+          Thanks!
+        </h1>
       </article>
 
     </section>
