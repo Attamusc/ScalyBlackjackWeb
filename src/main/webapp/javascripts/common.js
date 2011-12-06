@@ -1,4 +1,37 @@
-var CASINO = CASINO || {}; // loose module pattern
+// From: https://github.com/documentcloud/backbone/pull/614
+// 
+// Utility function for easily nesting collections into a model.
+// Nesting collections is painful because the model's toJSON function
+// has to be overriden since the model's data and the collection's data are not the same
+// This utility fixes that by pointing the underlying model data object to the collection data
+// so that the model's data is always the same as the nested collection's.
+// No more need to override the model's toJSON function.
+Backbone.Collection.nest = function(model, attributeName, nestedCollection) {
+   // Setup nested references
+   for (var i = 0; i < nestedCollection.length; i++) {
+      if(model.attributes[attributeName]){
+         model.attributes[attributeName][i] = nestedCollection.at(i).attributes;
+      }
+   }
+   nestedCollection.bind('add', function(initiative) {
+      model.get(attributeName).push(initiative.attributes);
+   });
+   nestedCollection.bind('remove', function(initiative) {
+      var updateObj = {};
+      updateObj[attributeName] = _.without(model.get(attributeName), initiative.attributes);
+      model.set(updateObj);
+   });
+
+   return nestedCollection;
+};
+
+
+// CONSTANTS!
+CASINO.modes = {
+   IN_GAME: 1,
+   VIEW_GAME: 2,
+   FLOOR: 3
+};
 
 
 // re-binds common events to elements that may be added later

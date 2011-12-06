@@ -153,8 +153,24 @@ h1, h2, h3, h4, h5, h6, #navigation, .seat {
 }
 #main_table_wrapper .house_table, #main_table_wrapper .table_seats_wrapper, #main_table_wrapper .player_cards_wrapper {
   width: 825px;
-  height: 425px;
+  height: 300px;
   margin: 30px auto 0;
+}
+#main_table_wrapper .table_message {
+  color: #222;
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+  top: 225px;
+  left: 350px;
+  z-index: 10;
+  padding: 15px;
+  border: 2px solid #444;
+  background: #ddd;
+  border-radius: 5px;
+}
+.table_timer .counter {
+  color: #99291c;
 }
 #main_table_wrapper .house_table {
   border: 10px solid #9D6220;
@@ -195,6 +211,11 @@ a.join_table_link {
   line-height: 80px;
   border: 4px solid #000;
   border-radius: 50px;
+}
+#main_table_wrapper .seat img {
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
 }
 .house_table_wrapper .seat {
   width: 40px;
@@ -329,7 +350,6 @@ a.join_table_link {
   right: -75px;
 }
 .player_cards_wrapper {
-  position: absolute;
   width: 100%;
   display: block;
   z-index: 6;
@@ -344,6 +364,21 @@ a.join_table_link {
   border-radius: 10px;
   text-align: center;
   font-weight: bold;
+  position: relative;
+}
+.card img {
+  display: none;
+}
+.card.show_back img {
+  display: inline;
+  position: absolute;
+  left: 0;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+.card.show_back .card_value {
+  display: none;
 }
 .red_card {
   color: #FF0000;
@@ -352,7 +387,6 @@ a.join_table_link {
   color: #000;
 }
 #main_table_wrapper .card_wrapper {
-  width: 100px;
   position: absolute;
 }
 #main_table_wrapper .card {
@@ -369,23 +403,23 @@ a.join_table_link {
 }
 #main_table_wrapper .seat_1_cards {
   bottom: 115px;
-  left: 15px;
+  left: 5px;
 }
 #main_table_wrapper .seat_2_cards {
   bottom: 5px;
-  left: 75px;
+  left: 50px;
 }
 #main_table_wrapper .seat_3_cards {
   bottom: 5px;
-  left: 360px;
+  left: 335px;
 }
 #main_table_wrapper .seat_4_cards {
-  right: 75px;
-  bottom: 5px;
+  right: 5px;
+  bottom: 115px;
 }
 #main_table_wrapper .seat_5_cards {
-  right: 0;
-  bottom: 115px;
+  right: 75px;
+  bottom: 5px;
 }
 #player_cards .card {
   width: 42px;
@@ -406,16 +440,17 @@ a.join_table_link {
   border-top: 3px solid #333;
 }
 #table_dash_board .dash_section {
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: center;
   background: #222;
-  padding: 15px 5px;
+  padding: 10px 5px 15px;
   border: 1px solid #333;
   border-radius: 5px;
   -ms-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
+  height: 25px;
 }
 #table_dash_board .dash_section:hover {
   border: 1px solid #444;
@@ -430,7 +465,7 @@ a.join_table_link {
 /* Styles for pull out panes on game page  */
 #basic_strategy_pane, #table_info_pane {
   position: fixed;
-  top: 200px;
+  top: 50px;
 }
 #basic_strategy_pane {
   left: -605px;

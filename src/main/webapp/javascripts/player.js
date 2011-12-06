@@ -1,26 +1,43 @@
-( function( $ ) {
 
-   function Player(id, options) {
+$( function () {
 
-      var that = this, secret = {};
+   // A user is an instance of an object capable of playing blackjack
+   CASINO.models.User = Backbone.Model.extend({
 
-      this.defaults = {
-         name: 'Anon',
-         avatar: 'http://placekitten.com/50/50',
-         chips: 0
-      };
+      defaults: function () {
+         return {
+            id: 0,
+            dealer: false,
+            a_real_boy: false, // whether or not this user is a bot
+            client_user: false, // if this is the user who is using the webapp
+            name: 'Anon',
+            avatar: 'http://placekitten.com/50/50',
+            chips: 0
+         };
+      },
 
-      this.info = $.extend({}, this.defaults, options);
-      secret.id = id;
-   }
+      initialize: function () {
+      },
 
-   Player.prototype.id = function () {
-      return secret.id;
-   };
+      updateChips: function (difference) {
+         if (!isNaN(difference)) {
+            this.chips += difference;
+         }
+      },
+   
+      clearHand: function () {
+         this.hand.reset();
+      },
+   
+      addCardToHand: function (card) {
+         this.hand.add(card); // fires add event
+      }
+   });
 
 
-   var CASINO = CASINO || { generators : {}}; // Loose module pattern
-   CASINO.generators.Player = Player;
-   // CASINO.players = {}; // will hold each active player. Index by player id
+   // A table will have a collection of players
+   CASINO.models.Players = Backbone.Collection.extend({
+      model: CASINO.models.User
+   });
 
-}( jQuery ));
+});
