@@ -96,7 +96,7 @@ $( function() {
          var self = this;
          // self.hands.reset(); // TODO: we don't want to wipe the hands, just the cards in them
          self.hands.each( function (hand) {
-            hand.cards.reset();
+            hand.cards.reset();// = new CASINO.models.Cards();
          });
       },
 
@@ -151,7 +151,6 @@ $( function() {
          this.model.players.bind('remove', this.playerLeaveSeat, this);
          this.model.players.bind('change', this.updatePlayerSeat, this);
          this.model.bind('change:in_play', this.render, this);
-         this.model.hands.bind('reset', this.renderHands, this);
       },
 
 
@@ -245,6 +244,7 @@ $( function() {
 
 
       renderHands: function () {
+         CASINO.log('rendering hands');
          var self = this;
          self.$hands = $(self.el).find('.player_cards_wrapper').empty();
 

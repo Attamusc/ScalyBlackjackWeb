@@ -110,6 +110,7 @@ $(function () {
          });
 
          self.model.cards.bind('add', self.addOne, this);
+         self.model.cards.bind('reset', self.render, this);
       },
 
       addOne: function (card) {
