@@ -82,13 +82,13 @@ $( function() {
 
                   if (dup.length == 0) {
                      // card visibility if dealer
-                     if (player.get('dealer')) {
-                        if (hand.cards.length == 0) { // dealer's first card is facedown
-                           card.set({visible: false});
-                        } else if (hand.cards.length == 2) { // if dealer hits, flip their first card
-                           hand.cards.at(0).set({visible: true});
-                        }
-                     }
+                    // if (player.get('dealer')) {
+                        //if (hand.cards.length == 1) { // dealer's second card is facedown
+                        //   card.set({visible: false});
+                        //} else if (hand.cards.length == 2) { // if dealer hits, flip their first card
+                        //   hand.cards.at(1).set({visible: true});
+                        //}
+                    // }
 
                      hand.cards.add( card );
                   }
