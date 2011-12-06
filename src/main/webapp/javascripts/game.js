@@ -54,7 +54,8 @@ $( function () {
 
       setBet: function (new_bet) {
          var self = this;
-         self.$('.your_bet').val('Bet ' + new_bet).siblings('.your_bet_field').val(new_bet);
+         self.$('.your_bet').val('Bet ' + new_bet);
+         $('#your_bet_field').val(new_bet);
          self.model.set({'your_bet': new_bet});
       },
 
