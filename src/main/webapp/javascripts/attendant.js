@@ -25,6 +25,8 @@ CASINO.attendant = (function( $ ) {
     */
    api.process_message = function( message ) {
 
+      var message = JSON.parse(message);
+
       if (message && message.type) {
 
          console.log('processing message: ' + message.type);
@@ -131,7 +133,9 @@ CASINO.attendant = (function( $ ) {
             default:
                console.log('Unhandled message type: ' + message.type);
          }
-      }
+      } else {
+               console.log('Unhandled message: ' + message);
+     }
    };
 
    return api;
