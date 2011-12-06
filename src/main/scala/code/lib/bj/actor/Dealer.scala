@@ -220,12 +220,14 @@ class Dealer(tableId: Int) extends Actor with Hand {
    * @param source Source actor of the message.
    */
   def hit(pid : Int, player : Player) {
+    /*
     if (!valid(player)) {
         Log.debug(this + " received a bad player of " + player)
         player ! NotOk
     }
 
     else {
+    */
       val card = shoe.deal
 
       deal(player,card)
@@ -236,7 +238,7 @@ class Dealer(tableId: Int) extends Actor with Hand {
         player ! Broke
 
         moveNext(pid)
-      }
+      //}
     }    
   }
 
@@ -246,10 +248,10 @@ class Dealer(tableId: Int) extends Actor with Hand {
    * @param source Source actor of the message.
    */  
   def stay(pid : Int, source : Player) {
-    if (!valid(source)) {
+    /*if (!valid(source)) {
       Log.debug(this + " received a bad player of " + source)
       source ! NotOk
-    }
+    }*/
       
     source ! Ok
 

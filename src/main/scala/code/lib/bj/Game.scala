@@ -36,7 +36,7 @@ case class Launch
 object Game {
     
   private val botNames : Vector[String] = Vector("RonBot", "John", "Russell", "George", "April", "Steve", "Phillip", "Agnes", "Beatrice", "Eugene", "Joanne", "Blanche", "Maryann", "Jodi", "Timothy", "Bruce", "Justin", "Keith", "William", "Richard")
-  private var players = List[Player](new Player("Sean", 10000, 100, 0, true), new Player("Gaby", 10000, 100, 0, false), new Player("RonBot", 10000, 100, 0, false))
+  private var players = List[Player](new Player("Sean", 1000000, 1000, 0, true), new Player("Gaby", 1000000, 1000, 0, false), new Player("RonBot", 1000000, 1000, 1, false))
   
   def init = {
     Log.debug("Starting the House")

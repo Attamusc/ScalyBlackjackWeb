@@ -70,9 +70,6 @@ class Table(val minBet: Double) extends Actor {
   /** House mail box */
   var house : OutputChannel[Any] = null
   
-  /** Current game number being played */
-  var gameNumber : Int = 0
-  
   /** Starts the table */
   start
 
@@ -175,12 +172,24 @@ class Table(val minBet: Double) extends Actor {
   def gameOver(pays : HashMap[Int,Outcome]) = {
       pays.foreach(p => pay(p))
       
+      // Copy all players so that we can send them a go message after wiping everything
+      val playersCopy = players.clone
+      
+      this.players = HashMap[Int, OutputChannel[Any]]()
+      this.bets = HashMap[Int, Double]()
+      
+      // Tell all the players to replace their bets for the next game
+      playersCopy.values.foreach(p => p ! Go)
+      
+      // NOTE: Should send a time as well
+      Conductor ! MessageFactory.game_over(this.tid)
+      
       // Wait 10 seconds to receive new bets, then relaunch myself
       Thread.sleep(10000)
       
-      if(this.gameNumber < 2)
-        this.gameNumber += 1
-        this ! Go
+      Conductor ! MessageFactory.new_game(this.tid)
+      
+      this ! Go
   }
   
   /**
